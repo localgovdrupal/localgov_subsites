@@ -1,0 +1,10 @@
+
+<div class="navigation-stacked">
+  <div class="navigation-header">
+    <h3>In this section</h3>
+    <p>{{ heading }}</p>
+  </div>
+  {% for link in links %}
+    <a href="{{ link.url }}">{{ link.title }}</a>
+  {% endfor %}
+</div>
