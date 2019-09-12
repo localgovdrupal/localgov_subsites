@@ -33,6 +33,7 @@ class CampaignNavigationBlock extends BlockBase {
         $build[] = [
           '#theme' => 'campaign_navigation',
           '#heading' => $campaign->label(),
+          '#parentURL' => $campaign->toUrl()->toString(),
           '#links' => $links
         ];
       }
@@ -66,13 +67,51 @@ class CampaignNavigationBlock extends BlockBase {
    * @throws \Drupal\Core\Entity\EntityMalformedException
    */
   private function formatLinks(CampaignMaster $campaign) {
+
+    // Get current node and store nid as variable currentNid
+    $currentNode = \Drupal::routeMatch()->getParameter('node');
+    if ($currentNode instanceof \Drupal\node\NodeInterface) {
+      $currentNid = $currentNode->id();
+    }
+
     $links = [];
+
+    if ($currentNid == $campaign->id()) {
+      $links[] = [
+        'title' => $campaign->label(),
+        'url' => $campaign->toUrl(),
+        'class' => 'is-active'
+      ];
+    }
+
+    else {
+      $links[] = [
+        'title' => $campaign->label(),
+        'url' => $campaign->toUrl()
+      ];        
+    }
+
     foreach ($campaign->get('field_campaign_pages')->getValue() as $node_data) {
       $node = Node::load($node_data['target_id']);
-      $links[] = [
-        'title' => $node->label(),
-        'url' => $node->toUrl()
-      ];
+
+      $campaignNid = $node->id();
+
+      if ($currentNid == $campaignNid) {
+        $links[] = [
+          'title' => $node->label(),
+          'url' => $node->toUrl(),
+          'class' => 'is-active'
+        ];
+      }
+
+      else {
+        $links[] = [
+          'title' => $node->label(),
+          'url' => $node->toUrl()
+        ];        
+      }
+
+
     }
 
     return $links;
