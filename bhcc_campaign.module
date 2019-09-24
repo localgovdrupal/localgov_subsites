@@ -8,13 +8,21 @@ function bhcc_campaign_theme($existing, $type, $theme, $path) {
     'campaign_navigation' => [
       'variables' => [
         'heading' => '',
-        'links' => []
+        'links' => [],
+        'parentURL' => ''
       ]
     ],
     'campaign_banner' => [
       'variables' => [
         'tag' => '',
-        'heading' => ''
+        'heading' => '',
+        'image' => ''
+      ]
+    ],
+    'campaign_overview_banner' => [
+      'variables' => [
+        'heading' => '',
+        'image' => ''
       ]
     ]
   ];

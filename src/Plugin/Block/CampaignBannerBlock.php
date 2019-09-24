@@ -24,11 +24,19 @@ class CampaignBannerBlock extends BlockBase {
   public function build() {
     $build = [];
 
+    $nodeID = \Drupal::requestStack()->getCurrentRequest()->get('node');
+
+    $nodeTitle = $nodeID->label();
+
     if ($campaign = $this->getCampaign()) {
+
+      $campaignImage = file_create_url($campaign->get('field_banner')->entity->uri->value);
+
       $build[] = [
         '#theme' => 'campaign_banner',
-        '#tag' => 'Community',
-        '#heading' => $campaign->label()
+        '#tag' => $campaign->label(),
+        '#heading' => $nodeTitle,
+        '#image' => $campaignImage
       ];
     }
 
