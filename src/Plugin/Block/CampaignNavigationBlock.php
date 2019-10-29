@@ -93,6 +93,9 @@ class CampaignNavigationBlock extends BlockBase {
 
     foreach ($campaign->get('field_campaign_pages')->getValue() as $node_data) {
       $node = Node::load($node_data['target_id']);
+      if (is_null($node)) {
+        continue;
+      }
 
       $campaignNid = $node->id();
 
