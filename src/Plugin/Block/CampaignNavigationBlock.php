@@ -174,19 +174,19 @@ class CampaignNavigationBlock extends BlockBase {
    */
   protected function listHomepageAndPages(NodeInterface $homepage): array {
 
-    // Weed out the references to deleted nodes.
-    $existing_pages = array_filter(iterator_to_array($homepage->field_campaign_pages), function (EntityReferenceItem $ref): bool {
-      return isset($ref->entity);
-    });
-
-    $existing_page_nodes = array_map(function (EntityReferenceItem $ref) {
+    $page_refs = $homepage->field_campaign_pages;
+    $page_nodes = array_map(function (EntityReferenceItem $ref) {
       return $ref->entity;
-    }, $existing_pages);
+    }, iterator_to_array($page_refs));
 
-    $related_campaign_nodes = $existing_page_nodes;
+    // Weed out the references to deleted nodes.
+    $existing_pages = array_filter($page_nodes);
+
+    $related_campaign_nodes = $existing_pages;
     $related_campaign_nodes[] = $homepage;
+    $related_campaign_nodes_w_sequential_keys = array_values($related_campaign_nodes);
 
-    return $related_campaign_nodes;
+    return $related_campaign_nodes_w_sequential_keys;
   }
 
 }

@@ -133,10 +133,6 @@ class CampaignNavigationBlockTest extends UnitTestCase {
       ->disableOriginalConstructor()
       ->getMock();
     $mockEntityRefItemForNode20->expects($this->any())
-      ->method('__isset')
-      ->with('entity')
-      ->willReturn(TRUE);
-    $mockEntityRefItemForNode20->expects($this->any())
       ->method('__get')
       ->with('entity')
       ->willReturn($this->campaignPageNode20);
@@ -145,20 +141,29 @@ class CampaignNavigationBlockTest extends UnitTestCase {
       ->disableOriginalConstructor()
       ->getMock();
     $mockEntityRefItemForNode30->expects($this->any())
-      ->method('__isset')
-      ->with('entity')
-      ->willReturn(TRUE);
-    $mockEntityRefItemForNode30->expects($this->any())
       ->method('__get')
       ->with('entity')
       ->willReturn($this->campaignPageNode30);
+
+    // Also add a reference to a Campaign page that no longer exists.
+    $mockEntityRefItemForDeletedNode = $this->getMockBuilder(EntityReferenceItem::class)
+      ->disableOriginalConstructor()
+      ->getMock();
+    $mockEntityRefItemForDeletedNode->expects($this->any())
+      ->method('__get')
+      ->with('entity')
+      ->willReturn(NULL);
 
     $mockEntityRefList = $this->getMockBuilder(EntityReferenceFieldItemList::class)
       ->disableOriginalConstructor()
       ->getMock();
     $mockEntityRefList->expects($this->any())
       ->method('getIterator')
-      ->willReturn(new \ArrayIterator([$mockEntityRefItemForNode20, $mockEntityRefItemForNode30]));
+      ->willReturn(new \ArrayIterator([
+        $mockEntityRefItemForDeletedNode,
+        $mockEntityRefItemForNode20,
+        $mockEntityRefItemForNode30,
+      ]));
     $this->campaignHomepageNode10->expects($this->any())
       ->method('__get')
       ->with('field_campaign_pages')
