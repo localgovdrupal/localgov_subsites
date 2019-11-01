@@ -1,0 +1,53 @@
+<?php
+
+/**
+ * @file
+ * Update hooks.
+ */
+
+use Drupal\Core\Utility\UpdateException;
+
+/**
+ * Implements hook_update_N().
+ *
+ * Add the current node as a context for all existing campaign_navigation_block
+ * type blocks.  This is needed because we have updated the annotation of the
+ * campaign_navigation_block.  This annotation will be applied to the *new*
+ * blocks only.  So we have to update the existing ones.
+ *
+ * **After running this update, we will have to export the site configuration.**
+ *
+ * @see Drupal\bhcc_campaign\Plugin\Block\CampaignNavigationBlock
+ *
+ * @throws Drupal\Core\Utility\UpdateException
+ */
+function bhcc_campaign_update_8001() {
+
+  $etm = Drupal::service('entity_type.manager');
+  $nav_block_list = $etm->getStorage('block')->loadByProperties(['plugin' => 'campaign_navigation_block']);
+
+  $updated_blocks = [];
+  foreach ($nav_block_list as $nav_block) {
+    try {
+      $nav_block_settings = $nav_block->get('settings');
+
+      $has_node_context_mapping = isset($nav_block_settings['context_mapping']['node']);
+      if ($has_node_context_mapping) {
+        continue;
+      }
+
+      $nav_block_settings['context_mapping']['node'] = '@node.node_route_context:node';
+      $nav_block->set('settings', $nav_block_settings);
+      $nav_block->save();
+    }
+    catch (Exception $e) {
+      return new UpdateException("Failed to update the {$nav_block->label()} block.  Details: {$e->getMessage()}");
+    }
+
+    $updated_blocks[] = "{$nav_block->label()} in {$nav_block->getRegion()}";
+  }
+
+  return t('Updated the following blocks: @block-list', [
+    '@block-list' => implode($updated_blocks, ', '),
+  ]);
+}
