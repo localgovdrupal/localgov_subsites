@@ -95,11 +95,12 @@ class CampaignNavigationBlock extends BlockBase {
       $links[] = [
         'title' => $campaign->label(),
         'url' => $campaign->toUrl()
-      ];        
+      ];
     }
 
     foreach ($campaign->get('field_campaign_pages')->getValue() as $node_data) {
       $node = Node::load($node_data['target_id']);
+      // Skip over loading this node if it is not found (has been deleted)
       if (is_null($node)) {
         continue;
       }
@@ -118,7 +119,7 @@ class CampaignNavigationBlock extends BlockBase {
         $links[] = [
           'title' => $node->label(),
           'url' => $node->toUrl()
-        ];        
+        ];
       }
     }
 
