@@ -5,7 +5,8 @@ namespace Drupal\Tests\bhcc_campaign\Unit;
 use Drupal\bhcc_campaign\Plugin\Block\CampaignNavigationBlock;
 use Drupal\Core\Field\EntityReferenceFieldItemList;
 use Drupal\Core\Field\Plugin\Field\FieldType\EntityReferenceItem;
-use Drupal\node\Entity\Node;
+use Drupal\bhcc_campaign\Node\CampaignMaster;
+use Drupal\bhcc_campaign\Node\CampaignSingleton;
 use Drupal\Tests\UnitTestCase;
 
 /**
@@ -15,6 +16,60 @@ use Drupal\Tests\UnitTestCase;
  * @group bhcc
  */
 class CampaignNavigationBlockTest extends UnitTestCase {
+
+  /**
+   * Tests for CampaignNavigationBlock::getCampaign().
+   *
+   * We provice a campaign homepage and expect that its returned
+   * as its the campaign.
+   */
+  public function testGetCampaign() {
+
+    // Node to test.
+    $campaignNode = $this->campaignHomepageNode10;
+
+    // Turn protected method into public method.
+    $method = new \ReflectionMethod(CampaignNavigationBlock::class, 'getCampaign');
+    $method->setAccessible(TRUE);
+    $result = $method->invoke($this->testTarget, $campaignNode);
+    $resultNid = $result->id();
+
+    // Expected result.
+    $expectedNid = 10;
+
+    // Assert the campaign node we get is node '10'.
+    $this->assertEquals($expectedNid, $resultNid);
+
+    // Assert the returned node is of type CampaignMaster.
+    $this->assertInstanceOf(CampaignMaster::class, $result);
+  }
+
+  /**
+   * Tests for CampaignNavigationBlock::getCampaign().
+   *
+   * We provice a campaign child page,
+   * and expect the parent campaign homepage node to be returned.
+   */
+  public function testGetCampaignForChildPage() {
+
+    // Node to test.
+    $campaignNode = $this->campaignPageNode20;
+
+    // Turn protected method into public method.
+    $method = new \ReflectionMethod(CampaignNavigationBlock::class, 'getCampaign');
+    $method->setAccessible(TRUE);
+    $result = $method->invoke($this->testTarget, $campaignNode);
+    $resultNid = $result->id();
+
+    // Expected result - should be the parent campaign.
+    $expectedNid = $this->campaignHomepageNode10->id();
+
+    // Assert the campaign node we get is node '10'.
+    $this->assertEquals($expectedNid, $resultNid);
+
+    // Assert the returned node is of type CampaignMaster.
+    $this->assertInstanceOf(CampaignMaster::class, $result);
+  }
 
   /**
    * Tests for CampaignNavigationBlock::prepareCacheTagsForCampaign().
@@ -99,14 +154,14 @@ class CampaignNavigationBlockTest extends UnitTestCase {
     $this->testTarget = new CampaignNavigationBlock($configuration = [], $plugin_id = 'none', $plugin_definition = ['provider' => 'nobody']);
 
     // Campaign homepage page nodes.
-    $this->campaignHomepageNode10 = $this->getMockBuilder(Node::class)
+    $this->campaignHomepageNode10 = $this->getMockBuilder(CampaignMaster::class)
       ->disableOriginalConstructor()
       ->getMock();
     $this->campaignHomepageNode10->expects($this->any())
       ->method('getCacheTags')
       ->willReturn(['node:10']);
 
-    $this->campaignHomepageNode100 = $this->getMockBuilder(Node::class)
+    $this->campaignHomepageNode100 = $this->getMockBuilder(CampaignMaster::class)
       ->disableOriginalConstructor()
       ->getMock();
     $this->campaignHomepageNode100->expects($this->any())
@@ -114,14 +169,14 @@ class CampaignNavigationBlockTest extends UnitTestCase {
       ->willReturn(['node:100']);
 
     // Campaign page nodes.
-    $this->campaignPageNode20 = $this->getMockBuilder(Node::class)
+    $this->campaignPageNode20 = $this->getMockBuilder(CampaignSingleton::class)
       ->disableOriginalConstructor()
       ->getMock();
     $this->campaignPageNode20->expects($this->any())
       ->method('getCacheTags')
       ->willReturn(['node:20']);
 
-    $this->campaignPageNode30 = $this->getMockBuilder(Node::class)
+    $this->campaignPageNode30 = $this->getMockBuilder(CampaignSingleton::class)
       ->disableOriginalConstructor()
       ->getMock();
     $this->campaignPageNode30->expects($this->any())
@@ -180,6 +235,28 @@ class CampaignNavigationBlockTest extends UnitTestCase {
       ->method('__get')
       ->with('field_campaign_pages')
       ->willReturn($mockEmptyEntityRefList);
+
+    // Set the ID property on each node - parent nodes.
+    $campaignHomepageNids = [10, 100];
+    foreach ($campaignHomepageNids as $nid) {
+      $nodeKey = 'campaignHomepageNode' . $nid;
+      $this->$nodeKey->expects($this->any())
+        ->method('id')
+        ->willReturn($nid);
+    }
+
+    // Set the node ID and parent on the child nodes.
+    $campaignPageNids = [20, 30];
+    foreach ($campaignPageNids as $nid) {
+      $nodeKey = 'campaignPageNode' . $nid;
+      $this->$nodeKey->expects($this->any())
+        ->method('id')
+        ->willReturn($nid);
+      // Will return node 10 as parent node.
+      $this->$nodeKey->expects($this->any())
+        ->method('getParent')
+        ->willReturn($this->campaignHomepageNode10);
+    }
   }
 
   /**
@@ -190,9 +267,9 @@ class CampaignNavigationBlockTest extends UnitTestCase {
   protected $testTarget;
 
   /**
-   * Campaign homepage node.
+   * Campaign homepage nodes.
    *
-   * @var Drupal\node\NodeInterface
+   * @var Drupal\bhcc_campaign\Node\CampaignMaster
    */
   protected $campaignHomepageNode10;
   protected $campaignHomepageNode100;
@@ -200,7 +277,7 @@ class CampaignNavigationBlockTest extends UnitTestCase {
   /**
    * Campaign page nodes.
    *
-   * @var Drupal\node\NodeInterface
+   * @var Drupal\bhcc_campaign\Node\CampaignSingleton
    */
   protected $campaignPageNode20;
   protected $campaignPageNode30;

@@ -12,7 +12,7 @@ use Drupal\Core\Field\Plugin\Field\FieldType\EntityReferenceItem;
 use Drupal\node\NodeInterface;
 
 /**
- * Class CampaignNavigationBlock
+ * Class CampaignNavigationBlock.
  *
  * @package Drupal\bhcc_campaign\Plugin\Block
  *
@@ -32,7 +32,7 @@ class CampaignNavigationBlock extends BlockBase {
   public function build() {
     $build = [];
 
-    if ($campaign = $this->getCampaign()) {
+    if ($campaign = $this->getCampaignFromContext()) {
       $links = $this->formatLinks($campaign);
 
       if ($links) {
@@ -40,7 +40,7 @@ class CampaignNavigationBlock extends BlockBase {
           '#theme' => 'campaign_navigation',
           '#heading' => $campaign->label(),
           '#parentURL' => $campaign->toUrl()->toString(),
-          '#links' => $links
+          '#links' => $links,
         ];
       }
     }
@@ -51,33 +51,51 @@ class CampaignNavigationBlock extends BlockBase {
   /**
    * Load campaign.
    *
+   * @param \Drupal\node\Entity\Node $node
+   *   Campaign node to check (either a campaign overview page or sub page).
+   *
    * @return bool|\Drupal\Core\Entity\EntityInterface|\Drupal\node\Entity\Node|mixed|null
+   *   Node object of Campaign overview page.
+   *
    * @throws \Drupal\Core\TypedData\Exception\MissingDataException
    */
-  private function getCampaign() {
-    $node = $this->getContextValue('node');
-
+  protected function getCampaign(Node $node) {
     if ($node instanceof CampaignSingleton) {
       $node = $node->getParent();
     }
-
     return $node;
+  }
+
+  /**
+   * Load campaign from context.
+   *
+   * @return bool|\Drupal\Core\Entity\EntityInterface|\Drupal\node\Entity\Node|mixed|null
+   *   Node object of Campaign overview page.
+   *
+   * @throws \Drupal\Core\TypedData\Exception\MissingDataException
+   */
+  protected function getCampaignFromContext() {
+    $node = $this->getContextValue('node');
+    return $this->getCampaign($node);
   }
 
   /**
    * Format links for the campaign navigation theme.
    *
    * @param \Drupal\bhcc_campaign\Node\CampaignMaster $campaign
+   *   Node object of campaign overview page.
    *
    * @return array
+   *   Menu links for build.
+   *
    * @throws \Drupal\Core\Entity\EntityMalformedException
    */
-  private function formatLinks(CampaignMaster $campaign) {
+  protected function formatLinks(CampaignMaster $campaign) {
 
-    // Get current node and store nid as variable currentNid
+    // Get current node and store nid as variable currentNid.
     $currentNode = $this->getContextValue('node');
 
-    if ($currentNode instanceof \Drupal\node\NodeInterface) {
+    if ($currentNode instanceof NodeInterface) {
       $currentNid = $currentNode->id();
     }
 
@@ -87,20 +105,19 @@ class CampaignNavigationBlock extends BlockBase {
       $links[] = [
         'title' => $campaign->label(),
         'url' => $campaign->toUrl(),
-        'class' => 'is-active'
+        'class' => 'is-active',
       ];
     }
 
     else {
       $links[] = [
         'title' => $campaign->label(),
-        'url' => $campaign->toUrl()
+        'url' => $campaign->toUrl(),
       ];
     }
 
     foreach ($campaign->get('field_campaign_pages')->getValue() as $node_data) {
       $node = Node::load($node_data['target_id']);
-      // Skip over loading this node if it is not found (has been deleted)
       if (is_null($node)) {
         continue;
       }
@@ -111,14 +128,14 @@ class CampaignNavigationBlock extends BlockBase {
         $links[] = [
           'title' => $node->label(),
           'url' => $node->toUrl(),
-          'class' => 'is-active'
+          'class' => 'is-active',
         ];
       }
 
       else {
         $links[] = [
           'title' => $node->label(),
-          'url' => $node->toUrl()
+          'url' => $node->toUrl(),
         ];
       }
     }
@@ -138,7 +155,7 @@ class CampaignNavigationBlock extends BlockBase {
    */
   public function getCacheTags() {
 
-    $homepage = $this->getCampaign();
+    $homepage = $this->getCampaignFromContext();
     $campaign_nodes = $this->listHomepageAndPages($homepage);
     $campaign_cache_tags = $this->prepareCacheTagsForCampaign($campaign_nodes);
 
