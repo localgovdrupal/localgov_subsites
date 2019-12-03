@@ -2,14 +2,12 @@
 
 namespace Drupal\bhcc_campaign\Plugin\Block;
 
-use Drupal\bhcc_campaign\Node\CampaignMaster;
-use Drupal\bhcc_campaign\Node\CampaignSingleton;
-use Drupal\Core\Block\BlockBase;
+use Drupal\bhcc_campaign\Node\CampaignMasterInterface;
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\Cache\CacheableDependencyInterface;
-use Drupal\node\Entity\Node;
 use Drupal\Core\Field\Plugin\Field\FieldType\EntityReferenceItem;
 use Drupal\node\NodeInterface;
+use Drupal\node\Entity\Node;
 
 /**
  * Class CampaignNavigationBlock.
@@ -24,7 +22,7 @@ use Drupal\node\NodeInterface;
  *   }
  * )
  */
-class CampaignNavigationBlock extends BlockBase {
+class CampaignNavigationBlock extends CampaignBlockBase {
 
   /**
    * {@inheritdoc}
@@ -32,8 +30,9 @@ class CampaignNavigationBlock extends BlockBase {
   public function build() {
     $build = [];
 
-    if ($campaign = $this->getCampaignFromContext()) {
-      $links = $this->formatLinks($campaign);
+    $node = $this->getContextValue('node');
+    if ($campaign = $this->getCampaign($node)) {
+      $links = $this->formatLinks($campaign, $node);
 
       if ($links) {
         $build[] = [
@@ -49,51 +48,19 @@ class CampaignNavigationBlock extends BlockBase {
   }
 
   /**
-   * Load campaign.
-   *
-   * @param \Drupal\node\Entity\Node $node
-   *   Campaign node to check (either a campaign overview page or sub page).
-   *
-   * @return bool|\Drupal\Core\Entity\EntityInterface|\Drupal\node\Entity\Node|mixed|null
-   *   Node object of Campaign overview page.
-   *
-   * @throws \Drupal\Core\TypedData\Exception\MissingDataException
-   */
-  protected function getCampaign(Node $node) {
-    if ($node instanceof CampaignSingleton) {
-      $node = $node->getParent();
-    }
-    return $node;
-  }
-
-  /**
-   * Load campaign from context.
-   *
-   * @return bool|\Drupal\Core\Entity\EntityInterface|\Drupal\node\Entity\Node|mixed|null
-   *   Node object of Campaign overview page.
-   *
-   * @throws \Drupal\Core\TypedData\Exception\MissingDataException
-   */
-  protected function getCampaignFromContext() {
-    $node = $this->getContextValue('node');
-    return $this->getCampaign($node);
-  }
-
-  /**
    * Format links for the campaign navigation theme.
    *
-   * @param \Drupal\bhcc_campaign\Node\CampaignMaster $campaign
+   * @param \Drupal\bhcc_campaign\Node\CampaignMasterInterface $campaign
    *   Node object of campaign overview page.
+   * @param \Drupal\node\NodeInterface $currentNode
+   *   Current page node.
    *
    * @return array
    *   Menu links for build.
    *
    * @throws \Drupal\Core\Entity\EntityMalformedException
    */
-  protected function formatLinks(CampaignMaster $campaign) {
-
-    // Get current node and store nid as variable currentNid.
-    $currentNode = $this->getContextValue('node');
+  protected function formatLinks(CampaignMasterInterface $campaign, NodeInterface $currentNode) {
 
     if ($currentNode instanceof NodeInterface) {
       $currentNid = $currentNode->id();
@@ -155,8 +122,9 @@ class CampaignNavigationBlock extends BlockBase {
    */
   public function getCacheTags() {
 
-    $homepage = $this->getCampaignFromContext();
-    $campaign_nodes = $this->listHomepageAndPages($homepage);
+    $node = $this->getContextValue('node');
+    $overview = $this->getCampaign($node);
+    $campaign_nodes = $this->listOverviewAndPages($overview);
     $campaign_cache_tags = $this->prepareCacheTagsForCampaign($campaign_nodes);
 
     return Cache::mergeTags(parent::getCacheTags(), $campaign_cache_tags);
@@ -165,7 +133,7 @@ class CampaignNavigationBlock extends BlockBase {
   /**
    * All cache tags for *a* Campaign.
    *
-   * List cache tags for the given Campaign homepage and its child Campaign
+   * List cache tags for the given Campaign Overview and its child Campaign
    * pages.
    *
    * @param array $campaign_nodes
@@ -185,14 +153,14 @@ class CampaignNavigationBlock extends BlockBase {
   }
 
   /**
-   * List of Campaign homepage and its child Campaign pages.
+   * List of Campaign Overview and its child Campaign pages.
    *
    * @return array
    *   List of nodes.
    */
-  protected function listHomepageAndPages(NodeInterface $homepage): array {
+  protected function listOverviewAndPages(NodeInterface $overview): array {
 
-    $page_refs = $homepage->field_campaign_pages;
+    $page_refs = $overview->field_campaign_pages;
     $page_nodes = array_map(function (EntityReferenceItem $ref) {
       return $ref->entity;
     }, iterator_to_array($page_refs));
@@ -201,7 +169,7 @@ class CampaignNavigationBlock extends BlockBase {
     $existing_pages = array_filter($page_nodes);
 
     $related_campaign_nodes = $existing_pages;
-    $related_campaign_nodes[] = $homepage;
+    $related_campaign_nodes[] = $overview;
     $related_campaign_nodes_w_sequential_keys = array_values($related_campaign_nodes);
 
     return $related_campaign_nodes_w_sequential_keys;

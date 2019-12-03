@@ -2,11 +2,11 @@
 
 namespace Drupal\bhcc_campaign\Plugin\Block;
 
-use Drupal\Core\Block\BlockBase;
+use Drupal\node\NodeInterface;
 use Drupal\Core\Cache\Cache;
 
 /**
- * Class CampaignOverviewBlock
+ * Class CampaignOverviewBlock.
  *
  * @package Drupal\bhcc_campaign\Plugin\Block
  *
@@ -15,32 +15,51 @@ use Drupal\Core\Cache\Cache;
  *   admin_label = "Campaign overview banner"
  * )
  */
-class CampaignOverviewBlock extends BlockBase {
+class CampaignOverviewBlock extends CampaignBlockBase {
 
   /**
    * {@inheritdoc}
    */
   public function build() {
+
     $build = [];
-
-    $nodeID = \Drupal::requestStack()->getCurrentRequest()->get('node');
-
-    $nodeTitle = $nodeID->label();
-
-    $nodeImageURL = file_create_url($nodeID->get('field_banner')->entity->uri->value);
-
-    $build[] = [
-      '#theme' => 'campaign_overview_banner',
-      '#heading' => $nodeTitle,
-      '#image' => $nodeImageURL
-    ];
-
+    $node = \Drupal::requestStack()->getCurrentRequest()->get('node');
+    $build[] = $this->getBlockBuild($node);
     return $build;
   }
+
+  /**
+   * Get Block Build array.
+   *
+   * @param \Drupal\node\Entity\Node $node
+   *   Current Node.
+   *
+   * @return array
+   *   Block Render array.
+   */
+  protected function getBlockBuild(NodeInterface $node) {
+
+    $blockBuild = [];
+
+    if ($campaign = $this->getCampaign($node)) {
+
+      $campaignImageURL = $this->getCampaignBanner($campaign);
+
+      $blockBuild = [
+        '#theme' => 'campaign_overview_banner',
+        '#heading' => $this->getCampaignTitle($campaign),
+        '#image' => $campaignImageURL,
+      ];
+    }
+
+    return $blockBuild;
+  }
+
   /**
    * {@inheritdoc}
    */
   public function getCacheContexts() {
-    return Cache::mergeContexts(parent::getCacheContexts(), array('route'));
+    return Cache::mergeContexts(parent::getCacheContexts(), ['route']);
   }
+
 }

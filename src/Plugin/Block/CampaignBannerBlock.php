@@ -2,12 +2,11 @@
 
 namespace Drupal\bhcc_campaign\Plugin\Block;
 
-use Drupal\bhcc_campaign\Node\CampaignSingleton;
-use Drupal\Core\Block\BlockBase;
+use Drupal\node\NodeInterface;
 use Drupal\Core\Cache\Cache;
 
 /**
- * Class CampaignBannerBlock
+ * Class CampaignBannerBlock.
  *
  * @package Drupal\bhcc_campaign\Plugin\Block
  *
@@ -16,53 +15,52 @@ use Drupal\Core\Cache\Cache;
  *   admin_label = "Campaign banner"
  * )
  */
-class CampaignBannerBlock extends BlockBase {
+class CampaignBannerBlock extends CampaignBlockBase {
 
   /**
    * {@inheritdoc}
    */
   public function build() {
+
     $build = [];
-
-    $nodeID = \Drupal::requestStack()->getCurrentRequest()->get('node');
-
-    $nodeTitle = $nodeID->label();
-
-    if ($campaign = $this->getCampaign()) {
-
-      $campaignImage = file_create_url($campaign->get('field_banner')->entity->uri->value);
-
-      $build[] = [
-        '#theme' => 'campaign_banner',
-        '#tag' => $campaign->label(),
-        '#heading' => $nodeTitle,
-        '#image' => $campaignImage
-      ];
-    }
-
+    $node = \Drupal::requestStack()->getCurrentRequest()->get('node');
+    $build[] = $this->getBlockBuild($node);
     return $build;
   }
 
   /**
-   * Load campaign.
+   * Get Block Build array.
    *
-   * @return bool|\Drupal\Core\Entity\EntityInterface|\Drupal\node\Entity\Node|mixed|null
-   * @throws \Drupal\Core\TypedData\Exception\MissingDataException
+   * @param Drupal\node\NodeInterface $node
+   *   Current Node.
+   *
+   * @return array
+   *   Block Render array.
    */
-  private function getCampaign() {
-    $node = \Drupal::requestStack()->getCurrentRequest()->get('node');
+  protected function getBlockBuild(NodeInterface $node) {
 
-    if ($node instanceof CampaignSingleton) {
-      $node = $node->getParent();
+    $blockBuild = [];
+
+    if ($campaign = $this->getCampaign($node)) {
+
+      $campaignImageURL = $this->getCampaignBanner($campaign);
+
+      $blockBuild = [
+        '#theme' => 'campaign_banner',
+        '#tag' => $this->getCampaignTitle($campaign),
+        '#heading' => $node->label(),
+        '#image' => $campaignImageURL,
+      ];
     }
 
-    return $node;
+    return $blockBuild;
   }
 
   /**
    * {@inheritdoc}
    */
   public function getCacheContexts() {
-    return Cache::mergeContexts(parent::getCacheContexts(), array('route'));
+    return Cache::mergeContexts(parent::getCacheContexts(), ['route']);
   }
+
 }

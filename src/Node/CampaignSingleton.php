@@ -6,23 +6,21 @@ use Drupal\bhcc_helper\Node\NodeBase;
 use Drupal\node\Entity\Node;
 
 /**
- * Class CampaignSingleton
+ * Class CampaignSingleton.
  *
  * @package Drupal\bhcc_campaign\Node
  */
-class CampaignSingleton extends NodeBase {
+class CampaignSingleton extends NodeBase implements CampaignSingletonInterface {
 
   /**
-   * Get parent node.
-   *
-   * @return bool|\Drupal\Core\Entity\EntityInterface|\Drupal\node\Entity\Node|null
-   * @throws \Drupal\Core\TypedData\Exception\MissingDataException
+   * {@inheritdoc}
    */
   public function getParent() {
     if (!$this->get('field_campaign')->isEmpty()) {
       return Node::load($this->get('field_campaign')->first()->getValue()['target_id']);
     }
 
-    return false;
+    return FALSE;
   }
+
 }

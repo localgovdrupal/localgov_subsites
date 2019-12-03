@@ -5,20 +5,16 @@ namespace Drupal\bhcc_campaign\Node;
 use Drupal\bhcc_helper\Node\NodeBase;
 
 /**
- * Class CampaignMaster
+ * Class CampaignMaster.
  *
  * @package Drupal\bhcc_campaign\Node
  */
-class CampaignMaster extends NodeBase {
+class CampaignMaster extends NodeBase implements CampaignMasterInterface {
 
   /**
-   * Add a new child page.
-   *
-   * @param \Drupal\bhcc_campaign\Node\CampaignSingleton $child
-   *
-   * @return $this
+   * {@inheritdoc}
    */
-  public function addChild(CampaignSingleton $child) {
+  public function addChild(CampaignSingletonInterface $child) {
     if (!$this->hasChild($child)) {
       $this->set('field_campaign_pages', $this->get('field_campaign_pages')->getValue() + ['target_id' => $child->id()]);
     }
@@ -27,13 +23,9 @@ class CampaignMaster extends NodeBase {
   }
 
   /**
-   * Remove child page.
-   *
-   * @param \Drupal\bhcc_campaign\Node\CampaignSingleton $child
-   *
-   * @return $this
+   * {@inheritdoc}
    */
-  public function removeChild(CampaignSingleton $child) {
+  public function removeChild(CampaignSingletonInterface $child) {
     if ($this->hasChild($child)) {
       $children = $this->get('field_campaign_pages')->getValue();
 
@@ -50,17 +42,16 @@ class CampaignMaster extends NodeBase {
   }
 
   /**
-   * Check if the guide already contains a page.
-   *
-   * @param \Drupal\bhcc_campaign\Node\CampaignSingleton $child
-   *
-   * @return bool
+   * {@inheritdoc}
    */
-  public function hasChild(CampaignSingleton $child) {
+  public function hasChild(CampaignSingletonInterface $child) {
     foreach ($this->get('field_campaign_pages')->getValue() as $item) {
-      if ($item['target_id'] == $child->id()) { return true; }
+      if ($item['target_id'] == $child->id()) {
+        return TRUE;
+      }
     }
 
-    return false;
+    return FALSE;
   }
+
 }
