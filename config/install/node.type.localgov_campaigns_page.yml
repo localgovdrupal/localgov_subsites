@@ -10,7 +10,7 @@ third_party_settings:
     parent: 'main:'
 name: 'Campaign page'
 type: localgov_campaigns_page
-description: ''
+description: 'General campaign pages attached to an overview page.'
 help: ''
 new_revision: true
 preview_mode: 0

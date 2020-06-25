@@ -5,4 +5,13 @@ type: module
 package: LocalGovDrupal
 
 dependencies:
-#  - localgov_campaigns:localgov_campaigns_paragraphs
+  - drupal:block
+  - drupal:field
+  - drupal:image
+  - drupal:node
+  - drupal:path
+  - drupal:text
+  - field_group:field_group
+  - paragraphs:paragraphs
+  - localgov_campaigns:localgov_campaigns_paragraphs
+  - localgov_topics:localgov_topics

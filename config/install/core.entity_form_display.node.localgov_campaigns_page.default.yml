@@ -9,8 +9,6 @@ dependencies:
     - field.field.node.localgov_campaigns_page.field_topic_term
     - node.type.localgov_campaigns_page
   module:
-    - bhcc_admin
-    - content_moderation
     - field_group
     - path
     - text

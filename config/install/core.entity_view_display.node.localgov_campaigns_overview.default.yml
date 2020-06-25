@@ -5,7 +5,7 @@ dependencies:
     - field.field.node.localgov_campaigns_overview.body
     - field.field.node.localgov_campaigns_overview.field_banner
     - field.field.node.localgov_campaigns_overview.field_banner_colour
-    - field.field.node.localgov_campaigns_overview.field_localgov_campaigns_pages
+    - field.field.node.localgov_campaigns_overview.field_campaign_pages
     - field.field.node.localgov_campaigns_overview.field_hide_sidebar
     - field.field.node.localgov_campaigns_overview.field_page_builder_advanced
     - field.field.node.localgov_campaigns_overview.field_select_colorway
@@ -38,7 +38,7 @@ hidden:
   body: true
   field_banner: true
   field_banner_colour: true
-  field_localgov_campaigns_pages: true
+  field_campaign_pages: true
   field_hide_sidebar: true
   field_select_colorway: true
   field_select_colourway_accent: true

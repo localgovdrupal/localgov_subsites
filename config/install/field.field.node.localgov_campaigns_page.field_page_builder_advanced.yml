@@ -75,9 +75,6 @@ settings:
       link_and_summary_page_builder_:
         enabled: true
         weight: 36
-      newsroom_teasers:
-        weight: 37
-        enabled: false
       page_builder_layout:
         weight: 38
         enabled: false

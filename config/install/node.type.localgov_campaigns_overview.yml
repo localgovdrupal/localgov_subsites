@@ -10,7 +10,7 @@ third_party_settings:
     parent: 'main:'
 name: 'Campaign overview'
 type: localgov_campaigns_overview
-description: ''
+description: 'Main campaign landing page.'
 help: ''
 new_revision: true
 preview_mode: 0

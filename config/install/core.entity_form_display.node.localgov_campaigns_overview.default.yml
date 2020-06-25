@@ -5,7 +5,7 @@ dependencies:
     - field.field.node.localgov_campaigns_overview.body
     - field.field.node.localgov_campaigns_overview.field_banner
     - field.field.node.localgov_campaigns_overview.field_banner_colour
-    - field.field.node.localgov_campaigns_overview.field_localgov_campaigns_pages
+    - field.field.node.localgov_campaigns_overview.field_campaign_pages
     - field.field.node.localgov_campaigns_overview.field_hide_sidebar
     - field.field.node.localgov_campaigns_overview.field_page_builder_advanced
     - field.field.node.localgov_campaigns_overview.field_select_colorway
@@ -14,12 +14,8 @@ dependencies:
     - image.style.thumbnail
     - node.type.localgov_campaigns_overview
   module:
-    - bhcc_admin
-    - bhcc_guide
-    - content_moderation
     - field_group
     - image
-    - imce
     - path
     - text
 third_party_settings:
@@ -103,7 +99,7 @@ third_party_settings:
       region: content
     group_campaign:
       children:
-        - field_localgov_campaigns_pages
+        - field_campaign_pages
       parent_name: group_tabs
       weight: 11
       format_type: tab
@@ -145,7 +141,7 @@ content:
         enabled: true
     type: image_image
     region: content
-  field_localgov_campaigns_pages:
+  field_campaign_pages:
     weight: 28
     settings: {  }
     third_party_settings: {  }
