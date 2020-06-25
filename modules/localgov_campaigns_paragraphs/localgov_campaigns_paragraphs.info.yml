@@ -1,0 +1,11 @@
+name: LocalGov Campaigns Paragraphs
+description: Page builder paragraph types for use with LocalGov Campaigns.
+core_version_requirement: ^8.9 || ^9
+type: module
+package: LocalGovDrupal
+
+dependencies:
+  - paragraphs:paragraphs
+  - localgov_campaigns:localgov_campaigns
+  - localgov_core:localgov_media
+  - localgov_paragraphs:localgov_paragraphs

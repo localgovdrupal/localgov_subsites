@@ -1,0 +1,23 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.image_page_builder_.field_image
+    - paragraphs.paragraphs_type.image_page_builder_
+  module:
+    - image
+id: paragraph.image_page_builder_.default
+targetEntityType: paragraph
+bundle: image_page_builder_
+mode: default
+content:
+  field_image:
+    weight: 0
+    label: hidden
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+    region: content
+hidden: {  }

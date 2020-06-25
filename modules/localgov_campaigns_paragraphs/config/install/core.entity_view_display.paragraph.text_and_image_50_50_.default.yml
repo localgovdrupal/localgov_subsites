@@ -1,0 +1,32 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.text_and_image_50_50_.field_image
+    - field.field.paragraph.text_and_image_50_50_.field_text
+    - paragraphs.paragraphs_type.text_and_image_50_50_
+  module:
+    - image
+    - text
+id: paragraph.text_and_image_50_50_.default
+targetEntityType: paragraph
+bundle: text_and_image_50_50_
+mode: default
+content:
+  field_image:
+    weight: 0
+    label: hidden
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+    region: content
+  field_text:
+    weight: 2
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+hidden: {  }

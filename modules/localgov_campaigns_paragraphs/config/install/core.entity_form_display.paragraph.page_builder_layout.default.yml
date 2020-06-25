@@ -1,0 +1,50 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.page_builder_layout.field_elements
+    - field.field.paragraph.page_builder_layout.field_elements_second
+    - field.field.paragraph.page_builder_layout.field_layout
+    - paragraphs.paragraphs_type.page_builder_layout
+  module:
+    - paragraphs
+id: paragraph.page_builder_layout.default
+targetEntityType: paragraph
+bundle: page_builder_layout
+mode: default
+content:
+  field_elements:
+    type: entity_reference_paragraphs
+    weight: 1
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: closed
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: _none
+    third_party_settings: {  }
+    region: content
+  field_elements_second:
+    type: entity_reference_paragraphs
+    weight: 2
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: closed
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: _none
+    third_party_settings: {  }
+    region: content
+  field_layout:
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+hidden:
+  created: true
+  moderation_state: true
+  status: true
+  uid: true

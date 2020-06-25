@@ -1,0 +1,75 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_box_links
+    - paragraphs.paragraphs_type.box_link
+    - paragraphs.paragraphs_type.box_link_page_builder_
+  module:
+    - entity_reference_revisions
+id: paragraph.box_link_page_builder_.field_box_links
+field_name: field_box_links
+entity_type: paragraph
+bundle: box_link_page_builder_
+label: 'Box links'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      box_link: box_link
+    target_bundles_drag_drop:
+      advanced_links:
+        weight: 17
+        enabled: false
+      box_link:
+        enabled: true
+        weight: 18
+      box_link_page_builder_:
+        weight: 19
+        enabled: false
+      call_out_box:
+        weight: 20
+        enabled: false
+      call_out_box_page_builder_:
+        weight: 21
+        enabled: false
+      fact_box:
+        weight: 22
+        enabled: false
+      fact_boxes_page_builder_:
+        weight: 23
+        enabled: false
+      homepage_ia_blocks:
+        weight: 24
+        enabled: false
+      homepage_icons:
+        weight: 25
+        enabled: false
+      page_builder_layout:
+        weight: 26
+        enabled: false
+      pagebuilder_image:
+        weight: 27
+        enabled: false
+      pagebuilder_text:
+        weight: 28
+        enabled: false
+      quote_box_page_builder_:
+        weight: 29
+        enabled: false
+      text_field_page_builder_:
+        weight: 30
+        enabled: false
+      topic_list_builder:
+        weight: 31
+        enabled: false
+      video_page_builder_:
+        weight: 32
+        enabled: false
+field_type: entity_reference_revisions

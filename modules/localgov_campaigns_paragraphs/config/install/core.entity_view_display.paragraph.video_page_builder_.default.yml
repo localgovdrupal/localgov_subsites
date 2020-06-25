@@ -1,0 +1,13 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.video_page_builder_.field_video_url
+    - paragraphs.paragraphs_type.video_page_builder_
+id: paragraph.video_page_builder_.default
+targetEntityType: paragraph
+bundle: video_page_builder_
+mode: default
+content: {  }
+hidden:
+  field_video_url: true
