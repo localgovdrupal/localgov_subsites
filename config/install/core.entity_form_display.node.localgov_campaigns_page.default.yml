@@ -1,0 +1,188 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.localgov_campaigns_page.body
+    - field.field.node.localgov_campaigns_page.field_campaign
+    - field.field.node.localgov_campaigns_page.field_page_builder_advanced
+    - field.field.node.localgov_campaigns_page.field_sidebar
+    - field.field.node.localgov_campaigns_page.field_topic_term
+    - node.type.localgov_campaigns_page
+  module:
+    - bhcc_admin
+    - content_moderation
+    - field_group
+    - path
+    - text
+third_party_settings:
+  field_group:
+    group_tabs:
+      children:
+        - group_description
+        - group_s
+        - group_page
+      parent_name: ''
+      weight: 4
+      format_type: tabs
+      format_settings:
+        id: ''
+        classes: ''
+        direction: vertical
+      label: tabs
+    group_description:
+      children:
+        - title
+        - field_campaign
+        - field_topic_term
+        - body
+      parent_name: group_tabs
+      weight: 20
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: false
+      label: Description
+    group_page:
+      children:
+        - field_page_builder_advanced
+      parent_name: group_tabs
+      weight: 22
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: false
+      label: Page
+    group_s:
+      children:
+        - field_sidebar
+      parent_name: group_tabs
+      weight: 21
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: false
+      label: Sidebar
+id: node.localgov_campaigns_page.default
+targetEntityType: node
+bundle: localgov_campaigns_page
+mode: default
+content:
+  body:
+    type: text_textarea_with_summary
+    weight: -2
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+    third_party_settings: {  }
+    region: content
+  created:
+    type: datetime_timestamp
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_campaign:
+    weight: -4
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_page_builder_advanced:
+    weight: 6
+    settings:
+      title: Element
+      title_plural: Elements
+      edit_mode: closed
+      add_mode: select
+      form_display_mode: default
+      default_paragraph_type: _none
+    third_party_settings: {  }
+    type: page_builder_entity_reference_paragraphs
+    region: content
+  field_sidebar:
+    weight: 26
+    settings:
+      title: Element
+      title_plural: Elements
+      edit_mode: closed
+      add_mode: select
+      form_display_mode: default
+      default_paragraph_type: _none
+    third_party_settings: {  }
+    type: page_builder_entity_reference_paragraphs
+    region: content
+  field_topic_term:
+    weight: -3
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete_tags
+    region: content
+  moderation_state:
+    type: moderation_state_default
+    weight: 8
+    settings: {  }
+    region: content
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 5
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  promote:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 2
+    region: content
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 9
+    region: content
+    third_party_settings: {  }
+  sticky:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 3
+    region: content
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: -5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 0
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    region: content
+    third_party_settings: {  }
+  url_redirects:
+    weight: 7
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden: {  }

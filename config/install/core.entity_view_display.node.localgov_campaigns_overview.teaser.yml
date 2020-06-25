@@ -1,0 +1,42 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.localgov_campaigns_overview.body
+    - field.field.node.localgov_campaigns_overview.field_banner
+    - field.field.node.localgov_campaigns_overview.field_banner_colour
+    - field.field.node.localgov_campaigns_overview.field_localgov_campaigns_pages
+    - field.field.node.localgov_campaigns_overview.field_hide_sidebar
+    - field.field.node.localgov_campaigns_overview.field_page_builder_advanced
+    - field.field.node.localgov_campaigns_overview.field_select_colorway
+    - field.field.node.localgov_campaigns_overview.field_select_colourway_accent
+    - field.field.node.localgov_campaigns_overview.field_sidebar
+    - node.type.localgov_campaigns_overview
+  module:
+    - text
+    - user
+id: node.localgov_campaigns_overview.teaser
+targetEntityType: node
+bundle: localgov_campaigns_overview
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 0
+    settings:
+      trim_length: 300
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_banner: true
+  field_banner_colour: true
+  field_localgov_campaigns_pages: true
+  field_hide_sidebar: true
+  field_page_builder_advanced: true
+  field_select_colorway: true
+  field_select_colourway_accent: true
+  field_sidebar: true
+  links: true
+  search_api_excerpt: true

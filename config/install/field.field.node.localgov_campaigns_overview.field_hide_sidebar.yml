@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_hide_sidebar
+    - node.type.localgov_campaigns_overview
+id: node.localgov_campaigns_overview.field_hide_sidebar
+field_name: field_hide_sidebar
+entity_type: node
+bundle: localgov_campaigns_overview
+label: 'Full width overview'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

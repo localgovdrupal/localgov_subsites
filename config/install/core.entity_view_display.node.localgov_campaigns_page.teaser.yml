@@ -1,0 +1,34 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.localgov_campaigns_page.body
+    - field.field.node.localgov_campaigns_page.field_campaign
+    - field.field.node.localgov_campaigns_page.field_page_builder_advanced
+    - field.field.node.localgov_campaigns_page.field_sidebar
+    - field.field.node.localgov_campaigns_page.field_topic_term
+    - node.type.localgov_campaigns_page
+  module:
+    - text
+    - user
+id: node.localgov_campaigns_page.teaser
+targetEntityType: node
+bundle: localgov_campaigns_page
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 0
+    settings:
+      trim_length: 300
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_campaign: true
+  field_page_builder_advanced: true
+  field_sidebar: true
+  field_topic_term: true
+  links: true
+  search_api_excerpt: true

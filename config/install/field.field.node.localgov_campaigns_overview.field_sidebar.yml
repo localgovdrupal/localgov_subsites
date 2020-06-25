@@ -1,0 +1,96 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_sidebar
+    - node.type.localgov_campaigns_overview
+    - paragraphs.paragraphs_type.campaign_navigation
+  module:
+    - entity_reference_revisions
+id: node.localgov_campaigns_overview.field_sidebar
+field_name: field_sidebar
+entity_type: node
+bundle: localgov_campaigns_overview
+label: Sidebar
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      campaign_navigation: campaign_navigation
+    target_bundles_drag_drop:
+      advanced_links:
+        weight: 24
+        enabled: false
+      box_link:
+        weight: 25
+        enabled: false
+      box_link_page_builder_:
+        weight: 26
+        enabled: false
+      call_out_box:
+        weight: 27
+        enabled: false
+      call_out_box_page_builder_:
+        weight: 28
+        enabled: false
+      campaign_navigation:
+        enabled: true
+        weight: 29
+      fact_box:
+        weight: 30
+        enabled: false
+      fact_boxes_page_builder_:
+        weight: 31
+        enabled: false
+      homepage_ia_blocks:
+        weight: 32
+        enabled: false
+      homepage_icons:
+        weight: 33
+        enabled: false
+      image_page_builder_:
+        weight: 34
+        enabled: false
+      link_and_summary:
+        weight: 35
+        enabled: false
+      link_and_summary_page_builder_:
+        weight: 36
+        enabled: false
+      newsroom_teasers:
+        weight: 37
+        enabled: false
+      page_builder_layout:
+        weight: 38
+        enabled: false
+      pagebuilder_image:
+        weight: 39
+        enabled: false
+      pagebuilder_text:
+        weight: 40
+        enabled: false
+      quote:
+        weight: 41
+        enabled: false
+      quote_box_page_builder_:
+        weight: 42
+        enabled: false
+      text_and_image_50_50_:
+        weight: 43
+        enabled: false
+      text_field_page_builder_:
+        weight: 44
+        enabled: false
+      topic_list_builder:
+        weight: 45
+        enabled: false
+      video_page_builder_:
+        weight: 46
+        enabled: false
+field_type: entity_reference_revisions
