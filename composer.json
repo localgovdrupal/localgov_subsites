@@ -1,0 +1,8 @@
+{
+  "name": "localgovdrupal/localgov_campaigns",
+  "description": "Provides campaign sections using page builder paragraph types for LocalGovDrupal.",
+  "type": "drupal-module",
+  "homepage": "https://github.com/localgovdrupal/localgov_campaigns",
+  "license": "GPL-2.0-or-later",
+  "minimum-stability": "dev"
+}
