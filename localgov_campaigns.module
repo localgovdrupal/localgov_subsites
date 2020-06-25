@@ -1,38 +1,46 @@
 <?php
 
 /**
+ * @file
+ * LocalGov Campaigns module file.
+ */
+
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\node\Entity\Node;
+
+/**
  * Implements hook_theme().
  */
-function bhcc_campaign_theme($existing, $type, $theme, $path) {
+function localgov_campaigns_theme($existing, $type, $theme, $path) {
   return [
     'campaign_navigation' => [
       'variables' => [
         'heading' => '',
         'links' => [],
-        'parentURL' => ''
-      ]
+        'parentURL' => '',
+      ],
     ],
     'campaign_banner' => [
       'variables' => [
         'tag' => '',
         'heading' => '',
-        'image' => ''
-      ]
+        'image' => '',
+      ],
     ],
     'campaign_overview_banner' => [
       'variables' => [
         'heading' => '',
-        'image' => ''
-      ]
-    ]
+        'image' => '',
+      ],
+    ],
   ];
 }
 
 /**
  * Implements hook_ENTITY_TYPE_insert().
  */
-function bhcc_campaign_node_insert(\Drupal\Core\Entity\EntityInterface $entity) {
-  bhcc_campaign_node_update($entity);
+function localgov_campaigns_node_insert(EntityInterface $entity) {
+  localgov_campaigns_node_update($entity);
 }
 
 /**
@@ -41,9 +49,9 @@ function bhcc_campaign_node_insert(\Drupal\Core\Entity\EntityInterface $entity) 
  * When saving a guide singleton, we update the guide parent so it knows about
  * the new page.
  */
-function bhcc_campaign_node_update(Drupal\Core\Entity\EntityInterface $entity) {
-  if ($entity instanceof \Drupal\bhcc_campaign\Node\CampaignSingleton) {
-    /** @var \Drupal\bhcc_campaign\Node\CampaignMaster $parent */
+function localgov_campaigns_node_update(EntityInterface $entity) {
+  if ($entity instanceof \Drupal\localgov_campaigns\Node\CampaignSingleton) {
+    /** @var \Drupal\localgov_campaigns\Node\CampaignMaster $parent */
     if ($parent = $entity->getParent()) {
       // Ensure this node is not linked to another parent.
       $query = Drupal::entityQuery('node')
@@ -53,8 +61,8 @@ function bhcc_campaign_node_update(Drupal\Core\Entity\EntityInterface $entity) {
         ->execute();
 
       foreach ($query as $nid) {
-        /** @var \Drupal\bhcc_campaign\Node\CampaignMaster $node */
-        $node = \Drupal\node\Entity\Node::load($nid);
+        /** @var \Drupal\localgov_campaigns\Node\CampaignMaster $node */
+        $node = Node::load($nid);
 
         $node->removeChild($entity);
         $node->save();
@@ -72,8 +80,8 @@ function bhcc_campaign_node_update(Drupal\Core\Entity\EntityInterface $entity) {
         ->execute();
 
       foreach ($query as $nid) {
-        /** @var \Drupal\bhcc_campaign\Node\CampaignMaster $node */
-        $node = \Drupal\node\Entity\Node::load($nid);
+        /** @var \Drupal\blocalgov_campaigns\Node\CampaignMaster $node */
+        $node = Node::load($nid);
 
         $node->removeChild($entity);
         $node->save();

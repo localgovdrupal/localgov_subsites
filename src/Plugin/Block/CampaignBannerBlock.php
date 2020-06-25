@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\bhcc_campaign\Plugin\Block;
+namespace Drupal\localgov_campaigns\Plugin\Block;
 
 use Drupal\node\NodeInterface;
 use Drupal\Core\Cache\Cache;
@@ -8,7 +8,7 @@ use Drupal\Core\Cache\Cache;
 /**
  * Class CampaignBannerBlock.
  *
- * @package Drupal\bhcc_campaign\Plugin\Block
+ * @package Drupal\localgov_campaigns\Plugin\Block
  *
  * @Block(
  *   id = "campaign_banner",

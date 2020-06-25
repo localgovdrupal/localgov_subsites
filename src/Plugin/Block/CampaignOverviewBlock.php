@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\bhcc_campaign\Plugin\Block;
+namespace Drupal\localgov_campaigns\Plugin\Block;
 
 use Drupal\node\NodeInterface;
 use Drupal\Core\Cache\Cache;
@@ -8,7 +8,7 @@ use Drupal\Core\Cache\Cache;
 /**
  * Class CampaignOverviewBlock.
  *
- * @package Drupal\bhcc_campaign\Plugin\Block
+ * @package Drupal\localgov_campaigns\Plugin\Block
  *
  * @Block(
  *   id = "campaign_overview_banner",
@@ -31,7 +31,7 @@ class CampaignOverviewBlock extends CampaignBlockBase {
   /**
    * Get Block Build array.
    *
-   * @param \Drupal\node\Entity\Node $node
+   * @param \Drupal\node\NodeInterface $node
    *   Current Node.
    *
    * @return array

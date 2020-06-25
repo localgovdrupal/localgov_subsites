@@ -1,8 +1,8 @@
 <?php
 
-namespace Drupal\bhcc_campaign\Plugin\Block;
+namespace Drupal\localgov_campaigns\Plugin\Block;
 
-use Drupal\bhcc_campaign\Node\CampaignMasterInterface;
+use Drupal\localgov_campaigns\Node\CampaignMasterInterface;
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\Cache\CacheableDependencyInterface;
 use Drupal\Core\Field\Plugin\Field\FieldType\EntityReferenceItem;
@@ -12,7 +12,7 @@ use Drupal\node\Entity\Node;
 /**
  * Class CampaignNavigationBlock.
  *
- * @package Drupal\bhcc_campaign\Plugin\Block
+ * @package Drupal\localgov_campaigns\Plugin\Block
  *
  * @Block(
  *   id = "campaign_navigation_block",

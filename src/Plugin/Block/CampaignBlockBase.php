@@ -1,9 +1,9 @@
 <?php
 
-namespace Drupal\bhcc_campaign\Plugin\Block;
+namespace Drupal\localgov_campaigns\Plugin\Block;
 
-use Drupal\bhcc_campaign\Node\CampaignMasterInterface;
-use Drupal\bhcc_campaign\Node\CampaignSingletonInterface;
+use Drupal\localgov_campaigns\Node\CampaignMasterInterface;
+use Drupal\localgov_campaigns\Node\CampaignSingletonInterface;
 use Drupal\node\NodeInterface;
 use Drupal\Core\Block\BlockBase;
 

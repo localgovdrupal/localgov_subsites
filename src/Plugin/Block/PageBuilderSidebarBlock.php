@@ -1,14 +1,14 @@
 <?php
 
-namespace Drupal\bhcc_campaign\Plugin\Block;
+namespace Drupal\localgov_campaigns\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Cache\Cache;
 
 /**
- * Class PageBuilderSidebarBlock
+ * Class PageBuilderSidebarBlock.
  *
- * @package Drupal\bhcc_campaign\Plugin\Block
+ * @package Drupal\localgov_campaigns\Plugin\Block
  *
  * @Block(
  *   id = "page_builder_sidebar",

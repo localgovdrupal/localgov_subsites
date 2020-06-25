@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\bhcc_campaign\Node;
+namespace Drupal\localgov_campaigns\Node;
 
 /**
  * Interface CampaignSingleton.
