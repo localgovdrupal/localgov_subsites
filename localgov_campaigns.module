@@ -5,8 +5,7 @@
  * LocalGov Campaigns module file.
  */
 
-use Drupal\Core\Entity\EntityInterface;
-use Drupal\node\Entity\Node;
+use Drupal\node\NodeInterface;
 
 /**
  * Implements hook_theme().
@@ -39,52 +38,47 @@ function localgov_campaigns_theme($existing, $type, $theme, $path) {
 /**
  * Implements hook_ENTITY_TYPE_insert().
  */
-function localgov_campaigns_node_insert(EntityInterface $entity) {
-  localgov_campaigns_node_update($entity);
+function localgov_campaigns_node_insert(NodeInterface $node) {
+  localgov_campaigns_node_update($node);
 }
 
 /**
  * Implements hook_ENTITY_TYPE_update().
  *
- * When saving a guide singleton, we update the guide parent so it knows about
- * the new page.
+ * Implements reference back on overview to page when pages are created.
  */
-function localgov_campaigns_node_update(EntityInterface $entity) {
-  if ($entity instanceof \Drupal\localgov_campaigns\Node\CampaignSingleton) {
-    /** @var \Drupal\localgov_campaigns\Node\CampaignMaster $parent */
-    if ($parent = $entity->getParent()) {
-      // Ensure this node is not linked to another parent.
-      $query = Drupal::entityQuery('node')
-        ->condition('type', 'campaign_overview')
-        ->condition('nid', $parent->id(), '!=')
-        ->condition('field_campaign_pages', $entity->id())
-        ->execute();
-
-      foreach ($query as $nid) {
-        /** @var \Drupal\localgov_campaigns\Node\CampaignMaster $node */
-        $node = Node::load($nid);
-
-        $node->removeChild($entity);
-        $node->save();
+function localgov_campaigns_node_update(NodeInterface $node) {
+  if ($node->bundle() == 'localgov_campaigns_page') {
+    if ($parent = $node->field_campaign->entity) {
+      // Check if referenced campaign has changed.
+      if (isset($node->original) and $old_parent = $node->original->field_campaign->entity) {
+        if ($old_parent->id() !== $parent->id()) {
+          $i = array_search(['target_id' => $node->id()], $old_parent->field_campaign_pages->getValue());
+          if ($i !== FALSE) {
+            $old_parent->field_campaign_pages->removeItem($i);
+            $old_parent->save();
+          }
+        }
       }
-
-      // Update the parent node.
-      $parent->addChild($entity);
-      $parent->save();
+      // Add page to parent reference field.
+      if (array_search(['target_id' => $node->id()], $parent->field_campaign_pages->getValue()) === FALSE) {
+        $parent->field_campaign_pages->appendItem(['target_id' => $node->id()]);
+        $parent->save();
+      }
     }
-    else {
-      // Ensure this node is not linked to another parent.
-      $query = Drupal::entityQuery('node')
-        ->condition('type', 'campaign_overview')
-        ->condition('field_campaign_pages', $entity->id())
-        ->execute();
+  }
+}
 
-      foreach ($query as $nid) {
-        /** @var \Drupal\blocalgov_campaigns\Node\CampaignMaster $node */
-        $node = Node::load($nid);
-
-        $node->removeChild($entity);
-        $node->save();
+/**
+ * Implements hook_ENTITY_TYPE_delete().
+ */
+function localgov_campaigns_node_delete(NodeInterface $node) {
+  if ($node->bundle() == 'localgov_campaigns_page') {
+    if ($parent = $node->field_campaign->entity) {
+      $i = array_search(['target_id' => $node->id()], $parent->field_campaign_pages->getValue());
+      if ($i !== FALSE) {
+        $parent->field_campaign_pages->removeItem($i);
+        $parent->save();
       }
     }
   }
