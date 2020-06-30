@@ -11,7 +11,6 @@ dependencies:
     - field.field.node.localgov_campaigns_overview.field_page_builder_advanced
     - field.field.node.localgov_campaigns_overview.field_select_colorway
     - field.field.node.localgov_campaigns_overview.field_select_colourway_accent
-    - field.field.node.localgov_campaigns_overview.field_sidebar
     - node.type.localgov_campaigns_overview
   module:
     - text
@@ -37,6 +36,5 @@ hidden:
   field_page_builder_advanced: true
   field_select_colorway: true
   field_select_colourway_accent: true
-  field_sidebar: true
   links: true
   search_api_excerpt: true

@@ -10,7 +10,6 @@ dependencies:
     - field.field.node.localgov_campaigns_overview.field_page_builder_advanced
     - field.field.node.localgov_campaigns_overview.field_select_colorway
     - field.field.node.localgov_campaigns_overview.field_select_colourway_accent
-    - field.field.node.localgov_campaigns_overview.field_sidebar
     - image.style.thumbnail
     - node.type.localgov_campaigns_overview
   module:
@@ -24,9 +23,8 @@ third_party_settings:
       children:
         - group_description
         - group_banner
-        - group_campaign
-        - group_sidebar
-        - group_page
+        - group_page_builder
+        - group_child_pages
       parent_name: ''
       weight: 4
       format_type: tabs
@@ -61,45 +59,16 @@ third_party_settings:
       weight: 10
       format_type: tab
       format_settings:
-        label: Layout
         formatter: closed
         description: ''
         id: ''
         classes: ''
         required_fields: false
-      label: Layout
+      label: 'Banner image and colours'
       region: content
-    group_sidebar:
-      children:
-        - field_sidebar
-      parent_name: group_tabs
-      weight: 12
-      format_type: tab
-      format_settings:
-        id: ''
-        classes: ''
-        formatter: closed
-        description: ''
-        required_fields: false
-      label: Sidebar
-      region: content
-    group_page:
+    group_page_builder:
       children:
         - field_page_builder_advanced
-      parent_name: group_tabs
-      weight: 13
-      format_type: tab
-      format_settings:
-        id: ''
-        classes: ''
-        formatter: closed
-        description: ''
-        required_fields: false
-      label: Page
-      region: content
-    group_campaign:
-      children:
-        - field_campaign_pages
       parent_name: group_tabs
       weight: 11
       format_type: tab
@@ -109,7 +78,21 @@ third_party_settings:
         formatter: closed
         description: ''
         required_fields: false
-      label: Campaign
+      label: 'Page builder'
+      region: content
+    group_child_pages:
+      children:
+        - field_campaign_pages
+      parent_name: group_tabs
+      weight: 13
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: false
+      label: 'Child pages'
       region: content
 id: node.localgov_campaigns_overview.default
 targetEntityType: node
@@ -175,18 +158,6 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: options_select
-    region: content
-  field_sidebar:
-    weight: 18
-    settings:
-      title: Element
-      title_plural: Elements
-      edit_mode: closed
-      add_mode: select
-      form_display_mode: default
-      default_paragraph_type: _none
-    third_party_settings: {  }
-    type: page_builder_entity_reference_paragraphs
     region: content
   moderation_state:
     type: moderation_state_default

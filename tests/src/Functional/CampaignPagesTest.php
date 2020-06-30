@@ -54,11 +54,34 @@ class CampaignPagesTest extends BrowserTestBase {
    */
   public function testCampaignFields() {
     $this->drupalLogin($this->adminUser);
+
+    // Check overview fields.
     $this->drupalGet('/admin/structure/types/manage/localgov_campaigns_overview/fields');
     $this->assertSession()->statusCodeEquals(200);
+    $this->assertSession()->pageTextContains('Banner');
+    $this->assertSession()->pageTextContains('Banner colour');
+    $this->assertSession()->pageTextContains('Campaign pages');
+    $this->assertSession()->pageTextContains('Full width overview');
+    $this->assertSession()->pageTextContains('Page builder');
+    $this->assertSession()->pageTextContains('Select colourway accent');
+    $this->assertSession()->pageTextContains('Select colourway gradient');
 
+    // Check page fields.
     $this->drupalGet('/admin/structure/types/manage/localgov_campaigns_page/fields');
     $this->assertSession()->statusCodeEquals(200);
+    $this->assertSession()->pageTextContains('Campaign');
+    $this->assertSession()->pageTextContains('Page builder');
+    $this->assertSession()->pageTextContains('Topic term');
+
+    // Check edit tabs.
+    $this->drupalGet('/node/add/localgov_campaigns_overview');
+    $this->assertSession()->pageTextContains('Description');
+    $this->assertSession()->pageTextContains('Banner image and colours');
+    $this->assertSession()->pageTextContains('Page builder');
+    $this->assertSession()->pageTextContains('Child pages');
+    $this->drupalGet('/node/add/localgov_campaigns_page');
+    $this->assertSession()->pageTextContains('Description');
+    $this->assertSession()->pageTextContains('Page builder');
   }
 
 }

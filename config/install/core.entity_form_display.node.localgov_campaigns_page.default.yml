@@ -5,7 +5,6 @@ dependencies:
     - field.field.node.localgov_campaigns_page.body
     - field.field.node.localgov_campaigns_page.field_campaign
     - field.field.node.localgov_campaigns_page.field_page_builder_advanced
-    - field.field.node.localgov_campaigns_page.field_sidebar
     - field.field.node.localgov_campaigns_page.field_topic_term
     - node.type.localgov_campaigns_page
   module:
@@ -17,8 +16,7 @@ third_party_settings:
     group_tabs:
       children:
         - group_description
-        - group_s
-        - group_page
+        - group_page_builder
       parent_name: ''
       weight: 4
       format_type: tabs
@@ -43,7 +41,7 @@ third_party_settings:
         description: ''
         required_fields: false
       label: Description
-    group_page:
+    group_page_builder:
       children:
         - field_page_builder_advanced
       parent_name: group_tabs
@@ -55,20 +53,7 @@ third_party_settings:
         formatter: closed
         description: ''
         required_fields: false
-      label: Page
-    group_s:
-      children:
-        - field_sidebar
-      parent_name: group_tabs
-      weight: 21
-      format_type: tab
-      format_settings:
-        id: ''
-        classes: ''
-        formatter: closed
-        description: ''
-        required_fields: false
-      label: Sidebar
+      label: 'Page builder'
 id: node.localgov_campaigns_page.default
 targetEntityType: node
 bundle: localgov_campaigns_page
@@ -97,18 +82,6 @@ content:
     region: content
   field_page_builder_advanced:
     weight: 6
-    settings:
-      title: Element
-      title_plural: Elements
-      edit_mode: closed
-      add_mode: select
-      form_display_mode: default
-      default_paragraph_type: _none
-    third_party_settings: {  }
-    type: page_builder_entity_reference_paragraphs
-    region: content
-  field_sidebar:
-    weight: 26
     settings:
       title: Element
       title_plural: Elements
