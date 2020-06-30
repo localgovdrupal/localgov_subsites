@@ -2,7 +2,6 @@
 
 namespace Drupal\localgov_campaigns\Plugin\Block;
 
-use Drupal\localgov_campaigns\Node\CampaignMasterInterface;
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\Cache\CacheableDependencyInterface;
 use Drupal\Core\Field\Plugin\Field\FieldType\EntityReferenceItem;
@@ -22,7 +21,7 @@ use Drupal\node\Entity\Node;
  *   }
  * )
  */
-class CampaignNavigationBlock extends CampaignBlockBase {
+class CampaignsNavigationBlock extends CampaignsAbstractBlockBase {
 
   /**
    * {@inheritdoc}
@@ -50,7 +49,7 @@ class CampaignNavigationBlock extends CampaignBlockBase {
   /**
    * Format links for the campaign navigation theme.
    *
-   * @param \Drupal\bhcc_campaign\Node\CampaignMasterInterface $campaign
+   * @param \Drupal\node\NodeInterface $campaign
    *   Node object of campaign overview page.
    * @param \Drupal\node\NodeInterface $currentNode
    *   Current page node.
@@ -60,7 +59,7 @@ class CampaignNavigationBlock extends CampaignBlockBase {
    *
    * @throws \Drupal\Core\Entity\EntityMalformedException
    */
-  protected function formatLinks(CampaignMasterInterface $campaign, NodeInterface $currentNode) {
+  protected function formatLinks(NodeInterface $campaign, NodeInterface $currentNode) {
 
     if ($currentNode instanceof NodeInterface) {
       $currentNid = $currentNode->id();
@@ -148,7 +147,7 @@ class CampaignNavigationBlock extends CampaignBlockBase {
       return $cacheable->getCacheTags();
     }, $campaign_nodes);
 
-    $merged_tags = array_reduce($list_of_tag_collections, [Cache::class, 'mergeTags'], $initial = []);
+    $merged_tags = array_reduce($list_of_tag_collections, [Cache::class, 'mergeTags'], []);
     return $merged_tags;
   }
 

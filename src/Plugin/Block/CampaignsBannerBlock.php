@@ -2,7 +2,6 @@
 
 namespace Drupal\localgov_campaigns\Plugin\Block;
 
-use Drupal\node\NodeInterface;
 use Drupal\Core\Cache\Cache;
 
 /**
@@ -15,45 +14,25 @@ use Drupal\Core\Cache\Cache;
  *   admin_label = "Campaign banner"
  * )
  */
-class CampaignBannerBlock extends CampaignBlockBase {
+class CampaignsBannerBlock extends CampaignsAbstractBlockBase {
 
   /**
    * {@inheritdoc}
    */
   public function build() {
-
-    $build = [];
     $node = \Drupal::requestStack()->getCurrentRequest()->get('node');
-    $build[] = $this->getBlockBuild($node);
-    return $build;
-  }
-
-  /**
-   * Get Block Build array.
-   *
-   * @param Drupal\node\NodeInterface $node
-   *   Current Node.
-   *
-   * @return array
-   *   Block Render array.
-   */
-  protected function getBlockBuild(NodeInterface $node) {
-
-    $blockBuild = [];
+    $build = [];
 
     if ($campaign = $this->getCampaign($node)) {
-
-      $campaignImageURL = $this->getCampaignBanner($campaign);
-
-      $blockBuild = [
+      $build[] = [
         '#theme' => 'campaign_banner',
-        '#tag' => $this->getCampaignTitle($campaign),
+        '#tag' => $campaign->label(),
         '#heading' => $node->label(),
-        '#image' => $campaignImageURL,
+        '#image' => $this->getCampaignBanner($campaign),
       ];
     }
 
-    return $blockBuild;
+    return $build;
   }
 
   /**
