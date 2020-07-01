@@ -14,11 +14,8 @@ use Drupal\node\Entity\Node;
  * @package Drupal\localgov_campaigns\Plugin\Block
  *
  * @Block(
- *   id = "campaign_navigation_block",
+ *   id = "localgov_campaign_navigation",
  *   admin_label = "Campaign navigation",
- *   context_definitions = {
- *     "node" = @ContextDefinition("entity:node")
- *   }
  * )
  */
 class CampaignsNavigationBlock extends CampaignsAbstractBlockBase {
@@ -29,15 +26,14 @@ class CampaignsNavigationBlock extends CampaignsAbstractBlockBase {
   public function build() {
     $build = [];
 
-    $node = $this->getContextValue('node');
-    if ($campaign = $this->getCampaign($node)) {
-      $links = $this->formatLinks($campaign, $node);
+    if ($campaign = $this->getCampaign()) {
+      $links = $this->formatLinks($campaign, $this->node);
 
       if ($links) {
         $build[] = [
           '#theme' => 'campaign_navigation',
           '#heading' => $campaign->label(),
-          '#parentURL' => $campaign->toUrl()->toString(),
+          '#parent_url' => $campaign->toUrl()->toString(),
           '#links' => $links,
         ];
       }
@@ -112,20 +108,9 @@ class CampaignsNavigationBlock extends CampaignsAbstractBlockBase {
   /**
    * {@inheritdoc}
    */
-  public function getCacheContexts() {
-    return Cache::mergeContexts(parent::getCacheContexts(), ['route']);
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public function getCacheTags() {
-
-    $node = $this->getContextValue('node');
-    $overview = $this->getCampaign($node);
-    $campaign_nodes = $this->listOverviewAndPages($overview);
+    $campaign_nodes = $this->listOverviewAndPages();
     $campaign_cache_tags = $this->prepareCacheTagsForCampaign($campaign_nodes);
-
     return Cache::mergeTags(parent::getCacheTags(), $campaign_cache_tags);
   }
 
@@ -142,11 +127,9 @@ class CampaignsNavigationBlock extends CampaignsAbstractBlockBase {
    *   List of strings.
    */
   protected function prepareCacheTagsForCampaign(array $campaign_nodes): array {
-
     $list_of_tag_collections = array_map(function (CacheableDependencyInterface $cacheable): array {
       return $cacheable->getCacheTags();
     }, $campaign_nodes);
-
     $merged_tags = array_reduce($list_of_tag_collections, [Cache::class, 'mergeTags'], []);
     return $merged_tags;
   }
@@ -157,8 +140,8 @@ class CampaignsNavigationBlock extends CampaignsAbstractBlockBase {
    * @return array
    *   List of nodes.
    */
-  protected function listOverviewAndPages(NodeInterface $overview): array {
-
+  protected function listOverviewAndPages(): array {
+    $overview = $this->getCampaign();
     $page_refs = $overview->field_campaign_pages;
     $page_nodes = array_map(function (EntityReferenceItem $ref) {
       return $ref->entity;

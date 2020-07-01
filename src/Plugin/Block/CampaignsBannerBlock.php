@@ -2,15 +2,13 @@
 
 namespace Drupal\localgov_campaigns\Plugin\Block;
 
-use Drupal\Core\Cache\Cache;
-
 /**
  * Class CampaignBannerBlock.
  *
  * @package Drupal\localgov_campaigns\Plugin\Block
  *
  * @Block(
- *   id = "campaign_banner",
+ *   id = "localgov_campaign_banner",
  *   admin_label = "Campaign banner"
  * )
  */
@@ -20,26 +18,18 @@ class CampaignsBannerBlock extends CampaignsAbstractBlockBase {
    * {@inheritdoc}
    */
   public function build() {
-    $node = \Drupal::requestStack()->getCurrentRequest()->get('node');
     $build = [];
 
-    if ($campaign = $this->getCampaign($node)) {
+    if ($campaign = $this->getCampaign($this->node)) {
       $build[] = [
         '#theme' => 'campaign_banner',
         '#tag' => $campaign->label(),
-        '#heading' => $node->label(),
-        '#image' => $this->getCampaignBanner($campaign),
+        '#heading' => $this->node->label(),
+        '#image' => $this->getCampaignBanner(),
       ];
     }
 
     return $build;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getCacheContexts() {
-    return Cache::mergeContexts(parent::getCacheContexts(), ['route']);
   }
 
 }

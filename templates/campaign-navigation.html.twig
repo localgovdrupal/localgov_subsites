@@ -1,12 +1,11 @@
-
 <nav class="navigation-stacked">
   <div class="navigation-header">
-    <a href="{{ parentURL }}">
+    <a href="{{ parent_url }}">
       <h2>In this section</h2>
       <p>{{ heading }}</p>
     </a>
   </div>
-  <ul>
+  <ul class="navigation-links">
     {% for link in links %}
       {% if link.class == 'is-active' %}
         <li><span class="{{ link.class }}">{{ link.title }}</span></li>

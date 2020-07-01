@@ -16,7 +16,7 @@ function localgov_campaigns_theme($existing, $type, $theme, $path) {
       'variables' => [
         'heading' => '',
         'links' => [],
-        'parentURL' => '',
+        'parent_url' => '',
       ],
     ],
     'campaign_banner' => [
@@ -31,6 +31,10 @@ function localgov_campaigns_theme($existing, $type, $theme, $path) {
         'heading' => '',
         'image' => '',
       ],
+    ],
+    'node__localgov_campaigns_page__full' => [
+      'template' => 'node--localgov-campaigns-page--full',
+      'base hook' => 'node',
     ],
   ];
 }

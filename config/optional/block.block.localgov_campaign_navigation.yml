@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - localgov_campaigns
+  theme:
+    - localgov_theme
+id: localgov_campaign_navigation
+theme: localgov_theme
+region: sidebar_second
+weight: -4
+provider: null
+plugin: localgov_campaign_navigation
+settings:
+  id: localgov_campaign_navigation
+  label: 'Campaign navigation'
+  provider: localgov_campaigns
+  label_display: '0'
+visibility: {  }

@@ -2,15 +2,13 @@
 
 namespace Drupal\localgov_campaigns\Plugin\Block;
 
-use Drupal\Core\Cache\Cache;
-
 /**
  * Class CampaignOverviewBlock.
  *
  * @package Drupal\localgov_campaigns\Plugin\Block
  *
  * @Block(
- *   id = "campaign_overview_banner",
+ *   id = "localgov_campaign_overview_banner",
  *   admin_label = "Campaign overview banner"
  * )
  */
@@ -32,13 +30,6 @@ class CampaignsOverviewBlock extends CampaignsAbstractBlockBase {
     }
 
     return $build;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getCacheContexts() {
-    return Cache::mergeContexts(parent::getCacheContexts(), ['route']);
   }
 
 }

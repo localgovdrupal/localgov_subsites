@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - localgov_campaigns
+  theme:
+    - localgov_theme
+id: localgov_campaign_banner
+theme: localgov_theme
+region: content_top
+weight: 0
+provider: null
+plugin: localgov_campaign_banner
+settings:
+  id: localgov_campaign_banner
+  label: 'Campaign banner'
+  provider: localgov_campaigns
+  label_display: '0'
+visibility: {  }
