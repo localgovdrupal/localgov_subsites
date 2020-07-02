@@ -3,7 +3,6 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
-    - field.field.node.localgov_campaigns_overview.body
     - field.field.node.localgov_campaigns_overview.field_banner
     - field.field.node.localgov_campaigns_overview.field_banner_colour
     - field.field.node.localgov_campaigns_overview.field_campaign_pages
@@ -11,23 +10,22 @@ dependencies:
     - field.field.node.localgov_campaigns_overview.field_page_builder_advanced
     - field.field.node.localgov_campaigns_overview.field_select_colorway
     - field.field.node.localgov_campaigns_overview.field_select_colourway_accent
+    - field.field.node.localgov_campaigns_overview.localgov_campaigns_summary
     - node.type.localgov_campaigns_overview
   module:
-    - text
     - user
 id: node.localgov_campaigns_overview.teaser
 targetEntityType: node
 bundle: localgov_campaigns_overview
 mode: teaser
 content:
-  body:
-    label: hidden
-    type: text_summary_or_trimmed
+  localgov_campaigns_summary:
+    type: basic_string
     weight: 0
-    settings:
-      trim_length: 300
-    third_party_settings: {  }
     region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
 hidden:
   field_banner: true
   field_banner_colour: true

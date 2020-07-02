@@ -58,6 +58,7 @@ class CampaignPagesTest extends BrowserTestBase {
     // Check overview fields.
     $this->drupalGet('/admin/structure/types/manage/localgov_campaigns_overview/fields');
     $this->assertSession()->statusCodeEquals(200);
+    $this->assertSession()->pageTextContains('Summary');
     $this->assertSession()->pageTextContains('Banner');
     $this->assertSession()->pageTextContains('Banner colour');
     $this->assertSession()->pageTextContains('Campaign pages');
@@ -69,6 +70,7 @@ class CampaignPagesTest extends BrowserTestBase {
     // Check page fields.
     $this->drupalGet('/admin/structure/types/manage/localgov_campaigns_page/fields');
     $this->assertSession()->statusCodeEquals(200);
+    $this->assertSession()->pageTextContains('Summary');
     $this->assertSession()->pageTextContains('Campaign');
     $this->assertSession()->pageTextContains('Page builder');
     $this->assertSession()->pageTextContains('Topic term');

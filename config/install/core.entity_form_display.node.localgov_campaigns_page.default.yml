@@ -2,15 +2,15 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.localgov_campaigns_page.body
     - field.field.node.localgov_campaigns_page.field_campaign
     - field.field.node.localgov_campaigns_page.field_page_builder_advanced
+    - field.field.node.localgov_campaigns_page.localgov_campaigns_summary
     - field.field.node.localgov_campaigns_page.field_topic_term
     - node.type.localgov_campaigns_page
   module:
     - field_group
+    - localgov_campaigns
     - path
-    - text
 third_party_settings:
   field_group:
     group_tabs:
@@ -18,19 +18,20 @@ third_party_settings:
         - group_description
         - group_page_builder
       parent_name: ''
-      weight: 4
+      weight: -2
       format_type: tabs
       format_settings:
         id: ''
         classes: ''
         direction: vertical
       label: tabs
+      region: content
     group_description:
       children:
         - title
+        - localgov_campaigns_summary
         - field_campaign
         - field_topic_term
-        - body
       parent_name: group_tabs
       weight: 20
       format_type: tab
@@ -41,6 +42,7 @@ third_party_settings:
         description: ''
         required_fields: false
       label: Description
+      region: content
     group_page_builder:
       children:
         - field_page_builder_advanced
@@ -54,20 +56,12 @@ third_party_settings:
         description: ''
         required_fields: false
       label: 'Page builder'
+      region: content
 id: node.localgov_campaigns_page.default
 targetEntityType: node
 bundle: localgov_campaigns_page
 mode: default
 content:
-  body:
-    type: text_textarea_with_summary
-    weight: -2
-    settings:
-      rows: 9
-      summary_rows: 3
-      placeholder: ''
-    third_party_settings: {  }
-    region: content
   created:
     type: datetime_timestamp
     weight: 1
@@ -75,13 +69,13 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_campaign:
-    weight: -4
+    weight: -3
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
   field_page_builder_advanced:
-    weight: 6
+    weight: -1
     settings:
       title: Element
       title_plural: Elements
@@ -92,12 +86,21 @@ content:
     third_party_settings: {  }
     type: page_builder_entity_reference_paragraphs
     region: content
+  localgov_campaigns_summary:
+    weight: -4
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
   field_topic_term:
-    weight: -3
+    weight: -2
     settings:
       match_operator: CONTAINS
       size: 60
       placeholder: ''
+      match_limit: 10
     third_party_settings: {  }
     type: entity_reference_autocomplete_tags
     region: content
@@ -149,6 +152,7 @@ content:
       match_operator: CONTAINS
       size: 60
       placeholder: ''
+      match_limit: 10
     region: content
     third_party_settings: {  }
   url_redirects:
