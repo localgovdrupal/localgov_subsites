@@ -13,6 +13,22 @@ use Drupal\image\Entity\ImageStyle;
  */
 function localgov_campaigns_paragraphs_theme($existing, $type, $theme, $path) {
   return [
+    'field__field_box_links' => [
+      'template' => 'field--field-box-links',
+      'base hook' => 'field',
+    ],
+    'field__field_call_out_boxes' => [
+      'template' => 'field--field-call-out-boxes',
+      'base hook' => 'field',
+    ],
+    'field__field_fact-boxes' => [
+      'template' => 'field--field-fact-boxes',
+      'base hook' => 'field',
+    ],
+    'field__field_quotes' => [
+      'template' => 'field--field-quotes',
+      'base hook' => 'field',
+    ],
     'paragraph__box_link' => [
       'template' => 'paragraph--box-link',
       'base hook' => 'paragraph',
