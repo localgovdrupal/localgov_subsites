@@ -2,16 +2,16 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.paragraph.text_and_image_50_50_.field_image
-    - field.field.paragraph.text_and_image_50_50_.field_text
+    - field.field.paragraph.text_and_image_50_50.field_image
+    - field.field.paragraph.text_and_image_50_50.field_text
     - image.style.thumbnail
-    - paragraphs.paragraphs_type.text_and_image_50_50_
+    - paragraphs.paragraphs_type.text_and_image_50_50
   module:
     - image
     - text
-id: paragraph.text_and_image_50_50_.default
+id: paragraph.text_and_image_50_50.default
 targetEntityType: paragraph
-bundle: text_and_image_50_50_
+bundle: text_and_image_50_50
 mode: default
 content:
   field_image:

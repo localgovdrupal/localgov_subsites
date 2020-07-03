@@ -2,15 +2,15 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.paragraph.field_text
-    - paragraphs.paragraphs_type.text_and_image_50_50_
+    - field.storage.paragraph.field_body_text
+    - paragraphs.paragraphs_type.call_out_box
   module:
     - text
-id: paragraph.text_and_image_50_50_.field_text
-field_name: field_text
+id: paragraph.call_out_box.field_body_text
+field_name: field_body_text
 entity_type: paragraph
-bundle: text_and_image_50_50_
-label: Text
+bundle: call_out_box
+label: 'Body text'
 description: ''
 required: false
 translatable: true

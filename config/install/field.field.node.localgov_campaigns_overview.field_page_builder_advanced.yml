@@ -10,7 +10,7 @@ dependencies:
     - paragraphs.paragraphs_type.link_and_summary_page_builder
     - paragraphs.paragraphs_type.quote_box_page_builder
     - paragraphs.paragraphs_type.text
-    - paragraphs.paragraphs_type.text_and_image_50_50_
+    - paragraphs.paragraphs_type.text_and_image_50_50
     - paragraphs.paragraphs_type.text_field_page_builder
   module:
     - entity_reference_revisions
@@ -34,7 +34,7 @@ settings:
       fact_boxes_page_builder: fact_boxes_page_builder
       link_and_summary_page_builder: link_and_summary_page_builder
       quote_box_page_builder: quote_box_page_builder
-      text_and_image_50_50: text_and_image_50_50_
+      text_and_image_50_50: text_and_image_50_50
       text: text
       text_field_page_builder: text_field_page_builder
     target_bundles_drag_drop:
@@ -92,7 +92,7 @@ settings:
       quote_box_page_builder:
         enabled: true
         weight: 42
-      text_and_image_50_50_:
+      text_and_image_50_50:
         enabled: true
         weight: 43
       text_field_page_builder:

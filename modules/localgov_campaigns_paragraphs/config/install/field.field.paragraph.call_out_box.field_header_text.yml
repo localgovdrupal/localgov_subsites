@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_header_text
+    - paragraphs.paragraphs_type.call_out_box
+id: paragraph.call_out_box.field_header_text
+field_name: field_header_text
+entity_type: paragraph
+bundle: call_out_box
+label: 'Header text'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string
