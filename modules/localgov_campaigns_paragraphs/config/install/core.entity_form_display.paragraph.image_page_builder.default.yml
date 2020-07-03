@@ -1,0 +1,26 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.image_page_builder.field_image
+    - image.style.thumbnail
+    - paragraphs.paragraphs_type.image_page_builder
+  module:
+    - image
+id: paragraph.image_page_builder.default
+targetEntityType: paragraph
+bundle: image_page_builder
+mode: default
+content:
+  field_image:
+    weight: 101
+    settings:
+      preview_image_style: thumbnail
+      progress_indicator: throbber
+    third_party_settings: {  }
+    type: image_image
+    region: content
+hidden:
+  created: true
+  status: true
+  uid: true

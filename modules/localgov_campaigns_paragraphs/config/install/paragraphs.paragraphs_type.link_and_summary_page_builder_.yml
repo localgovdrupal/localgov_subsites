@@ -1,8 +1,0 @@
-langcode: en
-status: true
-dependencies: {  }
-id: link_and_summary_page_builder_
-label: 'Link and summary (Page builder)'
-icon_uuid: null
-description: ''
-behavior_plugins: {  }

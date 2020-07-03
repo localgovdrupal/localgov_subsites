@@ -4,14 +4,14 @@ dependencies:
   config:
     - field.storage.node.field_page_builder_advanced
     - node.type.localgov_campaigns_overview
-    - paragraphs.paragraphs_type.box_link_page_builder_
-    - paragraphs.paragraphs_type.call_out_box_page_builder_
-    - paragraphs.paragraphs_type.fact_boxes_page_builder_
-    - paragraphs.paragraphs_type.link_and_summary_page_builder_
-    - paragraphs.paragraphs_type.quote_box_page_builder_
+    - paragraphs.paragraphs_type.box_link_page_builder
+    - paragraphs.paragraphs_type.call_out_box_page_builder
+    - paragraphs.paragraphs_type.fact_boxes_page_builder
+    - paragraphs.paragraphs_type.link_and_summary_page_builder
+    - paragraphs.paragraphs_type.quote_box_page_builder
     - paragraphs.paragraphs_type.text
     - paragraphs.paragraphs_type.text_and_image_50_50_
-    - paragraphs.paragraphs_type.text_field_page_builder_
+    - paragraphs.paragraphs_type.text_field_page_builder
   module:
     - entity_reference_revisions
 id: node.localgov_campaigns_overview.field_page_builder_advanced
@@ -29,14 +29,14 @@ settings:
   handler_settings:
     negate: 0
     target_bundles:
-      box_link_page_builder_: box_link_page_builder_
-      call_out_box_page_builder_: call_out_box_page_builder_
-      fact_boxes_page_builder_: fact_boxes_page_builder_
-      link_and_summary_page_builder_: link_and_summary_page_builder_
-      quote_box_page_builder_: quote_box_page_builder_
-      text_and_image_50_50_: text_and_image_50_50_
+      box_link_page_builder: box_link_page_builder
+      call_out_box_page_builder: call_out_box_page_builder
+      fact_boxes_page_builder: fact_boxes_page_builder
+      link_and_summary_page_builder: link_and_summary_page_builder
+      quote_box_page_builder: quote_box_page_builder
+      text_and_image_50_50: text_and_image_50_50_
       text: text
-      text_field_page_builder_: text_field_page_builder_
+      text_field_page_builder: text_field_page_builder
     target_bundles_drag_drop:
       advanced_links:
         weight: 24
@@ -44,13 +44,13 @@ settings:
       box_link:
         weight: 25
         enabled: false
-      box_link_page_builder_:
+      box_link_page_builder:
         enabled: true
         weight: 26
       call_out_box:
         weight: 27
         enabled: false
-      call_out_box_page_builder_:
+      call_out_box_page_builder:
         enabled: true
         weight: 28
       campaign_navigation:
@@ -59,7 +59,7 @@ settings:
       fact_box:
         weight: 30
         enabled: false
-      fact_boxes_page_builder_:
+      fact_boxes_page_builder:
         enabled: true
         weight: 31
       homepage_ia_blocks:
@@ -68,13 +68,13 @@ settings:
       homepage_icons:
         weight: 33
         enabled: false
-      image_page_builder_:
+      image_page_builder:
         enabled: true
         weight: 34
       link_and_summary:
         weight: 35
         enabled: false
-      link_and_summary_page_builder_:
+      link_and_summary_page_builder:
         enabled: true
         weight: 36
       page_builder_layout:
@@ -89,19 +89,19 @@ settings:
       quote:
         weight: 41
         enabled: false
-      quote_box_page_builder_:
+      quote_box_page_builder:
         enabled: true
         weight: 42
       text_and_image_50_50_:
         enabled: true
         weight: 43
-      text_field_page_builder_:
+      text_field_page_builder:
         enabled: true
         weight: 44
       topic_list_builder:
         weight: 45
         enabled: false
-      video_page_builder_:
+      video_page_builder:
         enabled: true
         weight: 46
 field_type: entity_reference_revisions
