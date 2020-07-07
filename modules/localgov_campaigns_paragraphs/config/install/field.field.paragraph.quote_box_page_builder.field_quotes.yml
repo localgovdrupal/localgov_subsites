@@ -1,0 +1,84 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_quotes
+    - paragraphs.paragraphs_type.quote
+    - paragraphs.paragraphs_type.quote_box_page_builder
+  module:
+    - entity_reference_revisions
+id: paragraph.quote_box_page_builder.field_quotes
+field_name: field_quotes
+entity_type: paragraph
+bundle: quote_box_page_builder
+label: Quotes
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      quote: quote
+    target_bundles_drag_drop:
+      advanced_links:
+        weight: 20
+        enabled: false
+      box_link:
+        weight: 21
+        enabled: false
+      box_link_page_builder:
+        weight: 22
+        enabled: false
+      call_out_box:
+        weight: 23
+        enabled: false
+      call_out_box_page_builder:
+        weight: 24
+        enabled: false
+      fact_box:
+        weight: 25
+        enabled: false
+      fact_boxes_page_builder:
+        weight: 26
+        enabled: false
+      homepage_ia_blocks:
+        weight: 27
+        enabled: false
+      homepage_icons:
+        weight: 28
+        enabled: false
+      link_and_summary:
+        weight: 29
+        enabled: false
+      link_and_summary_page_builder:
+        weight: 30
+        enabled: false
+      page_builderlayout:
+        weight: 31
+        enabled: false
+      pagebuilder_image:
+        weight: 32
+        enabled: false
+      pagebuilder_text:
+        weight: 33
+        enabled: false
+      quote:
+        enabled: true
+        weight: 34
+      quote_box_page_builder:
+        weight: 35
+        enabled: false
+      text_field_page_builder:
+        weight: 36
+        enabled: false
+      topic_list_builder:
+        weight: 37
+        enabled: false
+      video_page_builder:
+        weight: 38
+        enabled: false
+field_type: entity_reference_revisions

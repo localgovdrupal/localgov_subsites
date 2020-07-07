@@ -1,0 +1,4 @@
+localgov_campaigns_paragraphs:
+  css:
+    base:
+      css/localgov-campaigns-paragraphs.css: {}
