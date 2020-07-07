@@ -2,9 +2,11 @@
 
 namespace Drupal\localgov_campaigns\Plugin\Block;
 
+use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\Cache\CacheableDependencyInterface;
 use Drupal\Core\Field\Plugin\Field\FieldType\EntityReferenceItem;
+use Drupal\Core\Session\AccountInterface;
 use Drupal\node\NodeInterface;
 use Drupal\node\Entity\Node;
 
@@ -103,6 +105,20 @@ class CampaignsNavigationBlock extends CampaignsAbstractBlockBase {
     }
 
     return $links;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function blockAccess(AccountInterface $account) {
+    if (!is_null($this->node) &&
+     $this->node->hasField('field_hide_sidebar') &&
+     $this->node->field_hide_sidebar->value == 1
+    ) {
+      return AccessResult::neutral();
+    }
+
+    return parent::blockAccess($account);
   }
 
   /**

@@ -76,10 +76,13 @@ abstract class CampaignsAbstractBlockBase extends BlockBase implements Container
    * @throws \Drupal\Core\TypedData\Exception\MissingDataException
    */
   protected function getCampaign() {
-    if ($this->node->bundle() == 'localgov_campaigns_page' and $this->node->field_campaign->entity) {
-      return $this->node->field_campaign->entity;
+    if ($this->node instanceof NodeInterface) {
+      if ($this->node->bundle() == 'localgov_campaigns_page' and $this->node->field_campaign->entity) {
+        return $this->node->field_campaign->entity;
+      }
+      return $this->node->bundle() == 'localgov_campaigns_overview' ? $this->node : NULL;
     }
-    return $this->node->bundle() == 'localgov_campaigns_overview' ? $this->node : NULL;
+    return NULL;
   }
 
   /**
