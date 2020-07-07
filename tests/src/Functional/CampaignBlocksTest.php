@@ -172,6 +172,14 @@ class CampaignBlocksTest extends BrowserTestBase {
     $this->assertSession()->pageTextNotContains($overview_title);
     $this->assertSession()->pageTextNotContains($page1_title);
     $this->assertSession()->pageTextNotContains($page2_title);
+
+    // Test hide sidebar field.
+    $overview->set('field_hide_sidebar', ['value' => 1]);
+    $overview->save();
+    $this->drupalGet($overview->toUrl()->toString());
+    $this->assertSession()->responseNotContains('block-localgov-campaign-navigation');
+    $this->drupalGet($page1->toUrl()->toString());
+    $this->assertSession()->responseContains('block-localgov-campaign-navigation');
   }
 
 }
