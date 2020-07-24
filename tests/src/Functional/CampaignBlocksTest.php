@@ -179,7 +179,7 @@ class CampaignBlocksTest extends BrowserTestBase {
     $this->drupalGet($overview->toUrl()->toString());
     $this->assertSession()->responseNotContains('block-localgov-campaign-navigation');
     $this->drupalGet($page1->toUrl()->toString());
-    $this->assertSession()->responseContains('block-localgov-campaign-navigation');
+    $this->assertSession()->responseNotContains('block-localgov-campaign-navigation');
   }
 
 }

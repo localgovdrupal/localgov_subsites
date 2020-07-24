@@ -56,7 +56,6 @@ third_party_settings:
         - field_banner
         - field_select_colorway
         - field_select_colourway_accent
-        - field_hide_sidebar
       parent_name: group_tabs
       weight: 10
       format_type: tab
@@ -84,6 +83,7 @@ third_party_settings:
       region: content
     group_child_pages:
       children:
+        - field_hide_sidebar
         - field_campaign_pages
       parent_name: group_tabs
       weight: 13
@@ -116,14 +116,14 @@ content:
     type: image_image
     region: content
   field_campaign_pages:
-    weight: 28
+    weight: 34
     settings: {  }
     third_party_settings: {  }
     type: localgov_entity_reference_labels
     region: content
   field_hide_sidebar:
     type: boolean_checkbox
-    weight: 31
+    weight: 33
     region: content
     settings:
       display_label: true

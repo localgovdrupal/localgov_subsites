@@ -8,8 +8,8 @@ id: node.localgov_campaigns_overview.field_hide_sidebar
 field_name: field_hide_sidebar
 entity_type: node
 bundle: localgov_campaigns_overview
-label: 'Full width overview'
-description: ''
+label: 'Hide page menu'
+description: 'Hide the sidebar menu from overview and associated pages.'
 required: false
 translatable: false
 default_value:

@@ -58,13 +58,11 @@ class CampaignsNavigationBlock extends CampaignsAbstractBlockBase {
    * @throws \Drupal\Core\Entity\EntityMalformedException
    */
   protected function formatLinks(NodeInterface $campaign, NodeInterface $currentNode) {
+    $links = [];
 
     if ($currentNode instanceof NodeInterface) {
       $currentNid = $currentNode->id();
     }
-
-    $links = [];
-
     if ($currentNid == $campaign->id()) {
       $links[] = [
         'title' => $campaign->label(),
@@ -90,9 +88,7 @@ class CampaignsNavigationBlock extends CampaignsAbstractBlockBase {
             continue;
           }
         }
-
         $campaignNid = $node->id();
-
         if ($currentNid == $campaignNid) {
           $links[] = [
             'title' => $node->label(),
@@ -116,10 +112,10 @@ class CampaignsNavigationBlock extends CampaignsAbstractBlockBase {
    * {@inheritdoc}
    */
   protected function blockAccess(AccountInterface $account) {
-    if (
-      !is_null($this->node) &&
-      $this->node->hasField('field_hide_sidebar') &&
-      $this->node->field_hide_sidebar->value == 1
+    $campaign = $this->getCampaign();
+    if (!is_null($campaign) &&
+      $campaign->hasField('field_hide_sidebar') &&
+      $campaign->field_hide_sidebar->value == 1
     ) {
       return AccessResult::neutral();
     }
