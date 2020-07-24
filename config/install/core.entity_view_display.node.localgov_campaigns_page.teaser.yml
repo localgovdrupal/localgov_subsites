@@ -5,7 +5,6 @@ dependencies:
     - core.entity_view_mode.node.teaser
     - field.field.node.localgov_campaigns_page.body
     - field.field.node.localgov_campaigns_page.field_campaign
-    - field.field.node.localgov_campaigns_page.field_page_builder_advanced
     - field.field.node.localgov_campaigns_page.field_topic_term
     - node.type.localgov_campaigns_page
   module:

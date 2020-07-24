@@ -28,6 +28,8 @@ class CampaignPagesTest extends KernelTestBase {
     'file',
     'filter',
     'image',
+    'layout_discovery',
+    'layout_paragraphs',
     'link',
     'menu_ui',
     'node',
@@ -51,7 +53,9 @@ class CampaignPagesTest extends KernelTestBase {
 
     $this->installEntitySchema('user');
     $this->installEntitySchema('node');
+    $this->installEntitySchema('file');
     $this->installSchema('node', ['node_access']);
+    $this->installSchema('file', ['file_usage']);
     $this->installConfig([
       'filter',
       'system',

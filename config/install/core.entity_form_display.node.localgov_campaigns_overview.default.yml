@@ -2,11 +2,12 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.node.localgov_campaigns_overview.body
     - field.field.node.localgov_campaigns_overview.field_banner
     - field.field.node.localgov_campaigns_overview.field_banner_colour
     - field.field.node.localgov_campaigns_overview.field_campaign_pages
     - field.field.node.localgov_campaigns_overview.field_hide_sidebar
-    - field.field.node.localgov_campaigns_overview.field_page_builder_advanced
+    - field.field.node.localgov_campaigns_overview.field_page_content
     - field.field.node.localgov_campaigns_overview.field_select_colorway
     - field.field.node.localgov_campaigns_overview.field_select_colourway_accent
     - field.field.node.localgov_campaigns_overview.localgov_campaigns_summary
@@ -15,7 +16,7 @@ dependencies:
   module:
     - field_group
     - image
-    - localgov_campaigns
+    - layout_paragraphs
     - localgov_core
     - path
 third_party_settings:
@@ -69,7 +70,7 @@ third_party_settings:
       region: content
     group_page_builder:
       children:
-        - field_page_builder_advanced
+        - field_page_content
       parent_name: group_tabs
       weight: 11
       format_type: tab
@@ -127,17 +128,14 @@ content:
     settings:
       display_label: true
     third_party_settings: {  }
-  field_page_builder_advanced:
-    weight: 17
+  field_page_content:
+    type: layout_paragraphs
+    weight: 32
     settings:
-      title: Element
-      title_plural: Elements
-      edit_mode: closed
-      add_mode: select
-      form_display_mode: default
-      default_paragraph_type: _none
+      preview_view_mode: default
+      nesting_depth: 0
+      require_layouts: 1
     third_party_settings: {  }
-    type: page_builder_entity_reference_paragraphs
     region: content
   field_select_colorway:
     type: options_select
@@ -216,4 +214,5 @@ content:
     settings: {  }
     third_party_settings: {  }
 hidden:
+  body: true
   field_banner_colour: true

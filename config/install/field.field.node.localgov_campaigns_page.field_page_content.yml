@@ -2,22 +2,28 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_page_builder_advanced
+    - field.storage.node.field_page_content
     - node.type.localgov_campaigns_page
     - paragraphs.paragraphs_type.box_link_page_builder
     - paragraphs.paragraphs_type.call_out_box_page_builder
     - paragraphs.paragraphs_type.fact_boxes_page_builder
+    - paragraphs.paragraphs_type.image_page_builder
     - paragraphs.paragraphs_type.link_and_summary_page_builder
+    - paragraphs.paragraphs_type.page_section
+    - paragraphs.paragraphs_type.pagebuilder_image
+    - paragraphs.paragraphs_type.pagebuilder_text
     - paragraphs.paragraphs_type.quote_box_page_builder
-    - paragraphs.paragraphs_type.text_and_image_50_50
     - paragraphs.paragraphs_type.text_field_page_builder
+    - paragraphs.paragraphs_type.video_page_builder
   module:
     - entity_reference_revisions
-id: node.localgov_campaigns_page.field_page_builder_advanced
-field_name: field_page_builder_advanced
+_core:
+  default_config_hash: w0QVLApoD3SEG2sTJdjiIfjo-PfYfgMP6FbKNFnLwhc
+id: node.localgov_campaigns_page.field_page_content
+field_name: field_page_content
 entity_type: node
 bundle: localgov_campaigns_page
-label: 'Page builder'
+label: 'Page content'
 description: ''
 required: false
 translatable: true
@@ -31,75 +37,88 @@ settings:
       box_link_page_builder: box_link_page_builder
       call_out_box_page_builder: call_out_box_page_builder
       fact_boxes_page_builder: fact_boxes_page_builder
+      image_page_builder: image_page_builder
       link_and_summary_page_builder: link_and_summary_page_builder
+      pagebuilder_image: pagebuilder_image
+      pagebuilder_text: pagebuilder_text
+      page_section: page_section
       quote_box_page_builder: quote_box_page_builder
-      text_and_image_50_50: text_and_image_50_50
       text_field_page_builder: text_field_page_builder
+      video_page_builder: video_page_builder
     target_bundles_drag_drop:
       advanced_links:
-        weight: 24
+        weight: 26
         enabled: false
       box_link:
-        weight: 25
+        weight: 27
         enabled: false
       box_link_page_builder:
         enabled: true
-        weight: 26
+        weight: 28
       call_out_box:
-        weight: 27
+        weight: 29
         enabled: false
       call_out_box_page_builder:
         enabled: true
-        weight: 28
+        weight: 30
       campaign_navigation:
-        weight: 29
+        weight: 31
+        enabled: false
+      contact:
+        weight: 32
         enabled: false
       fact_box:
-        weight: 30
+        weight: 33
         enabled: false
       fact_boxes_page_builder:
         enabled: true
-        weight: 31
-      homepage_ia_blocks:
-        weight: 32
-        enabled: false
-      homepage_icons:
-        weight: 33
+        weight: 34
+      from_library:
+        weight: 35
         enabled: false
       image_page_builder:
         enabled: true
-        weight: 34
+        weight: 36
       link_and_summary:
-        weight: 35
+        weight: 37
         enabled: false
       link_and_summary_page_builder:
         enabled: true
-        weight: 36
-      page_builder_layout:
         weight: 38
-        enabled: false
-      pagebuilder_image:
+      link_and_summary_page_builder_:
         weight: 39
         enabled: false
-      pagebuilder_text:
-        weight: 40
+      page_builderlayout:
+        weight: 42
         enabled: false
-      quote:
+      page_section:
+        enabled: true
+        weight: 43
+      pagebuilder_image:
+        enabled: true
+        weight: 40
+      pagebuilder_text:
+        enabled: true
         weight: 41
+      quote:
+        weight: 44
         enabled: false
       quote_box_page_builder:
         enabled: true
-        weight: 42
+        weight: 45
+      text:
+        weight: 46
+        enabled: false
       text_and_image_50_50:
-        enabled: true
-        weight: 43
+        weight: 47
+        enabled: false
       text_field_page_builder:
         enabled: true
-        weight: 44
+        weight: 48
       topic_list_builder:
-        weight: 45
+        weight: 49
         enabled: false
       video_page_builder:
         enabled: true
-        weight: 46
+        weight: 50
 field_type: entity_reference_revisions

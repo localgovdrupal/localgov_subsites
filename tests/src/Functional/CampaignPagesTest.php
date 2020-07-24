@@ -70,7 +70,7 @@ class CampaignPagesTest extends BrowserTestBase {
     $this->assertSession()->pageTextContains('Banner colour');
     $this->assertSession()->pageTextContains('Campaign pages');
     $this->assertSession()->pageTextContains('Full width overview');
-    $this->assertSession()->pageTextContains('Page builder');
+    $this->assertSession()->pageTextContains('Page content');
     $this->assertSession()->pageTextContains('Select colourway accent');
     $this->assertSession()->pageTextContains('Select colourway gradient');
 
@@ -79,7 +79,7 @@ class CampaignPagesTest extends BrowserTestBase {
     $this->assertSession()->statusCodeEquals(200);
     $this->assertSession()->pageTextContains('Summary');
     $this->assertSession()->pageTextContains('Campaign');
-    $this->assertSession()->pageTextContains('Page builder');
+    $this->assertSession()->pageTextContains('Page content');
     $this->assertSession()->pageTextContains('Topic term');
 
     // Check edit tabs.
