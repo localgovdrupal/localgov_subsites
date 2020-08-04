@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.localgov_link
+    - paragraphs.paragraphs_type.localgov_box_link
+  module:
+    - link
+id: paragraph.localgov_box_link.localgov_link
+field_name: localgov_link
+entity_type: paragraph
+bundle: localgov_box_link
+label: 'Title link'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 1
+field_type: link

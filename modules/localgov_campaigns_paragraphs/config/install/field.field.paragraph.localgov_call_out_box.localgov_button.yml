@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.localgov_button
+    - paragraphs.paragraphs_type.localgov_call_out_box
+  module:
+    - link
+id: paragraph.localgov_call_out_box.localgov_button
+field_name: localgov_button
+entity_type: paragraph
+bundle: localgov_call_out_box
+label: Button
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 1
+field_type: link

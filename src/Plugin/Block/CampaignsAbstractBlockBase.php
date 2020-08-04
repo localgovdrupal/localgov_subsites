@@ -77,8 +77,8 @@ abstract class CampaignsAbstractBlockBase extends BlockBase implements Container
    */
   protected function getCampaign() {
     if ($this->node instanceof NodeInterface) {
-      if ($this->node->bundle() == 'localgov_campaigns_page' and $this->node->field_campaign->entity) {
-        return $this->node->field_campaign->entity;
+      if ($this->node->bundle() == 'localgov_campaigns_page' and $this->node->localgov_campaigns_parent->entity) {
+        return $this->node->localgov_campaigns_parent->entity;
       }
       return $this->node->bundle() == 'localgov_campaigns_overview' ? $this->node : NULL;
     }
@@ -89,15 +89,18 @@ abstract class CampaignsAbstractBlockBase extends BlockBase implements Container
    * Get Campaign Banner.
    *
    * @return string|null
-   *   Stream wrapper url of Campaign overview field_banner,
+   *   Stream wrapper url of Campaign overview localgov_campaigns_banner,
    *   or NULL if no image field set.
    */
   protected function getCampaignBanner() {
     $campaign = $this->getCampaign();
-    if ($campaign->get('field_banner')->entity) {
-      $image = $campaign->get('field_banner')->entity;
-      $image_url = !empty($image) ? $image->uri->value : NULL;
-      return $image_url;
+    if ($campaign->get('localgov_campaigns_banner_image')->entity) {
+      $file_storage = $this->entityTypeManager->getStorage('file');
+      $fid = $campaign->get('localgov_campaigns_banner_image')->entity->field_media_image[0]->getValue()['target_id'];
+      $file = $file_storage->load($fid);
+      if (!is_null($file)) {
+        return $file->createFileUrl();
+      }
     }
     return NULL;
   }

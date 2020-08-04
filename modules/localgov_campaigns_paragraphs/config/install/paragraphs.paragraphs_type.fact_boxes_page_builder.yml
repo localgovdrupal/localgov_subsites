@@ -1,8 +1,0 @@
-langcode: en
-status: true
-dependencies: {  }
-id: fact_boxes_page_builder
-label: 'Fact boxes (Page builder)'
-icon_uuid: null
-description: ''
-behavior_plugins: {  }

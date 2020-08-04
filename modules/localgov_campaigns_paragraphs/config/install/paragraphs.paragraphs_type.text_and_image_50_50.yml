@@ -1,8 +1,0 @@
-langcode: en
-status: true
-dependencies: {  }
-id: text_and_image_50_50
-label: 'Text and image (50/50)'
-icon_uuid: null
-description: ''
-behavior_plugins: {  }

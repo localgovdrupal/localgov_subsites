@@ -7,7 +7,7 @@ use Drupal\Tests\node\Traits\NodeCreationTrait;
 use Drupal\node\Entity\Node;
 
 /**
- * Kernel tests to check field_campaign_pages field gets updated correctly.
+ * Kernel tests to check localgov_campaigns_pages field gets updated correctly.
  *
  * @group localgov_campaigns
  */
@@ -31,6 +31,8 @@ class CampaignPagesTest extends KernelTestBase {
     'layout_discovery',
     'layout_paragraphs',
     'link',
+    'media',
+    'media_library',
     'menu_ui',
     'node',
     'options',
@@ -41,6 +43,7 @@ class CampaignPagesTest extends KernelTestBase {
     'text',
     'token',
     'user',
+    'views',
     'localgov_core',
     'localgov_campaigns',
   ];
@@ -52,6 +55,7 @@ class CampaignPagesTest extends KernelTestBase {
     parent::setup();
 
     $this->installEntitySchema('user');
+    $this->installEntitySchema('media');
     $this->installEntitySchema('node');
     $this->installEntitySchema('file');
     $this->installSchema('node', ['node_access']);
@@ -74,17 +78,17 @@ class CampaignPagesTest extends KernelTestBase {
       'title' => 'Overview Page',
       'type' => 'localgov_campaigns_overview',
     ]);
-    $this->assertEmpty($overview->field_campaign_pages);
+    $this->assertEmpty($overview->localgov_campaigns_pages);
 
     // Check campaign page reference gets added to overview on node creation.
     $page1 = $this->createNode([
       'title' => 'Page 1',
       'type' => 'localgov_campaigns_page',
-      'field_campaign' => ['target_id' => $overview->id()],
+      'localgov_campaigns_parent' => ['target_id' => $overview->id()],
     ]);
-    $this->assertEquals($overview->id(), $page1->field_campaign->entity->id());
+    $this->assertEquals($overview->id(), $page1->localgov_campaigns_parent->entity->id());
     $overview = Node::load($overview->id());
-    $pages = $overview->field_campaign_pages->getValue();
+    $pages = $overview->localgov_campaigns_pages->getValue();
     $this->assertEquals(1, count($pages));
     $this->assertEquals($page1->id(), $pages[0]['target_id']);
 
@@ -93,11 +97,11 @@ class CampaignPagesTest extends KernelTestBase {
       'title' => 'Page 2',
       'type' => 'localgov_campaigns_page',
     ]);
-    $page2->set('field_campaign', ['target_id' => $overview->id()]);
+    $page2->set('localgov_campaigns_parent', ['target_id' => $overview->id()]);
     $page2->save();
-    $this->assertEquals($overview->id(), $page2->field_campaign->entity->id());
+    $this->assertEquals($overview->id(), $page2->localgov_campaigns_parent->entity->id());
     $overview = Node::load($overview->id());
-    $pages = $overview->field_campaign_pages->getValue();
+    $pages = $overview->localgov_campaigns_pages->getValue();
     $this->assertEquals(2, count($pages));
     $this->assertEquals($page2->id(), $pages[1]['target_id']);
 
@@ -106,12 +110,12 @@ class CampaignPagesTest extends KernelTestBase {
       'title' => 'Another Overview Page',
       'type' => 'localgov_campaigns_overview',
     ]);
-    $page2->set('field_campaign', ['target_id' => $new_overview->id()]);
+    $page2->set('localgov_campaigns_parent', ['target_id' => $new_overview->id()]);
     $page2->save();
     $new_overview = Node::load($new_overview->id());
-    $this->assertEquals($new_overview->id(), $page2->field_campaign->entity->id());
+    $this->assertEquals($new_overview->id(), $page2->localgov_campaigns_parent->entity->id());
     $overview = Node::load($overview->id());
-    $pages = $overview->field_campaign_pages->getValue();
+    $pages = $overview->localgov_campaigns_pages->getValue();
     $this->assertEquals(1, count($pages));
     $this->assertEquals($page1->id(), $pages[0]['target_id']);
 
@@ -120,7 +124,7 @@ class CampaignPagesTest extends KernelTestBase {
     // exception so calling the node delete hook here directly.
     localgov_campaigns_node_delete($page1);
     $overview = Node::load($overview->id());
-    $this->assertEmpty($overview->field_campaign_pages);
+    $this->assertEmpty($overview->localgov_campaigns_pages);
   }
 
 }

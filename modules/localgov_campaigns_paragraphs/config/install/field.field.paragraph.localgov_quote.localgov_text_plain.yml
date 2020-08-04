@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.localgov_text_plain
+    - paragraphs.paragraphs_type.localgov_quote
+id: paragraph.localgov_quote.localgov_text_plain
+field_name: localgov_text_plain
+entity_type: paragraph
+bundle: localgov_quote
+label: Text
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

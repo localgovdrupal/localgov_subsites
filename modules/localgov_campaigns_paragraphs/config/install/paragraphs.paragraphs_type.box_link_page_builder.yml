@@ -1,8 +1,0 @@
-langcode: en
-status: true
-dependencies: {  }
-id: box_link_page_builder
-label: 'Box link (Page builder)'
-icon_uuid: null
-description: ''
-behavior_plugins: {  }

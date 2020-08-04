@@ -1,8 +1,0 @@
-langcode: en
-status: true
-dependencies: {  }
-id: call_out_box_page_builder
-label: 'Call out box (Page builder)'
-icon_uuid: null
-description: ''
-behavior_plugins: {  }

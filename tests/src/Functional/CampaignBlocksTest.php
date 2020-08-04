@@ -2,6 +2,8 @@
 
 namespace Drupal\Tests\localgov_campaigns\Functional;
 
+use Drupal\file\Entity\File;
+use Drupal\media\Entity\Media;
 use Drupal\node\NodeInterface;
 use Drupal\Tests\BrowserTestBase;
 use Drupal\Tests\TestFileCreationTrait;
@@ -61,31 +63,41 @@ class CampaignBlocksTest extends BrowserTestBase {
   public function testCampaignBannerBlock() {
     $this->drupalLogin($this->adminUser);
     $this->drupalPlaceBlock('localgov_campaign_banner');
+    $this->drupalLogout();
+
+    // Create a media image.
+    $image = current($this->getTestFiles('image'));
+    $file = File::create([
+      'uri' => $image->uri,
+      'status' => FILE_STATUS_PERMANENT,
+    ]);
+    $file->save();
+    $media_image = Media::create([
+      'bundle' => 'image',
+      'field_media_image' => ['target_id' => $file->id()],
+    ]);
+    $media_image->save();
 
     // Create some nodes.
     $overview_title = $this->randomMachineName(8);
     $overview = $this->createNode([
       'title' => $overview_title,
       'type' => 'localgov_campaigns_overview',
+      'localgov_campaigns_banner_image' => ['target_id' => $media_image->id()],
       'status' => NodeInterface::PUBLISHED,
     ]);
-    // Would be good to work out how to upload images without submitting a form.
-    $image = current($this->getTestFiles('image'));
-    $edit['files[field_banner_0]'] = \Drupal::service('file_system')->realpath($image->uri);
-    $this->drupalPostForm('/node/' . $overview->id() . '/edit', $edit, 'Save');
     $page_title = $this->randomMachineName(8);
     $page = $this->createNode([
       'title' => $page_title,
       'type' => 'localgov_campaigns_page',
+      'localgov_campaigns_parent' => $overview->id(),
       'status' => NodeInterface::PUBLISHED,
-      'field_campaign' => ['target_id' => $overview->id()],
     ]);
     $article = $this->createNode([
       'title' => 'Test article',
       'type' => 'article',
       'status' => NodeInterface::PUBLISHED,
     ]);
-    $this->drupalLogout();
 
     // Test campaign overview.
     $this->drupalGet($overview->toUrl()->toString());
@@ -126,14 +138,14 @@ class CampaignBlocksTest extends BrowserTestBase {
       'title' => $page1_title,
       'type' => 'localgov_campaigns_page',
       'status' => NodeInterface::PUBLISHED,
-      'field_campaign' => ['target_id' => $overview->id()],
+      'localgov_campaigns_parent' => ['target_id' => $overview->id()],
     ]);
     $page2_title = $this->randomMachineName(8);
     $page2 = $this->createNode([
       'title' => $page2_title,
       'type' => 'localgov_campaigns_page',
       'status' => NodeInterface::PUBLISHED,
-      'field_campaign' => ['target_id' => $overview->id()],
+      'localgov_campaigns_parent' => ['target_id' => $overview->id()],
     ]);
     $article = $this->createNode([
       'title' => 'Test article',
@@ -174,7 +186,7 @@ class CampaignBlocksTest extends BrowserTestBase {
     $this->assertSession()->pageTextNotContains($page2_title);
 
     // Test hide sidebar field.
-    $overview->set('field_hide_sidebar', ['value' => 1]);
+    $overview->set('localgov_campaigns_hide_menu', ['value' => 1]);
     $overview->save();
     $this->drupalGet($overview->toUrl()->toString());
     $this->assertSession()->responseNotContains('block-localgov-campaign-navigation');

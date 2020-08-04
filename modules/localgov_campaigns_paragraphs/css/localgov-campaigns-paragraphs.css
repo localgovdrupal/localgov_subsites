@@ -1,8 +1,30 @@
+/* Page sections */
+.paragraph--type--page-section .layout__region {
+  padding-bottom: 5px;
+}
+.paragraph--type--page-section .layout--twocol .layout__region--first {
+  padding-right: 5px;
+}
+.paragraph--type--page-section .layout--twocol .layout__region--second {
+  padding-left: 5px;
+}
+.paragraph--type--page-section .layout--threecol-33-34-33 .layout__region--first {
+  padding-right: 5px;
+}
+.paragraph--type--page-section .layout--threecol-33-34-33 .layout__region--second {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+.paragraph--type--page-section .layout--threecol-33-34-33 .layout__region--third {
+  padding-left: 5px;
+}
+
 /* Call out box */
 .call-out-box {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  padding: 10px;
 }
 
 /* Fact box */

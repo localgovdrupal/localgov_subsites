@@ -6,6 +6,7 @@
  */
 
 use Drupal\Core\Url;
+use Drupal\file\Entity\File;
 use Drupal\image\Entity\ImageStyle;
 
 /**
@@ -13,52 +14,28 @@ use Drupal\image\Entity\ImageStyle;
  */
 function localgov_campaigns_paragraphs_theme($existing, $type, $theme, $path) {
   return [
-    'field__field_box_links' => [
-      'template' => 'field--field-box-links',
-      'base hook' => 'field',
-    ],
-    'field__field_call_out_boxes' => [
-      'template' => 'field--field-call-out-boxes',
-      'base hook' => 'field',
-    ],
-    'field__field_fact-boxes' => [
-      'template' => 'field--field-fact-boxes',
-      'base hook' => 'field',
-    ],
-    'field__field_quotes' => [
-      'template' => 'field--field-quotes',
-      'base hook' => 'field',
-    ],
-    'paragraph__box_link' => [
-      'template' => 'paragraph--box-link',
+    'paragraph__localgov_box_link' => [
+      'template' => 'paragraph--localgov-box-link',
       'base hook' => 'paragraph',
     ],
-    'paragraph__call_out_box' => [
-      'template' => 'paragraph--call-out-box',
+    'paragraph__localgov_call_out_box' => [
+      'template' => 'paragraph--localgov-call-out-box',
       'base hook' => 'paragraph',
     ],
-    'paragraph__fact_box' => [
-      'template' => 'paragraph--fact-box',
+    'paragraph__localgov_fact_box' => [
+      'template' => 'paragraph--localgov-fact-box',
       'base hook' => 'paragraph',
     ],
-    'paragraph__link_and_summary' => [
-      'template' => 'paragraph--link-and-summary',
+    'paragraph__localgov_link_and_summary' => [
+      'template' => 'paragraph--localgov-link-and-summary',
       'base hook' => 'paragraph',
     ],
-    'paragraph__quote' => [
-      'template' => 'paragraph--quote',
+    'paragraph__localgov_quote' => [
+      'template' => 'paragraph--localgov-quote',
       'base hook' => 'paragraph',
     ],
-    'paragraph__text' => [
-      'template' => 'paragraph--text',
-      'base hook' => 'paragraph',
-    ],
-    'paragraph__text_and_image_50_50' => [
-      'template' => 'paragraph--text-and-image-50-50',
-      'base hook' => 'paragraph',
-    ],
-    'paragraph__video_page_builder' => [
-      'template' => 'paragraph--video-page-builder',
+    'paragraph__localgov_video' => [
+      'template' => 'paragraph--localgov-video',
       'base hook' => 'paragraph',
     ],
   ];
@@ -73,22 +50,23 @@ function localgov_campaigns_paragraphs_preprocess_paragraph(&$variables) {
   /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
   $paragraph = $variables['paragraph'];
 
-  if ($paragraph->bundle() === 'box_link') {
-    if (!$paragraph->get('field_link')->isEmpty()) {
-      $link = $paragraph->get('field_link')->first()->getValue();
-      $variables['field_link']['title'] = $link['title'];
-      $variables['field_link']['url'] = Url::fromUri($link['uri']);
+  if ($paragraph->bundle() === 'localgov_box_link') {
+    if (!$paragraph->get('localgov_link')->isEmpty()) {
+      $link = $paragraph->get('localgov_link')->first()->getValue();
+      $variables['localgov_link']['title'] = $link['title'];
+      $variables['localgov_link']['url'] = Url::fromUri($link['uri']);
     }
   }
 
-  if ($paragraph->bundle() === 'call_out_box') {
-    if (!$paragraph->get('field_button')->isEmpty()) {
-      $button = $paragraph->get('field_button')->first()->getValue();
+  if ($paragraph->bundle() === 'localgov_call_out_box') {
+    if (!$paragraph->get('localgov_button')->isEmpty()) {
+      $button = $paragraph->get('localgov_button')->first()->getValue();
       $variables['button_url'] = Url::fromUri($button['uri']);
     }
-    if (!$paragraph->get('field_background_image')->isEmpty()) {
-      $image_uri = $paragraph->get('field_background_image')->entity->getFileUri();
-      $variables['background_url'] = ImageStyle::load('large_21_9')->buildUrl($image_uri);
+    if (!$paragraph->get('localgov_background_image')->isEmpty()) {
+      $fid = $paragraph->get('localgov_background_image')->entity->field_media_image[0]->getValue()['target_id'];
+      $file_url = File::load($fid)->getFileUri();
+      $variables['background_url'] = ImageStyle::load('large_21_9')->buildUrl($file_url);
     }
   }
 

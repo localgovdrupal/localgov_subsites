@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.localgov_fact
+    - paragraphs.paragraphs_type.localgov_fact_box
+id: paragraph.localgov_fact_box.localgov_fact
+field_name: localgov_fact
+entity_type: paragraph
+bundle: localgov_fact_box
+label: Fact
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

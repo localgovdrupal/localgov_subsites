@@ -1,8 +1,0 @@
-langcode: en
-status: true
-dependencies: {  }
-id: image_page_builder
-label: 'Image (Page builder)'
-icon_uuid: null
-description: ''
-behavior_plugins: {  }

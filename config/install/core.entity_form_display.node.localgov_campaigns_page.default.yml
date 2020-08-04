@@ -2,10 +2,9 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.localgov_campaigns_page.body
-    - field.field.node.localgov_campaigns_page.field_campaign
-    - field.field.node.localgov_campaigns_page.field_page_content
-    - field.field.node.localgov_campaigns_page.field_topic_term
+    - field.field.node.localgov_campaigns_page.localgov_campaigns_parent
+    - field.field.node.localgov_campaigns_page.localgov_campaigns_content
+    - field.field.node.localgov_campaigns_page.localgov_campaigns_topic
     - field.field.node.localgov_campaigns_page.localgov_campaigns_summary
     - node.type.localgov_campaigns_page
   module:
@@ -31,8 +30,8 @@ third_party_settings:
       children:
         - title
         - localgov_campaigns_summary
-        - field_campaign
-        - field_topic_term
+        - localgov_campaigns_parent
+        - localgov_campaigns_topic
       parent_name: group_tabs
       weight: 20
       format_type: tab
@@ -46,7 +45,7 @@ third_party_settings:
       region: content
     group_page_builder:
       children:
-        - field_page_content
+        - localgov_campaigns_content
       parent_name: group_tabs
       weight: 21
       format_type: tab
@@ -69,13 +68,13 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_campaign:
+  localgov_campaigns_parent:
     weight: -3
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
-  field_page_content:
+  localgov_campaigns_content:
     weight: 8
     settings:
       preview_view_mode: default
@@ -84,7 +83,7 @@ content:
     third_party_settings: {  }
     type: layout_paragraphs
     region: content
-  field_topic_term:
+  localgov_campaigns_topic:
     weight: -2
     settings:
       match_operator: CONTAINS
@@ -158,5 +157,4 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-hidden:
-  body: true
+hidden: {  }

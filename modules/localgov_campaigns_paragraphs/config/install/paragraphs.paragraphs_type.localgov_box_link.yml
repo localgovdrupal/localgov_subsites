@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+id: localgov_box_link
+label: 'Box link'
+icon_uuid: null
+description: ''
+behavior_plugins: {  }

@@ -1,8 +1,0 @@
-langcode: en
-status: true
-dependencies: {  }
-id: page_builderlayout
-label: 'Page builder layout'
-icon_uuid: null
-description: ''
-behavior_plugins: {  }

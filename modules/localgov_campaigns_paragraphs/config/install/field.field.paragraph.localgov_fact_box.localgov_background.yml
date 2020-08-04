@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.localgov_background
+    - paragraphs.paragraphs_type.localgov_fact_box
+  module:
+    - options
+id: paragraph.localgov_fact_box.localgov_background
+field_name: localgov_background
+entity_type: paragraph
+bundle: localgov_fact_box
+label: Background
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

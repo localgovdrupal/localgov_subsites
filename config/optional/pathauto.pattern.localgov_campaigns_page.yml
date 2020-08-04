@@ -6,7 +6,7 @@ dependencies:
 id: localgov_campaigns_page
 label: 'Campaign page'
 type: 'canonical_entities:node'
-pattern: '[node:field_campaign:entity:url:relative]/[node:title]'
+pattern: '[node:localgov_campaigns_parent:entity:url:relative]/[node:title]'
 selection_criteria:
   a17ad9f1-47e0-407c-9351-970cb7dc958c:
     id: node_type

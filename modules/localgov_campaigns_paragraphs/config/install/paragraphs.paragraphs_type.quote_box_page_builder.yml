@@ -1,8 +1,0 @@
-langcode: en
-status: true
-dependencies: {  }
-id: quote_box_page_builder
-label: 'Quote box (Page builder)'
-icon_uuid: null
-description: ''
-behavior_plugins: {  }

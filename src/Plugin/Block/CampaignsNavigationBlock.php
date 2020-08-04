@@ -77,8 +77,8 @@ class CampaignsNavigationBlock extends CampaignsAbstractBlockBase {
       ];
     }
 
-    $campaign_pages = $campaign->get('field_campaign_pages')->getValue();
-    $campaign_pages_count = $campaign->get('field_campaign_pages')->count();
+    $campaign_pages = $campaign->get('localgov_campaigns_pages')->getValue();
+    $campaign_pages_count = $campaign->get('localgov_campaigns_pages')->count();
 
     if ($campaign_pages_count > 0) {
       foreach ($campaign_pages as $node_data) {
@@ -114,8 +114,8 @@ class CampaignsNavigationBlock extends CampaignsAbstractBlockBase {
   protected function blockAccess(AccountInterface $account) {
     $campaign = $this->getCampaign();
     if (!is_null($campaign) &&
-      $campaign->hasField('field_hide_sidebar') &&
-      $campaign->field_hide_sidebar->value == 1
+      $campaign->hasField('localgov_campaigns_hide_menu') &&
+      $campaign->localgov_campaigns_hide_menu->value == 1
     ) {
       return AccessResult::neutral();
     }
@@ -160,7 +160,7 @@ class CampaignsNavigationBlock extends CampaignsAbstractBlockBase {
    */
   protected function listOverviewAndPages(): array {
     $overview = $this->getCampaign();
-    $page_refs = $overview->field_campaign_pages;
+    $page_refs = $overview->localgov_campaigns_pages;
     $page_nodes = array_map(function (EntityReferenceItem $ref) {
       return $ref->entity;
     }, iterator_to_array($page_refs));

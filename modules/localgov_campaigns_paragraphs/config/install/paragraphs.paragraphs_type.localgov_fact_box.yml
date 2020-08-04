@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+id: localgov_fact_box
+label: 'Fact box'
+icon_uuid: null
+description: ''
+behavior_plugins: {  }

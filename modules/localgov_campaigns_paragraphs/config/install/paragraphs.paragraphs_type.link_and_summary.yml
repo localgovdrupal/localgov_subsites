@@ -1,8 +1,0 @@
-langcode: en
-status: true
-dependencies: {  }
-id: link_and_summary
-label: 'Link and summary'
-icon_uuid: null
-description: ''
-behavior_plugins: {  }

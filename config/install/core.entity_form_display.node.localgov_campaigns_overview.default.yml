@@ -2,22 +2,19 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.localgov_campaigns_overview.body
-    - field.field.node.localgov_campaigns_overview.field_banner
-    - field.field.node.localgov_campaigns_overview.field_banner_colour
-    - field.field.node.localgov_campaigns_overview.field_campaign_pages
-    - field.field.node.localgov_campaigns_overview.field_hide_sidebar
-    - field.field.node.localgov_campaigns_overview.field_page_content
-    - field.field.node.localgov_campaigns_overview.field_select_colorway
-    - field.field.node.localgov_campaigns_overview.field_select_colourway_accent
+    - field.field.node.localgov_campaigns_overview.localgov_campaigns_banner_image
+    - field.field.node.localgov_campaigns_overview.localgov_campaigns_colour_accent
+    - field.field.node.localgov_campaigns_overview.localgov_campaigns_colour_grad
+    - field.field.node.localgov_campaigns_overview.localgov_campaigns_content
+    - field.field.node.localgov_campaigns_overview.localgov_campaigns_hide_menu
+    - field.field.node.localgov_campaigns_overview.localgov_campaigns_pages
     - field.field.node.localgov_campaigns_overview.localgov_campaigns_summary
-    - image.style.thumbnail
     - node.type.localgov_campaigns_overview
   module:
     - field_group
-    - image
     - layout_paragraphs
     - localgov_core
+    - media_library
     - path
 third_party_settings:
   field_group:
@@ -53,9 +50,10 @@ third_party_settings:
       region: content
     group_banner:
       children:
-        - field_banner
-        - field_select_colorway
-        - field_select_colourway_accent
+        - localgov_campaigns_banner
+        - localgov_campaigns_banner_image
+        - localgov_campaigns_colour_grad
+        - localgov_campaigns_colour_accent
       parent_name: group_tabs
       weight: 10
       format_type: tab
@@ -69,7 +67,7 @@ third_party_settings:
       region: content
     group_page_builder:
       children:
-        - field_page_content
+        - localgov_campaigns_content
       parent_name: group_tabs
       weight: 11
       format_type: tab
@@ -83,8 +81,8 @@ third_party_settings:
       region: content
     group_child_pages:
       children:
-        - field_hide_sidebar
-        - field_campaign_pages
+        - localgov_campaigns_hide_menu
+        - localgov_campaigns_pages
       parent_name: group_tabs
       weight: 13
       format_type: tab
@@ -107,28 +105,26 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_banner:
-    weight: 27
+  localgov_campaigns_banner_image:
+    type: media_library_widget
+    weight: 28
     settings:
-      preview_image_style: thumbnail
-      progress_indicator: throbber
+      media_types: {  }
     third_party_settings: {  }
-    type: image_image
     region: content
-  field_campaign_pages:
-    weight: 34
+  localgov_campaigns_colour_accent:
+    weight: 30
     settings: {  }
     third_party_settings: {  }
-    type: localgov_entity_reference_labels
+    type: options_select
     region: content
-  field_hide_sidebar:
-    type: boolean_checkbox
-    weight: 33
+  localgov_campaigns_colour_grad:
+    type: options_select
+    weight: 29
     region: content
-    settings:
-      display_label: true
+    settings: {  }
     third_party_settings: {  }
-  field_page_content:
+  localgov_campaigns_content:
     type: layout_paragraphs
     weight: 32
     settings:
@@ -137,17 +133,18 @@ content:
       require_layouts: 1
     third_party_settings: {  }
     region: content
-  field_select_colorway:
-    type: options_select
-    weight: 29
+  localgov_campaigns_hide_menu:
+    type: boolean_checkbox
+    weight: 33
     region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  localgov_campaigns_pages:
+    weight: 34
     settings: {  }
     third_party_settings: {  }
-  field_select_colourway_accent:
-    weight: 30
-    settings: {  }
-    third_party_settings: {  }
-    type: options_select
+    type: localgov_entity_reference_labels
     region: content
   localgov_campaigns_summary:
     weight: 1
@@ -213,6 +210,4 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-hidden:
-  body: true
-  field_banner_colour: true
+hidden: {  }

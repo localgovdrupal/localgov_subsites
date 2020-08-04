@@ -53,20 +53,20 @@ function localgov_campaigns_node_insert(NodeInterface $node) {
  */
 function localgov_campaigns_node_update(NodeInterface $node) {
   if ($node->bundle() == 'localgov_campaigns_page') {
-    if ($parent = $node->field_campaign->entity) {
+    if ($parent = $node->localgov_campaigns_parent->entity) {
       // Check if referenced campaign has changed.
-      if (isset($node->original) and $old_parent = $node->original->field_campaign->entity) {
+      if (isset($node->original) and $old_parent = $node->original->localgov_campaigns_parent->entity) {
         if ($old_parent->id() !== $parent->id()) {
-          $i = array_search(['target_id' => $node->id()], $old_parent->field_campaign_pages->getValue());
+          $i = array_search(['target_id' => $node->id()], $old_parent->localgov_campaigns_pages->getValue());
           if ($i !== FALSE) {
-            $old_parent->field_campaign_pages->removeItem($i);
+            $old_parent->localgov_campaigns_pages->removeItem($i);
             $old_parent->save();
           }
         }
       }
       // Add page to parent reference field.
-      if (array_search(['target_id' => $node->id()], $parent->field_campaign_pages->getValue()) === FALSE) {
-        $parent->field_campaign_pages->appendItem(['target_id' => $node->id()]);
+      elseif (array_search(['target_id' => $node->id()], $parent->localgov_campaigns_pages->getValue()) === FALSE) {
+        $parent->localgov_campaigns_pages->appendItem(['target_id' => $node->id()]);
         $parent->save();
       }
     }
@@ -78,10 +78,10 @@ function localgov_campaigns_node_update(NodeInterface $node) {
  */
 function localgov_campaigns_node_delete(NodeInterface $node) {
   if ($node->bundle() == 'localgov_campaigns_page') {
-    if ($parent = $node->field_campaign->entity) {
-      $i = array_search(['target_id' => $node->id()], $parent->field_campaign_pages->getValue());
+    if ($parent = $node->localgov_campaigns_parent->entity) {
+      $i = array_search(['target_id' => $node->id()], $parent->localgov_campaigns_pages->getValue());
       if ($i !== FALSE) {
-        $parent->field_campaign_pages->removeItem($i);
+        $parent->localgov_campaigns_pages->removeItem($i);
         $parent->save();
       }
     }

@@ -3,14 +3,12 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
-    - field.field.node.localgov_campaigns_overview.body
-    - field.field.node.localgov_campaigns_overview.field_banner
-    - field.field.node.localgov_campaigns_overview.field_banner_colour
-    - field.field.node.localgov_campaigns_overview.field_campaign_pages
-    - field.field.node.localgov_campaigns_overview.field_hide_sidebar
-    - field.field.node.localgov_campaigns_overview.field_page_content
-    - field.field.node.localgov_campaigns_overview.field_select_colorway
-    - field.field.node.localgov_campaigns_overview.field_select_colourway_accent
+    - field.field.node.localgov_campaigns_overview.localgov_campaigns_banner_image
+    - field.field.node.localgov_campaigns_overview.localgov_campaigns_colour_accent
+    - field.field.node.localgov_campaigns_overview.localgov_campaigns_colour_grad
+    - field.field.node.localgov_campaigns_overview.localgov_campaigns_content
+    - field.field.node.localgov_campaigns_overview.localgov_campaigns_hide_menu
+    - field.field.node.localgov_campaigns_overview.localgov_campaigns_pages
     - field.field.node.localgov_campaigns_overview.localgov_campaigns_summary
     - node.type.localgov_campaigns_overview
   module:
@@ -28,13 +26,11 @@ content:
     settings: {  }
     third_party_settings: {  }
 hidden:
-  body: true
-  field_banner: true
-  field_banner_colour: true
-  field_campaign_pages: true
-  field_hide_sidebar: true
-  field_page_content: true
-  field_select_colorway: true
-  field_select_colourway_accent: true
+  localgov_campaigns_banner_image: true
   links: true
+  localgov_campaigns_colour_accent: true
+  localgov_campaigns_colour_grad: true
+  localgov_campaigns_content: true
+  localgov_campaigns_hide_menu: true
+  localgov_campaigns_pages: true
   search_api_excerpt: true
