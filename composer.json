@@ -7,7 +7,8 @@
   "minimum-stability": "dev",
   "require": {
     "drupal/layout_paragraphs": "^1.0@beta",
-    "drupal/paragraphs": "^1.11"
+    "drupal/paragraphs": "^1.11",
+    "localgovdrupal/localgov_paragraphs": "dev-master"
   },
   "extra": {
     "enable-patching": true,

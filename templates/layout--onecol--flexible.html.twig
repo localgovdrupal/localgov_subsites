@@ -1,0 +1,24 @@
+{#
+/**
+ * @file
+ * Theme template to display a one-column **flexible** layout.
+ *
+ * Available variables:
+ * - content: The content for this layout.
+ * - attributes: HTML attributes for the layout <div>.
+ */
+#}
+{%
+  set classes = [
+    'layout',
+    'layout--onecol',
+    'layout--onecol__flexible',
+  ]
+%}
+{% if content %}
+  <div{{ attributes.addClass(classes) }}>
+    <div {{ region_attributes.content.addClass('layout__region', 'layout__region--content', 'row') }}>
+      {{ content.content }}
+    </div>
+  </div>
+{% endif %}
