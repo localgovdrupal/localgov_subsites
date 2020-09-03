@@ -6,23 +6,18 @@
   "license": "GPL-2.0-or-later",
   "minimum-stability": "dev",
   "require": {
-    "drupal/layout_paragraphs": "^1.0@beta",
+    "drupal/layout_paragraphs": "dev-1.0.x",
     "drupal/paragraphs": "^1.11",
     "drupal/pathauto": "^1.8",
     "drupal/token": "^1.7",
     "localgovdrupal/localgov_paragraphs": "dev-master"
   },
   "extra": {
-    "enable-patching": true,
     "composer-exit-on-patch-failure": true,
     "patchLevel": {
       "drupal/core": "-p2"
     },
     "patches": {
-      "drupal/layout_paragraphs": {
-        "Fix to layout_paragraphs to support Claro, see: https://www.drupal.org/project/layout_paragraphs/issues/3158842": "https://www.drupal.org/files/issues/2020-07-13/support-layout-paragraphs-in-claro-3158842-2.patch",
-        "Schema fixes #3161030": "https://www.drupal.org/files/issues/2020-07-23/layout-paragraphs-schema-errors-3161030-3.patch"
-      }
     }
   }
 }
