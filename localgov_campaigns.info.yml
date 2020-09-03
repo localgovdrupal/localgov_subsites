@@ -2,7 +2,7 @@ name: LocalGov Campaigns
 description: Provides campaign sections using page builder paragraph types for LocalGovDrupal.
 core_version_requirement: ^8.9 || ^9
 type: module
-package: LocalGovDrupal
+package: LocalGov Drupal
 
 dependencies:
   - drupal:block
