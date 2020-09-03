@@ -8,7 +8,7 @@ localgov_campaigns_one_column_flexible:
  label: Flexible
  category: 'Columns: 1'
  template: templates/layout--onecol--flexible
- library: layout_discovery/onecol
+ library: localgov_campaigns/one-column-flexible
  icon_map:
    - [content]
  regions:
