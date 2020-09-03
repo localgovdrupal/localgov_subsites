@@ -159,24 +159,24 @@ class CampaignBlocksTest extends BrowserTestBase {
     $this->assertSession()->responseContains('block-localgov-campaign-navigation');
     $results = $this->xpath($xpath);
     $this->assertEquals(3, count($results));
-    $this->assertContains($overview_title, $results[0]->getText());
-    $this->assertNotContains($overview->toUrl()->toString(), $results[0]->getHtml());
-    $this->assertContains($page1_title, $results[1]->getText());
-    $this->assertContains($page1->toUrl()->toString(), $results[1]->getHtml());
-    $this->assertContains($page2_title, $results[2]->getText());
-    $this->assertContains($page2->toUrl()->toString(), $results[2]->getHtml());
+    $this->assertStringContainsString($overview_title, $results[0]->getText());
+    $this->assertStringNotContainsString($overview->toUrl()->toString(), $results[0]->getHtml());
+    $this->assertStringContainsString($page1_title, $results[1]->getText());
+    $this->assertStringContainsString($page1->toUrl()->toString(), $results[1]->getHtml());
+    $this->assertStringContainsString($page2_title, $results[2]->getText());
+    $this->assertStringContainsString($page2->toUrl()->toString(), $results[2]->getHtml());
 
     // Test campaign page.
     $this->drupalGet($page1->toUrl()->toString());
     $this->assertSession()->responseContains('block-localgov-campaign-navigation');
     $results = $this->xpath($xpath);
     $this->assertEquals(3, count($results));
-    $this->assertContains($overview_title, $results[0]->getText());
-    $this->assertContains($overview->toUrl()->toString(), $results[0]->getHtml());
-    $this->assertContains($page1_title, $results[1]->getText());
-    $this->assertNotContains($page1->toUrl()->toString(), $results[1]->getHtml());
-    $this->assertContains($page2_title, $results[2]->getText());
-    $this->assertContains($page2->toUrl()->toString(), $results[2]->getHtml());
+    $this->assertStringContainsString($overview_title, $results[0]->getText());
+    $this->assertStringContainsString($overview->toUrl()->toString(), $results[0]->getHtml());
+    $this->assertStringContainsString($page1_title, $results[1]->getText());
+    $this->assertStringNotContainsString($page1->toUrl()->toString(), $results[1]->getHtml());
+    $this->assertStringContainsString($page2_title, $results[2]->getText());
+    $this->assertStringContainsString($page2->toUrl()->toString(), $results[2]->getHtml());
 
     // Test article.
     $this->drupalGet($article->toUrl()->toString());
