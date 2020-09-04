@@ -28,12 +28,26 @@ class CampaignsParagraphsAdministrationTest extends ParagraphsTestBase {
 
     // Check paragraph types installed.
     $this->drupalGet('/admin/structure/paragraphs_type');
+    $this->assertSession()->pageTextContains('localgov_accordion');
+    $this->assertSession()->pageTextContains('localgov_accordion_pane');
     $this->assertSession()->pageTextContains('localgov_box_link');
     $this->assertSession()->pageTextContains('localgov_call_out_box');
     $this->assertSession()->pageTextContains('localgov_fact_box');
     $this->assertSession()->pageTextContains('localgov_link_and_summary');
     $this->assertSession()->pageTextContains('localgov_quote');
     $this->assertSession()->pageTextContains('localgov_video');
+
+    // Check 'Accordion' fields.
+    $this->drupalGet('/admin/structure/paragraphs_type/localgov_accordion/fields');
+    $this->assertSession()->pageTextContains('localgov_title');
+    $this->assertSession()->pageTextContains('field_heading_level');
+    $this->assertSession()->pageTextContains('field_paragraphs');
+
+    // Check 'Accordion pane' fields.
+    $this->drupalGet('/admin/structure/paragraphs_type/localgov_accordion_pane/fields');
+    $this->assertSession()->pageTextContains('localgov_title');
+    $this->assertSession()->pageTextContains('field_heading_level');
+    $this->assertSession()->pageTextContains('localgov_body_text');
 
     // Check 'Box link' fields.
     $this->drupalGet('/admin/structure/paragraphs_type/localgov_box_link/fields');
