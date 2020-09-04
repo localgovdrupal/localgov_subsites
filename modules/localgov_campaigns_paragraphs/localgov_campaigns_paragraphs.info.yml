@@ -2,7 +2,7 @@ name: LocalGov Campaigns Paragraphs
 description: Page builder paragraph types for use with LocalGov Campaigns.
 core_version_requirement: ^8.9 || ^9
 type: module
-package: LocalGovDrupal
+package: LocalGov Drupal
 
 dependencies:
   - drupal:media
