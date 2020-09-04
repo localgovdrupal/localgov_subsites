@@ -7,9 +7,6 @@
   "minimum-stability": "dev",
   "require": {
     "drupal/layout_paragraphs": "dev-1.0.x",
-    "drupal/paragraphs": "^1.11",
-    "drupal/pathauto": "^1.8",
-    "drupal/token": "^1.7",
     "localgovdrupal/localgov_paragraphs": "dev-master"
   },
   "extra": {
