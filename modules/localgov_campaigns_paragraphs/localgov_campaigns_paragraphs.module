@@ -14,6 +14,14 @@ use Drupal\image\Entity\ImageStyle;
  */
 function localgov_campaigns_paragraphs_theme($existing, $type, $theme, $path) {
   return [
+    'paragraph__localgov_accordion' => [
+      'template' => 'paragraph--localgov-accordion',
+      'base hook' => 'paragraph',
+    ],
+    'paragraph__localgov_accordion_pane' => [
+      'template' => 'paragraph--localgov-accordion-pane',
+      'base hook' => 'paragraph',
+    ],
     'paragraph__localgov_box_link' => [
       'template' => 'paragraph--localgov-box-link',
       'base hook' => 'paragraph',
@@ -76,4 +84,40 @@ function localgov_campaigns_paragraphs_preprocess_paragraph(&$variables) {
       $variables['field_video_url'] = $video['uri'];
     }
   }
+
+  if ($paragraph->bundle() === 'localgov_accordion' || $paragraph->bundle() === 'localgov_accordion_pane') {
+    if (!$paragraph->get('localgov_title')->isEmpty()) {
+      $heading_text = $paragraph->get('localgov_title')->value;
+      $heading_level = $paragraph->get('field_heading_level')->value;
+      $variables['heading'] = _create_heading($heading_text, $heading_level);
+    }
+  }
+}
+
+/**
+ * Create a heading element.
+ *
+ * @param string $heading_text
+ * @param string $heading_level
+ *
+ * @return bool|array
+ *   FALSE if heading_level is incorrect, heading element otherwise.
+ */
+function _create_heading(string $heading_text, string $heading_level) {
+  $allowed_heading_levels = ['h2', 'h3', 'h4', 'h5', 'h6'];
+
+  if (!in_array($heading_level, $allowed_heading_levels)) {
+    return;
+  }
+
+  $heading = [
+    '#type' => 'inline_template',
+    '#template' => '<{{ level }}>{{ text }}</{{ level }}>',
+    '#context' => [
+      'level' => $heading_level,
+      'text' => $heading_text,
+    ],
+  ];
+
+  return $heading;
 }
