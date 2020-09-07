@@ -98,10 +98,12 @@ function localgov_campaigns_paragraphs_preprocess_paragraph(&$variables) {
  * Create a heading element.
  *
  * @param string $heading_text
+ *   Heading text.
  * @param string $heading_level
+ *   Heading level.
  *
- * @return bool|array
- *   FALSE if heading_level is incorrect, heading element otherwise.
+ * @return void|array
+ *   Heading render element.
  */
 function _create_heading(string $heading_text, string $heading_level) {
   $allowed_heading_levels = ['h2', 'h3', 'h4', 'h5', 'h6'];
