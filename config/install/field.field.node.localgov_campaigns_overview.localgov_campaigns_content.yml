@@ -8,9 +8,14 @@ dependencies:
     - paragraphs.paragraphs_type.localgov_call_out_box
     - paragraphs.paragraphs_type.localgov_documents
     - paragraphs.paragraphs_type.localgov_fact_box
+    - paragraphs.paragraphs_type.localgov_featured_campaign
+    - paragraphs.paragraphs_type.localgov_ia_block
     - paragraphs.paragraphs_type.localgov_image
+    - paragraphs.paragraphs_type.localgov_labelled_icon
     - paragraphs.paragraphs_type.localgov_link_and_summary
+    - paragraphs.paragraphs_type.localgov_newsroom_teaser
     - paragraphs.paragraphs_type.localgov_quote
+    - paragraphs.paragraphs_type.localgov_subscribe_panel
     - paragraphs.paragraphs_type.localgov_text
     - paragraphs.paragraphs_type.localgov_video
     - paragraphs.paragraphs_type.page_section
@@ -40,6 +45,11 @@ settings:
       localgov_quote: localgov_quote
       localgov_text: localgov_text
       localgov_video: localgov_video
+      localgov_ia_block: localgov_ia_block
+      localgov_labelled_icon: localgov_labelled_icon
+      localgov_featured_campaign: localgov_featured_campaign
+      localgov_newsroom_teaser: localgov_newsroom_teaser
+      localgov_subscribe_panel: localgov_subscribe_panel
       page_section: page_section
     target_bundles_drag_drop:
       from_library:
@@ -56,32 +66,38 @@ settings:
         enabled: false
       localgov_documents:
         enabled: true
-        weight: -27
-      localgov_fact_box:
+        weight: 3
+      localgov_featured_campaign:
         enabled: true
-        weight: -26
+        weight: 23
+      localgov_ia_block:
+        enabled: true
+        weight: 21
       localgov_image:
         enabled: true
-        weight: -25
-      localgov_link:
-        weight: -18
-        enabled: false
+        weight: 4
+      localgov_labelled_icon:
+        enabled: true
+        weight: 23
       localgov_link_and_summary:
         enabled: true
-        weight: -24
+        weight: 5
+      localgov_newsroom_teaser:
+        enabled: true
+        weight: 26
       localgov_quote:
         enabled: true
-        weight: -23
+        weight: 6
+      localgov_subscribe_panel:
+        enabled: true
+        weight: 29
       localgov_text:
         enabled: true
-        weight: -22
+        weight: 7
       localgov_video:
         enabled: true
-        weight: -21
+        weight: 8
       page_section:
         enabled: true
-        weight: -16
-      topic_list_builder:
-        weight: -17
-        enabled: false
+        weight: 100
 field_type: entity_reference_revisions
