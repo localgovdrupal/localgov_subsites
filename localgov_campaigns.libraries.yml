@@ -1,0 +1,6 @@
+one-column-flexible:
+  css:
+    layout:
+      css/one-column-flexible.css: {}
+  dependencies:
+    - layout_discovery/onecol
