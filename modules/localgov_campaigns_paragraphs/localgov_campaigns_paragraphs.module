@@ -34,6 +34,10 @@ function localgov_campaigns_paragraphs_theme($existing, $type, $theme, $path) {
       'template' => 'paragraph--localgov-quote',
       'base hook' => 'paragraph',
     ],
+    'paragraph__localgov_table' => [
+      'template' => 'paragraph--localgov-table',
+      'base hook' => 'paragraph',
+    ],
     'paragraph__localgov_video' => [
       'template' => 'paragraph--localgov-video',
       'base hook' => 'paragraph',
@@ -68,6 +72,10 @@ function localgov_campaigns_paragraphs_preprocess_paragraph(&$variables) {
       $file_url = File::load($fid)->getFileUri();
       $variables['background_url'] = ImageStyle::load('large_21_9')->buildUrl($file_url);
     }
+  }
+
+  if ($paragraph->bundle() === 'localgov_table') {
+    $variables['table_theme'] = $paragraph->get('localgov_table_theme')->value;
   }
 
   if ($paragraph->bundle() === 'video_page_builder') {

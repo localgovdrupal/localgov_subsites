@@ -7,6 +7,7 @@
   "minimum-stability": "dev",
   "require": {
     "drupal/layout_paragraphs": "dev-1.0.x",
+    "drupal/tablefield": "^2.1",
     "localgovdrupal/localgov_paragraphs": "dev-master"
   },
   "extra": {

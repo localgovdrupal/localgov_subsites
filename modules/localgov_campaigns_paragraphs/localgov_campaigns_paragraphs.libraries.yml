@@ -2,3 +2,8 @@ localgov_campaigns_paragraphs:
   css:
     base:
       css/localgov-campaigns-paragraphs.css: {}
+
+localgov_table_paragraph:
+  css:
+    base:
+      css/localgov-table-paragraph.css: {}
