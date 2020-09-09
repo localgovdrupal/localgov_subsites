@@ -33,6 +33,7 @@ class CampaignsParagraphsAdministrationTest extends ParagraphsTestBase {
     $this->assertSession()->pageTextContains('localgov_fact_box');
     $this->assertSession()->pageTextContains('localgov_link_and_summary');
     $this->assertSession()->pageTextContains('localgov_quote');
+    $this->assertSession()->pageTextContains('localgov_table');
     $this->assertSession()->pageTextContains('localgov_video');
 
     // Check 'Box link' fields.
@@ -63,6 +64,11 @@ class CampaignsParagraphsAdministrationTest extends ParagraphsTestBase {
     $this->drupalGet('/admin/structure/paragraphs_type/localgov_quote/fields');
     $this->assertSession()->pageTextContains('localgov_author');
     $this->assertSession()->pageTextContains('localgov_text_plain');
+
+    // Check 'Table' fields.
+    $this->drupalGet('/admin/structure/paragraphs_type/localgov_table/fields');
+    $this->assertSession()->pageTextContains('localgov_table');
+    $this->assertSession()->pageTextContains('localgov_table_theme');
 
     // Check 'Video' fields.
     $this->drupalGet('/admin/structure/paragraphs_type/localgov_video/fields');
