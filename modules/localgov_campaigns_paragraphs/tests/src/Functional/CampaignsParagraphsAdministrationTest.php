@@ -41,13 +41,13 @@ class CampaignsParagraphsAdministrationTest extends ParagraphsTestBase {
     // Check 'Accordion' fields.
     $this->drupalGet('/admin/structure/paragraphs_type/localgov_accordion/fields');
     $this->assertSession()->pageTextContains('localgov_title');
-    $this->assertSession()->pageTextContains('field_heading_level');
-    $this->assertSession()->pageTextContains('field_paragraphs');
+    $this->assertSession()->pageTextContains('localgov_heading_level');
+    $this->assertSession()->pageTextContains('localgov_paragraphs');
 
     // Check 'Accordion pane' fields.
     $this->drupalGet('/admin/structure/paragraphs_type/localgov_accordion_pane/fields');
     $this->assertSession()->pageTextContains('localgov_title');
-    $this->assertSession()->pageTextContains('field_heading_level');
+    $this->assertSession()->pageTextContains('localgov_heading_level');
     $this->assertSession()->pageTextContains('localgov_body_text');
 
     // Check 'Box link' fields.

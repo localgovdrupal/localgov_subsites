@@ -107,8 +107,8 @@ function localgov_campaigns_paragraphs_preprocess_paragraph(&$variables) {
   if ($paragraph->bundle() === 'localgov_accordion' || $paragraph->bundle() === 'localgov_accordion_pane') {
     if (!$paragraph->get('localgov_title')->isEmpty()) {
       $heading_text = $paragraph->get('localgov_title')->value;
-      $heading_level = $paragraph->get('field_heading_level')->value;
-      $variables['heading'] = _create_heading($heading_text, $heading_level);
+      $heading_level = $paragraph->get('localgov_heading_level')->value;
+      $variables['heading'] = _localgov_campaigns_paragraphs_create_heading($heading_text, $heading_level);
     }
   }
 }
@@ -121,10 +121,10 @@ function localgov_campaigns_paragraphs_preprocess_paragraph(&$variables) {
  * @param string $heading_level
  *   Heading level.
  *
- * @return void|array
+ * @return null|array
  *   Heading render element.
  */
-function _create_heading(string $heading_text, string $heading_level) {
+function _localgov_campaigns_paragraphs_create_heading(string $heading_text, string $heading_level) {
   $allowed_heading_levels = ['h2', 'h3', 'h4', 'h5', 'h6'];
 
   if (!in_array($heading_level, $allowed_heading_levels)) {

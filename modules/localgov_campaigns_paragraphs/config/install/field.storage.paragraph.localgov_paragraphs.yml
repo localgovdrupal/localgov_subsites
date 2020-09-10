@@ -4,8 +4,8 @@ dependencies:
   module:
     - entity_reference_revisions
     - paragraphs
-id: paragraph.field_paragraphs
-field_name: field_paragraphs
+id: paragraph.localgov_paragraphs
+field_name: localgov_paragraphs
 entity_type: paragraph
 type: entity_reference_revisions
 settings:

@@ -2,12 +2,12 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.paragraph.field_heading_level
+    - field.storage.paragraph.localgov_heading_level
     - paragraphs.paragraphs_type.localgov_accordion
   module:
     - options
-id: paragraph.localgov_accordion.field_heading_level
-field_name: field_heading_level
+id: paragraph.localgov_accordion.localgov_heading_level
+field_name: localgov_heading_level
 entity_type: paragraph
 bundle: localgov_accordion
 label: 'Heading level'

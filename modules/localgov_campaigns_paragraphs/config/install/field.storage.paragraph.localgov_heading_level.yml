@@ -4,8 +4,8 @@ dependencies:
   module:
     - options
     - paragraphs
-id: paragraph.field_heading_level
-field_name: field_heading_level
+id: paragraph.localgov_heading_level
+field_name: localgov_heading_level
 entity_type: paragraph
 type: list_string
 settings:
