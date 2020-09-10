@@ -32,6 +32,7 @@ class CampaignsParagraphsAdministrationTest extends ParagraphsTestBase {
     $this->assertSession()->pageTextContains('localgov_accordion_pane');
     $this->assertSession()->pageTextContains('localgov_box_link');
     $this->assertSession()->pageTextContains('localgov_call_out_box');
+    $this->assertSession()->pageTextContains('localgov_documents');
     $this->assertSession()->pageTextContains('localgov_fact_box');
     $this->assertSession()->pageTextContains('localgov_link_and_summary');
     $this->assertSession()->pageTextContains('localgov_quote');
@@ -60,6 +61,10 @@ class CampaignsParagraphsAdministrationTest extends ParagraphsTestBase {
     $this->assertSession()->pageTextContains('localgov_body_text');
     $this->assertSession()->pageTextContains('localgov_button');
     $this->assertSession()->pageTextContains('localgov_header_text');
+
+    // Check 'Documents' fields.
+    $this->drupalGet('/admin/structure/paragraphs_type/localgov_documents/fields');
+    $this->assertSession()->pageTextContains('localgov_documents');
 
     // Check 'Fact box' fields.
     $this->drupalGet('/admin/structure/paragraphs_type/localgov_fact_box/fields');
