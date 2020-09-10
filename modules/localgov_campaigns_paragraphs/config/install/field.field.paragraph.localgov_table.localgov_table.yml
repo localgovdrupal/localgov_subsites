@@ -11,7 +11,7 @@ field_name: localgov_table
 entity_type: paragraph
 bundle: localgov_table
 label: Table
-description: 'Add a table.'
+description: ''
 required: true
 translatable: false
 default_value: {  }
