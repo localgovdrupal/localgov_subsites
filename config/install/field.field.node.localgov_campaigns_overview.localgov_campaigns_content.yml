@@ -6,6 +6,7 @@ dependencies:
     - node.type.localgov_campaigns_overview
     - paragraphs.paragraphs_type.localgov_box_link
     - paragraphs.paragraphs_type.localgov_call_out_box
+    - paragraphs.paragraphs_type.localgov_documents
     - paragraphs.paragraphs_type.localgov_fact_box
     - paragraphs.paragraphs_type.localgov_featured_campaign
     - paragraphs.paragraphs_type.localgov_ia_block
@@ -38,6 +39,7 @@ settings:
     target_bundles:
       localgov_box_link: localgov_box_link
       localgov_call_out_box: localgov_call_out_box
+      localgov_documents: localgov_documents
       localgov_fact_box: localgov_fact_box
       localgov_image: localgov_image
       localgov_link_and_summary: localgov_link_and_summary
@@ -52,13 +54,19 @@ settings:
       localgov_subscribe_panel: localgov_subscribe_panel
       page_section: page_section
     target_bundles_drag_drop:
+      from_library:
+        weight: -20
+        enabled: false
       localgov_box_link:
         enabled: true
-        weight: 1
+        weight: -29
       localgov_call_out_box:
         enabled: true
-        weight: 2
-      localgov_fact_box:
+        weight: -28
+      localgov_contact:
+        weight: -19
+        enabled: false
+      localgov_documents:
         enabled: true
         weight: 3
       localgov_featured_campaign:

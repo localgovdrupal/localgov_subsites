@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.localgov_documents
+    - media.type.document
+    - paragraphs.paragraphs_type.localgov_documents
+id: paragraph.localgov_documents.localgov_documents
+field_name: localgov_documents
+entity_type: paragraph
+bundle: localgov_documents
+label: Documents
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      document: document
+    sort:
+      field: _none
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference
