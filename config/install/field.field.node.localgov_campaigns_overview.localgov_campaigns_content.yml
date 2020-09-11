@@ -4,6 +4,7 @@ dependencies:
   config:
     - field.storage.node.localgov_campaigns_content
     - node.type.localgov_campaigns_overview
+    - paragraphs.paragraphs_type.localgov_accordion
     - paragraphs.paragraphs_type.localgov_box_link
     - paragraphs.paragraphs_type.localgov_call_out_box
     - paragraphs.paragraphs_type.localgov_documents
@@ -36,6 +37,7 @@ settings:
   handler_settings:
     negate: 0
     target_bundles:
+      localgov_accordion: localgov_accordion
       localgov_box_link: localgov_box_link
       localgov_call_out_box: localgov_call_out_box
       localgov_documents: localgov_documents
@@ -54,6 +56,12 @@ settings:
     target_bundles_drag_drop:
       from_library:
         weight: -20
+        enabled: false
+      localgov_accordion:
+        enabled: true
+        weight: -35
+      localgov_accordion_pane:
+        weight: -24
         enabled: false
       localgov_box_link:
         enabled: true

@@ -1,0 +1,12 @@
+/**
+ * @file
+ * Basic styling for Accordion paragraph.
+ */
+
+.accordion--initialised .accordion-pane__content {
+  display: none;
+}
+
+.accordion--initialised .accordion-pane__content--open {
+  display: block;
+}

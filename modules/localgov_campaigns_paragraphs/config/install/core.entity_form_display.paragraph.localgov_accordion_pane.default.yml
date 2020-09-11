@@ -1,0 +1,40 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.localgov_accordion_pane.localgov_heading_level
+    - field.field.paragraph.localgov_accordion_pane.localgov_body_text
+    - field.field.paragraph.localgov_accordion_pane.localgov_title
+    - paragraphs.paragraphs_type.localgov_accordion_pane
+  module:
+    - text
+id: paragraph.localgov_accordion_pane.default
+targetEntityType: paragraph
+bundle: localgov_accordion_pane
+mode: default
+content:
+  localgov_heading_level:
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  localgov_body_text:
+    weight: 2
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  localgov_title:
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+hidden:
+  created: true
+  status: true

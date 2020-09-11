@@ -2,3 +2,10 @@ localgov_campaigns_paragraphs:
   css:
     base:
       css/localgov-campaigns-paragraphs.css: {}
+
+localgov_accordion:
+  css:
+    base:
+      css/localgov-accordion.css: {}
+  js:
+    js/localgov-accordion.js: {}
