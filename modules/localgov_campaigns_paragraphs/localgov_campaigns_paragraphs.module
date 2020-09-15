@@ -46,6 +46,14 @@ function localgov_campaigns_paragraphs_theme($existing, $type, $theme, $path) {
       'template' => 'paragraph--localgov-quote',
       'base hook' => 'paragraph',
     ],
+    'paragraph__localgov_tabs' => [
+      'template' => 'paragraph--localgov-tabs',
+      'base hook' => 'paragraph',
+    ],
+    'paragraph__localgov_tab_panel' => [
+      'template' => 'paragraph--localgov-tab-panel',
+      'base hook' => 'paragraph',
+    ],
     'paragraph__localgov_video' => [
       'template' => 'paragraph--localgov-video',
       'base hook' => 'paragraph',
@@ -61,6 +69,14 @@ function localgov_campaigns_paragraphs_preprocess_paragraph(&$variables) {
 
   /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
   $paragraph = $variables['paragraph'];
+
+  // Create heading element for paragraphs with a heading level field and
+  // non-empty title field.
+  if ($paragraph->hasField('localgov_heading_level') && $paragraph->hasField('localgov_title') && !$paragraph->get('localgov_title')->isEmpty()) {
+    $heading_text = $paragraph->get('localgov_title')->value;
+    $heading_level = $paragraph->get('localgov_heading_level')->value;
+    $variables['heading'] = _localgov_campaigns_paragraphs_create_heading($heading_text, $heading_level);
+  }
 
   if ($paragraph->bundle() === 'localgov_box_link') {
     if (!$paragraph->get('localgov_link')->isEmpty()) {
@@ -101,14 +117,6 @@ function localgov_campaigns_paragraphs_preprocess_paragraph(&$variables) {
     if (!$paragraph->get('field_video_url')->isEmpty()) {
       $video = $paragraph->get('field_video_url')->first()->getValue();
       $variables['field_video_url'] = $video['uri'];
-    }
-  }
-
-  if ($paragraph->bundle() === 'localgov_accordion' || $paragraph->bundle() === 'localgov_accordion_pane') {
-    if (!$paragraph->get('localgov_title')->isEmpty()) {
-      $heading_text = $paragraph->get('localgov_title')->value;
-      $heading_level = $paragraph->get('localgov_heading_level')->value;
-      $variables['heading'] = _localgov_campaigns_paragraphs_create_heading($heading_text, $heading_level);
     }
   }
 }

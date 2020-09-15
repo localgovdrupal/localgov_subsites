@@ -9,3 +9,12 @@ localgov_accordion:
       css/localgov-accordion.css: {}
   js:
     js/localgov-accordion.js: {}
+
+localgov_tabs:
+  css:
+    base:
+      css/localgov-tabs.css: {}
+  js:
+    js/localgov-tabs.js: {}
+  dependencies:
+    - localgov_campaigns_paragraphs/localgov_accordion
