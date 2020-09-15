@@ -6,6 +6,7 @@ dependencies:
     - node.type.localgov_campaigns_page
     - paragraphs.paragraphs_type.localgov_accordion
     - paragraphs.paragraphs_type.localgov_box_link
+    - paragraphs.paragraphs_type.localgov_box_links_listing
     - paragraphs.paragraphs_type.localgov_call_out_box
     - paragraphs.paragraphs_type.localgov_documents
     - paragraphs.paragraphs_type.localgov_fact_box
@@ -45,6 +46,7 @@ settings:
       localgov_text: localgov_text
       localgov_video: localgov_video
       page_section: page_section
+      localgov_box_links_listing: localgov_box_links_listing
     target_bundles_drag_drop:
       from_library:
         weight: -21
@@ -58,6 +60,9 @@ settings:
       localgov_box_link:
         enabled: true
         weight: -31
+      localgov_box_links_listing:
+        enabled: true
+        weight: 25
       localgov_call_out_box:
         enabled: true
         weight: -30
