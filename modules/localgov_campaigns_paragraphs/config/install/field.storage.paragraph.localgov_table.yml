@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+    - tablefield
+id: paragraph.localgov_table
+field_name: localgov_table
+entity_type: paragraph
+type: tablefield
+settings: {  }
+module: tablefield
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
