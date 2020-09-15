@@ -3,6 +3,13 @@ localgov_campaigns_paragraphs:
     base:
       css/localgov-campaigns-paragraphs.css: {}
 
+localgov_accordion:
+  css:
+    base:
+      css/localgov-accordion.css: {}
+  js:
+    js/localgov-accordion.js: {}
+
 localgov_table_paragraph:
   css:
     base:
