@@ -10,6 +10,11 @@ localgov_accordion:
   js:
     js/localgov-accordion.js: {}
 
+localgov_box_links_listing:
+  css:
+    base:
+      css/localgov-box-links-listing.css: {}
+
 localgov_table_paragraph:
   css:
     base:

@@ -14,6 +14,10 @@ use Drupal\image\Entity\ImageStyle;
  */
 function localgov_campaigns_paragraphs_theme($existing, $type, $theme, $path) {
   return [
+    'field__paragraph__localgov_paragraphs__localgov_box_links_listing' => [
+      'template' => 'field--paragraph--localgov-paragraphs--localgov-box-links-listing',
+      'base hook' => 'field',
+    ],
     'paragraph__localgov_accordion' => [
       'template' => 'paragraph--localgov-accordion',
       'base hook' => 'paragraph',
@@ -24,6 +28,10 @@ function localgov_campaigns_paragraphs_theme($existing, $type, $theme, $path) {
     ],
     'paragraph__localgov_box_link' => [
       'template' => 'paragraph--localgov-box-link',
+      'base hook' => 'paragraph',
+    ],
+    'paragraph__localgov_box_links_listing' => [
+      'template' => 'paragraph--localgov-box-links-listing',
       'base hook' => 'paragraph',
     ],
     'paragraph__localgov_call_out_box' => [
@@ -66,11 +74,22 @@ function localgov_campaigns_paragraphs_preprocess_paragraph(&$variables) {
   /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
   $paragraph = $variables['paragraph'];
 
+  // Create heading element for paragraphs with a heading level field and
+  // non-empty title field.
+  if ($paragraph->hasField('localgov_heading_level') && $paragraph->hasField('localgov_title') && !$paragraph->get('localgov_title')->isEmpty()) {
+    $heading_text = $paragraph->get('localgov_title')->value;
+    $heading_level = $paragraph->get('localgov_heading_level')->value;
+    $variables['heading'] = _localgov_campaigns_paragraphs_create_heading($heading_text, $heading_level);
+  }
+
   if ($paragraph->bundle() === 'localgov_box_link') {
     if (!$paragraph->get('localgov_link')->isEmpty()) {
       $link = $paragraph->get('localgov_link')->first()->getValue();
-      $variables['localgov_link']['title'] = $link['title'];
-      $variables['localgov_link']['url'] = Url::fromUri($link['uri']);
+      $variables['localgov_link'] = [
+        'title' => $link['title'],
+        'url' => Url::fromUri($link['uri']),
+        'open_in_new_window' => $paragraph->get('localgov_opens_in_a_new_window')->value
+      ];
     }
   }
 
@@ -109,14 +128,6 @@ function localgov_campaigns_paragraphs_preprocess_paragraph(&$variables) {
     if (!$paragraph->get('field_video_url')->isEmpty()) {
       $video = $paragraph->get('field_video_url')->first()->getValue();
       $variables['field_video_url'] = $video['uri'];
-    }
-  }
-
-  if ($paragraph->bundle() === 'localgov_accordion' || $paragraph->bundle() === 'localgov_accordion_pane') {
-    if (!$paragraph->get('localgov_title')->isEmpty()) {
-      $heading_text = $paragraph->get('localgov_title')->value;
-      $heading_level = $paragraph->get('localgov_heading_level')->value;
-      $variables['heading'] = _localgov_campaigns_paragraphs_create_heading($heading_text, $heading_level);
     }
   }
 }
