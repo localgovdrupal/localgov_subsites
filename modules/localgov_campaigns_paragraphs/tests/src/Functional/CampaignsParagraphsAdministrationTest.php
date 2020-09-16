@@ -74,6 +74,21 @@ class CampaignsParagraphsAdministrationTest extends ParagraphsTestBase {
     $this->assertSession()->pageTextContains('localgov_below_text');
     $this->assertSession()->pageTextContains('localgov_fact');
 
+    // Check 'Key contacts' fields.
+    $this->drupalGet('/admin/structure/paragraphs_type/localgov_key_contacts/fields');
+    $this->assertSession()->pageTextContains('localgov_title');
+    $this->assertSession()->pageTextContains('localgov_heading_level');
+    $this->assertSession()->pageTextContains('localgov_paragraphs');
+
+    // Check 'Key contact item' fields.
+    $this->drupalGet('/admin/structure/paragraphs_type/localgov_key_contact_item/fields');
+    $this->assertSession()->pageTextContains('localgov_title');
+    $this->assertSession()->pageTextContains('localgov_heading_level');
+    $this->assertSession()->pageTextContains('localgov_colour_theme');
+    $this->assertSession()->pageTextContains('localgov_image');
+    $this->assertSession()->pageTextContains('localgov_link');
+    $this->assertSession()->pageTextContains('localgov_contact_email');
+
     // Check 'Link and summary' fields.
     $this->drupalGet('/admin/structure/paragraphs_type/localgov_link_and_summary/fields');
     $this->assertSession()->pageTextContains('localgov_summary');
