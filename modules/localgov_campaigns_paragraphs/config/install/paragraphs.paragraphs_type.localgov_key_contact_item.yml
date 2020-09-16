@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies: {  }
+id: localgov_key_contact_item
+label: 'Key contact item'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

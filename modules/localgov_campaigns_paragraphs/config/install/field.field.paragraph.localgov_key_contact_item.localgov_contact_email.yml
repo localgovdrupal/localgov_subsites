@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.localgov_contact_email
+    - paragraphs.paragraphs_type.localgov_key_contact_item
+id: paragraph.localgov_key_contact_item.localgov_contact_email
+field_name: localgov_contact_email
+entity_type: paragraph
+bundle: localgov_key_contact_item
+label: Email
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: email

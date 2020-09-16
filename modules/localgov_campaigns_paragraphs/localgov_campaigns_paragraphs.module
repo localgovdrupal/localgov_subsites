@@ -38,6 +38,14 @@ function localgov_campaigns_paragraphs_theme($existing, $type, $theme, $path) {
       'template' => 'paragraph--localgov-fact-box',
       'base hook' => 'paragraph',
     ],
+    'paragraph__localgov_key_contacts' => [
+      'template' => 'paragraph--localgov-key-contacts',
+      'base hook' => 'paragraph',
+    ],
+    'paragraph__localgov_key_contact_item' => [
+      'template' => 'paragraph--localgov-key-contact-item',
+      'base hook' => 'paragraph',
+    ],
     'paragraph__localgov_link_and_summary' => [
       'template' => 'paragraph--localgov-link-and-summary',
       'base hook' => 'paragraph',
@@ -66,6 +74,14 @@ function localgov_campaigns_paragraphs_preprocess_paragraph(&$variables) {
   /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
   $paragraph = $variables['paragraph'];
 
+  // Create heading element for paragraphs with a heading level field and
+  // non-empty title field.
+  if ($paragraph->hasField('localgov_heading_level') && $paragraph->hasField('localgov_title') && !$paragraph->get('localgov_title')->isEmpty()) {
+    $heading_text = $paragraph->get('localgov_title')->value;
+    $heading_level = $paragraph->get('localgov_heading_level')->value;
+    $variables['heading'] = _localgov_campaigns_paragraphs_create_heading($heading_text, $heading_level);
+  }
+
   if ($paragraph->bundle() === 'localgov_box_link') {
     if (!$paragraph->get('localgov_link')->isEmpty()) {
       $link = $paragraph->get('localgov_link')->first()->getValue();
@@ -84,6 +100,10 @@ function localgov_campaigns_paragraphs_preprocess_paragraph(&$variables) {
       $file_url = File::load($fid)->getFileUri();
       $variables['background_url'] = ImageStyle::load('large_21_9')->buildUrl($file_url);
     }
+  }
+
+  if ($paragraph->bundle() === 'localgov_key_contact_item') {
+    $variables['theme'] = $paragraph->get('localgov_colour_theme')->value;
   }
 
   if ($paragraph->bundle() === 'localgov_table') {
@@ -109,14 +129,6 @@ function localgov_campaigns_paragraphs_preprocess_paragraph(&$variables) {
     if (!$paragraph->get('field_video_url')->isEmpty()) {
       $video = $paragraph->get('field_video_url')->first()->getValue();
       $variables['field_video_url'] = $video['uri'];
-    }
-  }
-
-  if ($paragraph->bundle() === 'localgov_accordion' || $paragraph->bundle() === 'localgov_accordion_pane') {
-    if (!$paragraph->get('localgov_title')->isEmpty()) {
-      $heading_text = $paragraph->get('localgov_title')->value;
-      $heading_level = $paragraph->get('localgov_heading_level')->value;
-      $variables['heading'] = _localgov_campaigns_paragraphs_create_heading($heading_text, $heading_level);
     }
   }
 }
