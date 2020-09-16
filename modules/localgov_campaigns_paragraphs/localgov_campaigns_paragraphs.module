@@ -88,7 +88,7 @@ function localgov_campaigns_paragraphs_preprocess_paragraph(&$variables) {
       $variables['localgov_link'] = [
         'title' => $link['title'],
         'url' => Url::fromUri($link['uri']),
-        'open_in_new_window' => $paragraph->get('localgov_opens_in_a_new_window')->value
+        'open_in_new_window' => $paragraph->get('localgov_opens_in_a_new_window')->value,
       ];
     }
   }
