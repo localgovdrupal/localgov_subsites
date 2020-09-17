@@ -1,0 +1,25 @@
+/**
+ * @file
+ * Basic styling for Box links listing paragraph.
+ */
+
+.box-links-listing__list {
+  display: flex;
+  list-style-type: none;
+}
+
+/* 'Grid' theme. */
+.box-links-listing--grid .box-links-listing__list-item {
+  border: 1px solid #f2f2f2;
+  margin: 0 -1px -1px 0;
+  padding: 20px;
+}
+
+/* 'Boxes' theme. */
+.box-links-listing--boxes {
+  margin: 0 -15px;
+}
+
+.box-links-listing--boxes .box-links-listing__list-item {
+  padding: 0 15px;
+}

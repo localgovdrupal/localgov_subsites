@@ -55,6 +55,14 @@ class CampaignsParagraphsAdministrationTest extends ParagraphsTestBase {
     $this->drupalGet('/admin/structure/paragraphs_type/localgov_box_link/fields');
     $this->assertSession()->pageTextContains('localgov_image');
     $this->assertSession()->pageTextContains('localgov_link');
+    $this->assertSession()->pageTextContains('localgov_opens_in_a_new_window');
+
+    // Check 'Box links listing' fields.
+    $this->drupalGet('/admin/structure/paragraphs_type/localgov_box_links_listing/fields');
+    $this->assertSession()->pageTextContains('localgov_title');
+    $this->assertSession()->pageTextContains('localgov_heading_level');
+    $this->assertSession()->pageTextContains('localgov_paragraphs');
+    $this->assertSession()->pageTextContains('localgov_box_listing_theme');
 
     // Check 'Call out box' fields.
     $this->drupalGet('/admin/structure/paragraphs_type/localgov_call_out_box/fields');
