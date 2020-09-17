@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.localgov_table_theme
+    - paragraphs.paragraphs_type.localgov_table
+  module:
+    - options
+id: paragraph.localgov_table.localgov_table_theme
+field_name: localgov_table_theme
+entity_type: paragraph
+bundle: localgov_table
+label: 'Table theme'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: minimal
+default_value_callback: ''
+settings: {  }
+field_type: list_string

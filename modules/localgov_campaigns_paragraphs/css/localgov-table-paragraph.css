@@ -1,0 +1,18 @@
+/**
+ * @file
+ * Basic styling for Table paragraph.
+ */
+
+/* Headed table. */
+.table-paragraph--headed table thead {
+  background-color: #f2f2f2;
+}
+
+/* Striped table. */
+.table-paragraph--striped table thead {
+  background-color: #f2f2f2;
+}
+
+.table-paragraph--striped tbody tr:nth-of-type(odd) {
+  background-color: #f9f9f9;
+}
