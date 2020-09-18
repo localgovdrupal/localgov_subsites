@@ -132,7 +132,7 @@
       // Trigger create/destroy functions at different screen widths
       // based on the value of data-accordion-tabs-switch attribute.
       if (window.matchMedia) {
-        var mq = window.matchMedia(`(max-width: ${breakpoint})`);
+        var mq = window.matchMedia('(max-width: ' + breakpoint + ')');
         mq.addListener(function (e) {
           breakpointCheck();
         });
