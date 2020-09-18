@@ -11,6 +11,7 @@ dependencies:
     - paragraphs.paragraphs_type.localgov_documents
     - paragraphs.paragraphs_type.localgov_fact_box
     - paragraphs.paragraphs_type.localgov_featured_campaign
+    - paragraphs.paragraphs_type.localgov_featured_teasers
     - paragraphs.paragraphs_type.localgov_ia_block
     - paragraphs.paragraphs_type.localgov_image
     - paragraphs.paragraphs_type.localgov_key_contacts
@@ -46,6 +47,7 @@ settings:
       localgov_call_out_box: localgov_call_out_box
       localgov_documents: localgov_documents
       localgov_fact_box: localgov_fact_box
+      localgov_featured_teasers: localgov_featured_teasers
       localgov_image: localgov_image
       localgov_key_facts: localgov_key_facts
       localgov_link_and_summary: localgov_link_and_summary
@@ -73,19 +75,25 @@ settings:
         enabled: false
       localgov_box_link:
         enabled: true
-        weight: -29
+        weight: -34
       localgov_box_links_listing:
         enabled: true
-        weight: 25
+        weight: -28
       localgov_call_out_box:
         enabled: true
-        weight: -28
+        weight: -27
       localgov_contact:
         weight: -19
         enabled: false
       localgov_documents:
         enabled: true
-        weight: 3
+        weight: -26
+      localgov_featured_teaser:
+        weight: -29
+        enabled: false
+      localgov_featured_teasers:
+        enabled: true
+        weight: -25
       localgov_featured_campaign:
         enabled: true
         weight: 23
