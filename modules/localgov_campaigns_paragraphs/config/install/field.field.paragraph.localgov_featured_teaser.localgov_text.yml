@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.localgov_text
+    - paragraphs.paragraphs_type.localgov_featured_teaser
+  module:
+    - text
+id: paragraph.localgov_featured_teaser.localgov_text
+field_name: localgov_text
+entity_type: paragraph
+bundle: localgov_featured_teaser
+label: Summary
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long
