@@ -1,7 +1,7 @@
 {#
 /**
  * @file
- * Default theme implementation to display a paragraph.
+ * Default theme implementation to display a Key fact paragraph.
  *
  * Available variables:
  * - paragraph: Full paragraph entity.
@@ -32,19 +32,28 @@
  *   current user is a logged-in member.
  * - is_admin: Flag for admin user status. Will be true when the current user
  *   is an administrator.
+ * - heading: Title (heading element).
  *
  * @see template_preprocess_paragraph()
  *
  * @ingroup themeable
  */
 #}
-<div class="box-link">
-  <a href="{{ localgov_link.url }}"
-    {% if localgov_link.open_in_new_window %} target="_blank" {% endif %}>
-    {{ content.localgov_image }}
-  	<span>{{ localgov_link.title }}</span>
-    {% if localgov_link.open_in_new_window %}
-      <span class="visually-hidden">{{ '(opens in a new window)'|t }}</span>
-    {% endif %}
-  </a>
-</div>
+{%
+  set classes = [
+    'paragraph',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    not paragraph.isPublished() ? 'paragraph--unpublished',
+    'key-fact'
+  ]
+%}
+
+{% block paragraph %}
+  <div{{ attributes.addClass(classes) }}>
+    {% block content %}
+      {{ heading }}
+      {{ content.localgov_text }}
+    {% endblock %}
+  </div>
+{% endblock paragraph %}

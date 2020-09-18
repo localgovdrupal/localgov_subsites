@@ -1,7 +1,7 @@
 {#
 /**
  * @file
- * Default theme implementation to display a paragraph.
+ * Default theme implementation to display a Box links listing paragraph.
  *
  * Available variables:
  * - paragraph: Full paragraph entity.
@@ -38,13 +38,26 @@
  * @ingroup themeable
  */
 #}
-<div class="box-link">
-  <a href="{{ localgov_link.url }}"
-    {% if localgov_link.open_in_new_window %} target="_blank" {% endif %}>
-    {{ content.localgov_image }}
-  	<span>{{ localgov_link.title }}</span>
-    {% if localgov_link.open_in_new_window %}
-      <span class="visually-hidden">{{ '(opens in a new window)'|t }}</span>
-    {% endif %}
-  </a>
-</div>
+
+{% set theme = paragraph.get('localgov_box_listing_theme').value %}
+{%
+  set classes = [
+    'paragraph',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    not paragraph.isPublished() ? 'paragraph--unpublished',
+    'box-links-listing',
+    'box-links-listing--' ~ theme|clean_class
+  ]
+%}
+
+{{ attach_library('localgov_campaigns_paragraphs/localgov_box_links_listing') }}
+
+{% block paragraph %}
+  <div{{ attributes.addClass(classes) }}>
+    {% block content %}
+      {{ heading }}
+      {{ content.localgov_paragraphs }}
+    {% endblock %}
+  </div>
+{% endblock paragraph %}

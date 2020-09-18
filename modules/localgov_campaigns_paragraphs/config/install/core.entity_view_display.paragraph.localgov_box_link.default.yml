@@ -4,6 +4,7 @@ dependencies:
   config:
     - field.field.paragraph.localgov_box_link.localgov_image
     - field.field.paragraph.localgov_box_link.localgov_link
+    - field.field.paragraph.localgov_box_link.localgov_opens_in_a_new_window
     - paragraphs.paragraphs_type.localgov_box_link
 id: paragraph.localgov_box_link.default
 targetEntityType: paragraph
@@ -21,3 +22,4 @@ content:
     region: content
 hidden:
   localgov_link: true
+  localgov_opens_in_a_new_window: true

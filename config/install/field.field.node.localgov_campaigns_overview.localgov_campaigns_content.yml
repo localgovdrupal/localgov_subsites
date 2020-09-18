@@ -6,12 +6,14 @@ dependencies:
     - node.type.localgov_campaigns_overview
     - paragraphs.paragraphs_type.localgov_accordion
     - paragraphs.paragraphs_type.localgov_box_link
+    - paragraphs.paragraphs_type.localgov_box_links_listing
     - paragraphs.paragraphs_type.localgov_call_out_box
     - paragraphs.paragraphs_type.localgov_documents
     - paragraphs.paragraphs_type.localgov_fact_box
     - paragraphs.paragraphs_type.localgov_featured_campaign
     - paragraphs.paragraphs_type.localgov_ia_block
     - paragraphs.paragraphs_type.localgov_image
+    - paragraphs.paragraphs_type.localgov_key_facts
     - paragraphs.paragraphs_type.localgov_labelled_icon
     - paragraphs.paragraphs_type.localgov_link_and_summary
     - paragraphs.paragraphs_type.localgov_newsroom_teaser
@@ -45,12 +47,14 @@ settings:
       localgov_documents: localgov_documents
       localgov_fact_box: localgov_fact_box
       localgov_image: localgov_image
+      localgov_key_facts: localgov_key_facts
       localgov_link_and_summary: localgov_link_and_summary
       localgov_quote: localgov_quote
       localgov_table: localgov_table
       localgov_tabs: localgov_tabs
       localgov_text: localgov_text
       localgov_video: localgov_video
+      localgov_box_links_listing: localgov_box_links_listing
       localgov_ia_block: localgov_ia_block
       localgov_labelled_icon: localgov_labelled_icon
       localgov_featured_campaign: localgov_featured_campaign
@@ -70,6 +74,9 @@ settings:
       localgov_box_link:
         enabled: true
         weight: -29
+      localgov_box_links_listing:
+        enabled: true
+        weight: 25
       localgov_call_out_box:
         enabled: true
         weight: -28
@@ -88,6 +95,12 @@ settings:
       localgov_image:
         enabled: true
         weight: 4
+      localgov_key_fact:
+        weight: -40
+        enabled: false
+      localgov_key_facts:
+        enabled: true
+        weight: -27
       localgov_labelled_icon:
         enabled: true
         weight: 23
