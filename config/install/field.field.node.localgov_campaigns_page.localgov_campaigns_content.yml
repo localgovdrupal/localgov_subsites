@@ -11,6 +11,7 @@ dependencies:
     - paragraphs.paragraphs_type.localgov_documents
     - paragraphs.paragraphs_type.localgov_fact_box
     - paragraphs.paragraphs_type.localgov_image
+    - paragraphs.paragraphs_type.localgov_key_contacts
     - paragraphs.paragraphs_type.localgov_key_facts
     - paragraphs.paragraphs_type.localgov_link_and_summary
     - paragraphs.paragraphs_type.localgov_media_with_text
@@ -42,6 +43,7 @@ settings:
       localgov_documents: localgov_documents
       localgov_fact_box: localgov_fact_box
       localgov_image: localgov_image
+      localgov_key_contacts: localgov_key_contacts
       localgov_key_facts: localgov_key_facts
       localgov_link_and_summary: localgov_link_and_summary
       localgov_media_with_text: localgov_media_with_text
@@ -82,6 +84,12 @@ settings:
       localgov_image:
         enabled: true
         weight: -27
+      localgov_key_contact_item:
+        weight: 34
+        enabled: false
+      localgov_key_contacts:
+        enabled: true
+        weight: 33
       localgov_key_fact:
         weight: -40
         enabled: false
