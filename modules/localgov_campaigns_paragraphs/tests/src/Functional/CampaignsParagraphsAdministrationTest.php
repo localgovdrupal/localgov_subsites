@@ -103,7 +103,7 @@ class CampaignsParagraphsAdministrationTest extends ParagraphsTestBase {
     $this->assertSession()->pageTextContains('localgov_media_item');
     $this->assertSession()->pageTextContains('localgov_media_position');
     $this->assertSession()->pageTextContains('localgov_media_with_text_style');
-    $this->assertSession()->pageTextContains('localgov_localgov_opens_in_a_new_window');
+    $this->assertSession()->pageTextContains('localgov_opens_in_a_new_window');
 
     // Check 'Link and summary' fields.
     $this->drupalGet('/admin/structure/paragraphs_type/localgov_link_and_summary/fields');

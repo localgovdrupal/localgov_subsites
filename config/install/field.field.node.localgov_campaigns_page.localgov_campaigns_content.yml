@@ -94,7 +94,7 @@ settings:
       localgov_link_and_summary:
         enabled: true
         weight: -25
-    localgov_media_with_text:
+      localgov_media_with_text:
         enabled: true
         weight: -24
       localgov_quote:

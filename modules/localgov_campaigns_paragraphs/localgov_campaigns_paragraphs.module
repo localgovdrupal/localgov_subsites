@@ -130,7 +130,7 @@ function localgov_campaigns_paragraphs_preprocess_paragraph(&$variables) {
       $link = $paragraph->get('localgov_link')->first()->getValue();
       $link_options = [
         'attributes' => [
-          'class' => 'media-with-text__link'
+          'class' => 'media-with-text__link',
         ],
       ];
 
