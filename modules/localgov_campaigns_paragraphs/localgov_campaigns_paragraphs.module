@@ -46,6 +46,14 @@ function localgov_campaigns_paragraphs_theme($existing, $type, $theme, $path) {
       'template' => 'paragraph--localgov-fact-box',
       'base hook' => 'paragraph',
     ],
+    'paragraph__localgov_key_contacts' => [
+      'template' => 'paragraph--localgov-key-contacts',
+      'base hook' => 'paragraph',
+    ],
+    'paragraph__localgov_key_contact_item' => [
+      'template' => 'paragraph--localgov-key-contact-item',
+      'base hook' => 'paragraph',
+    ],
     'paragraph__localgov_key_facts' => [
       'template' => 'paragraph--localgov-key-facts',
       'base hook' => 'paragraph',
@@ -111,6 +119,10 @@ function localgov_campaigns_paragraphs_preprocess_paragraph(&$variables) {
       $file_url = File::load($fid)->getFileUri();
       $variables['background_url'] = ImageStyle::load('large_21_9')->buildUrl($file_url);
     }
+  }
+
+  if ($paragraph->bundle() === 'localgov_key_contact_item') {
+    $variables['theme'] = $paragraph->get('localgov_colour_theme')->value;
   }
 
   if ($paragraph->bundle() === 'localgov_table') {
