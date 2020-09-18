@@ -138,6 +138,18 @@ class CampaignsParagraphsAdministrationTest extends ParagraphsTestBase {
     $this->assertSession()->pageTextContains('localgov_table');
     $this->assertSession()->pageTextContains('localgov_table_theme');
 
+    // Check 'Tabs' fields.
+    $this->drupalGet('/admin/structure/paragraphs_type/localgov_tabs/fields');
+    $this->assertSession()->pageTextContains('localgov_title');
+    $this->assertSession()->pageTextContains('localgov_heading_level');
+    $this->assertSession()->pageTextContains('localgov_paragraphs');
+
+    // Check 'Tab panel' fields.
+    $this->drupalGet('/admin/structure/paragraphs_type/localgov_tab_panel/fields');
+    $this->assertSession()->pageTextContains('localgov_title');
+    $this->assertSession()->pageTextContains('localgov_heading_level');
+    $this->assertSession()->pageTextContains('localgov_body_text');
+
     // Check 'Video' fields.
     $this->drupalGet('/admin/structure/paragraphs_type/localgov_video/fields');
     $this->assertSession()->pageTextContains('localgov_video');

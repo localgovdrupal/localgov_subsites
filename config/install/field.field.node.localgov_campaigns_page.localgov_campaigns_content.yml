@@ -17,6 +17,7 @@ dependencies:
     - paragraphs.paragraphs_type.localgov_link_and_summary
     - paragraphs.paragraphs_type.localgov_quote
     - paragraphs.paragraphs_type.localgov_table
+    - paragraphs.paragraphs_type.localgov_tabs
     - paragraphs.paragraphs_type.localgov_text
     - paragraphs.paragraphs_type.localgov_video
     - paragraphs.paragraphs_type.page_section
@@ -49,6 +50,7 @@ settings:
       localgov_link_and_summary: localgov_link_and_summary
       localgov_quote: localgov_quote
       localgov_table: localgov_table
+      localgov_tabs: localgov_tabs
       localgov_text: localgov_text
       localgov_video: localgov_video
       page_section: page_section
@@ -110,16 +112,22 @@ settings:
         weight: -45
       localgov_quote:
         enabled: true
-        weight: -43
+        weight: -24
+      localgov_tab_panel:
+        weight: -15
+        enabled: false
       localgov_table:
         enabled: true
-        weight: -42
+        weight: -23
+      localgov_tabs:
+        enabled: true
+        weight: -22
       localgov_text:
         enabled: true
-        weight: -40
+        weight: -21
       localgov_video:
         enabled: true
-        weight: -38
+        weight: -20
       page_section:
         enabled: true
         weight: -34

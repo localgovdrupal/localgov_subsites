@@ -1,0 +1,32 @@
+.tabs--initialised .tab-panel {
+  display: none;
+  padding: 1rem;
+}
+
+.tabs--initialised .tab-panel--active {
+  border: 1px solid #ddd;
+  display: block;
+}
+
+.tabs--initialised .tabs__controls {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tabs--initialised .tabs__controls li {
+  margin: 0;
+}
+
+.tabs--initialised .tabs__controls button {
+  background: #eee;
+  border: 1px solid #ddd;
+  position: relative;
+  top: 1px;
+}
+
+.tabs--initialised .tabs__controls [aria-selected="true"] {
+  background-color: #fff;
+  border-bottom-color: #fff;
+}

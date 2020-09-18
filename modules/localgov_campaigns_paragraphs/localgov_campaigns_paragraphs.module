@@ -82,6 +82,14 @@ function localgov_campaigns_paragraphs_theme($existing, $type, $theme, $path) {
       'template' => 'paragraph--localgov-table',
       'base hook' => 'paragraph',
     ],
+    'paragraph__localgov_tabs' => [
+      'template' => 'paragraph--localgov-tabs',
+      'base hook' => 'paragraph',
+    ],
+    'paragraph__localgov_tab_panel' => [
+      'template' => 'paragraph--localgov-tab-panel',
+      'base hook' => 'paragraph',
+    ],
     'paragraph__localgov_video' => [
       'template' => 'paragraph--localgov-video',
       'base hook' => 'paragraph',
