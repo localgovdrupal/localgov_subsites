@@ -17,6 +17,7 @@ dependencies:
     - paragraphs.paragraphs_type.localgov_media_with_text
     - paragraphs.paragraphs_type.localgov_quote
     - paragraphs.paragraphs_type.localgov_table
+    - paragraphs.paragraphs_type.localgov_tabs
     - paragraphs.paragraphs_type.localgov_text
     - paragraphs.paragraphs_type.localgov_video
     - paragraphs.paragraphs_type.page_section
@@ -49,19 +50,20 @@ settings:
       localgov_media_with_text: localgov_media_with_text
       localgov_quote: localgov_quote
       localgov_table: localgov_table
+      localgov_tabs: localgov_tabs
       localgov_text: localgov_text
       localgov_video: localgov_video
       page_section: page_section
       localgov_box_links_listing: localgov_box_links_listing
     target_bundles_drag_drop:
       from_library:
-        weight: -21
+        weight: -40
         enabled: false
       localgov_accordion:
         enabled: true
-        weight: -31
+        weight: -38
       localgov_accordion_pane:
-        weight: -32
+        weight: -39
         enabled: false
       localgov_box_link:
         enabled: true
@@ -97,7 +99,7 @@ settings:
         enabled: true
         weight: -26
       localgov_link:
-        weight: -19
+        weight: -18
         enabled: false
       localgov_link_and_summary:
         enabled: true
@@ -108,19 +110,25 @@ settings:
       localgov_quote:
         enabled: true
         weight: -23
+      localgov_tab_panel:
+        weight: -15
+        enabled: false
       localgov_table:
         enabled: true
         weight: -22
-      localgov_text:
+      localgov_tabs:
         enabled: true
         weight: -21
-      localgov_video:
+      localgov_text:
         enabled: true
         weight: -20
+      localgov_video:
+        enabled: true
+        weight: -19
       page_section:
         enabled: true
         weight: -16
       topic_list_builder:
-        weight: -18
+        weight: -10
         enabled: false
 field_type: entity_reference_revisions

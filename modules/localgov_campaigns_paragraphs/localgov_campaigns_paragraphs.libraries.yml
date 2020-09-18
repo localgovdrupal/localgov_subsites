@@ -24,3 +24,12 @@ localgov_table_paragraph:
   css:
     base:
       css/localgov-table-paragraph.css: {}
+
+localgov_tabs:
+  css:
+    base:
+      css/localgov-tabs.css: {}
+  js:
+    js/localgov-tabs.js: {}
+  dependencies:
+    - localgov_campaigns_paragraphs/localgov_accordion
