@@ -32,18 +32,32 @@
  *   current user is a logged-in member.
  * - is_admin: Flag for admin user status. Will be true when the current user
  *   is an administrator.
+ * - heading: Title (heading element).
+ * - colour_theme: Value of the colour theme field.
  *
  * @see template_preprocess_paragraph()
  *
  * @ingroup themeable
  */
 #}
-<div class="call-out-box" {% if background_url is defined and background_url %}style="background-image: url('{{ background_url }}')"{% endif %}>
+{%
+  set classes = [
+    'call-out-box',
+    colour_theme ? 'call-out-box--' ~ colour_theme|clean_class
+  ]
+%}
+
+<div{{ attributes.addClass(classes) }}
+  {% if background_url is defined and background_url %}style="background-image: url('{{ background_url }}')"{% endif %}>
   <div class="call-out-content">
-    <h2>{{ content.localgov_header_text }}</h2>
+    {{ heading }}
     {{ content.localgov_body_text }}
-    <a href="{{ button_url }}" class="btn btn-primary">
+    <a href="{{ button_url }}" class="btn btn-primary"
+      {% if open_in_new_window %} target="_blank" {% endif %}>
       <span>{{ paragraph.localgov_button.getValue[0].title }}</span>
+      {% if open_in_new_window %}
+        <span class="visually-hidden"> {{ '(opens in a new window)'|t }}</span>
+      {% endif %}
     </a>
   </div>
 </div>

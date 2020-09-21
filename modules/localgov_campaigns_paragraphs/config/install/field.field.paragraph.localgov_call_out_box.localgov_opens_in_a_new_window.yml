@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.localgov_opens_in_a_new_window
+    - paragraphs.paragraphs_type.localgov_call_out_box
+id: paragraph.localgov_call_out_box.localgov_opens_in_a_new_window
+field_name: localgov_opens_in_a_new_window
+entity_type: paragraph
+bundle: localgov_call_out_box
+label: 'Open link in a new window'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

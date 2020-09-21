@@ -4,5 +4,6 @@ dependencies: {  }
 id: localgov_call_out_box
 label: 'Call out box'
 icon_uuid: null
+icon_default: null
 description: ''
 behavior_plugins: {  }
