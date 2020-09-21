@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.localgov_block_view.localgov_embed_block_view
+    - paragraphs.paragraphs_type.localgov_block_view
+  module:
+    - viewsreference
+id: paragraph.localgov_block_view.default
+targetEntityType: paragraph
+bundle: localgov_block_view
+mode: default
+content:
+  localgov_embed_block_view:
+    weight: 0
+    label: hidden
+    settings:
+      plugin_types:
+        block: block
+        default: 0
+        page: 0
+        feed: 0
+        entity_browser: 0
+        entity_reference: 0
+    third_party_settings: {  }
+    type: viewsreference_formatter
+    region: content
+hidden: {  }

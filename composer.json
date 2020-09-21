@@ -8,6 +8,7 @@
   "require": {
     "drupal/layout_paragraphs": "dev-1.0.x",
     "drupal/tablefield": "dev-2.x",
+    "drupal/viewsreference": "^1.4",
     "localgovdrupal/localgov_paragraphs": "dev-master"
   },
   "extra": {
