@@ -15,6 +15,11 @@ localgov_box_links_listing:
     base:
       css/localgov-box-links-listing.css: {}
 
+localgov_media_with_text:
+  css:
+    base:
+      css/localgov-media-with-text.css: {}
+
 localgov_table_paragraph:
   css:
     base:

@@ -5,6 +5,7 @@
  * LocalGovDrupal Campaigns Paragraphs module file.
  */
 
+use Drupal\Core\Link;
 use Drupal\Core\Url;
 use Drupal\file\Entity\File;
 use Drupal\image\Entity\ImageStyle;
@@ -74,6 +75,10 @@ function localgov_campaigns_paragraphs_theme($existing, $type, $theme, $path) {
       'template' => 'paragraph--localgov-link-and-summary',
       'base hook' => 'paragraph',
     ],
+    'paragraph__localgov_media_with_text' => [
+      'template' => 'paragraph--localgov-media-with-text',
+      'base hook' => 'paragraph',
+    ],
     'paragraph__localgov_quote' => [
       'template' => 'paragraph--localgov-quote',
       'base hook' => 'paragraph',
@@ -135,10 +140,42 @@ function localgov_campaigns_paragraphs_preprocess_paragraph(&$variables) {
       $file_url = File::load($fid)->getFileUri();
       $variables['background_url'] = ImageStyle::load('large_21_9')->buildUrl($file_url);
     }
+    $heading_text = $paragraph->get('localgov_header_text')->value;
+    $heading_level = $paragraph->get('localgov_heading_level')->value ?: 'h2';
+    $variables['heading'] = _localgov_campaigns_paragraphs_create_heading($heading_text, $heading_level);
+    $variables['colour_theme'] = $paragraph->get('localgov_colour_theme')->value;
+    $variables['open_in_new_window'] = $paragraph->get('localgov_opens_in_a_new_window')->value;
   }
 
   if ($paragraph->bundle() === 'localgov_key_contact_item') {
     $variables['theme'] = $paragraph->get('localgov_colour_theme')->value;
+  }
+
+  if ($paragraph->bundle() === 'localgov_media_with_text') {
+    // Check media item's position.
+    $variables['media_position'] = $paragraph->get('localgov_media_position')->first()->value;
+
+    // Check component's style.
+    $variables['style'] = $paragraph->get('localgov_media_with_text_style')->first()->value;
+
+    // Create a link.
+    if (!$paragraph->get('localgov_link')->isEmpty()) {
+      $link = $paragraph->get('localgov_link')->first()->getValue();
+      $link_options = [
+        'attributes' => [
+          'class' => 'media-with-text__link',
+        ],
+      ];
+
+      // Check if the link should open in a new window.
+      if ($paragraph->get('localgov_opens_in_a_new_window')->value) {
+        $link_options['attributes']['target'] = '_blank';
+      }
+
+      $link_url = Url::fromUri($link['uri'], $link_options);
+      $link = Link::fromTextAndUrl($link['title'], $link_url);
+      $variables['link'] = $link->toRenderable();
+    }
   }
 
   if ($paragraph->bundle() === 'localgov_table') {

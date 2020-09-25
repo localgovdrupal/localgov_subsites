@@ -1,7 +1,7 @@
 {#
 /**
  * @file
- * Default theme implementation to display a paragraph.
+ * Default theme implementation to display a Media with text paragraph.
  *
  * Available variables:
  * - paragraph: Full paragraph entity.
@@ -33,7 +33,10 @@
  * - is_admin: Flag for admin user status. Will be true when the current user
  *   is an administrator.
  * - heading: Title (heading element).
- * - colour_theme: Value of the colour theme field.
+ * - link: Link element.
+ * - media_position: Postion of the media item in the paragraph (Media position
+ *   field's value: 'top', 'bottom', 'left' or 'right').
+ * - style: Paragraph's style (Style field's value: 'default' or 'featured').
  *
  * @see template_preprocess_paragraph()
  *
@@ -42,22 +45,40 @@
 #}
 {%
   set classes = [
-    'call-out-box',
-    colour_theme ? 'call-out-box--' ~ colour_theme|clean_class
+    'paragraph',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    not paragraph.isPublished() ? 'paragraph--unpublished',
+    'media-with-text',
+    'media-with-text--' ~ style|clean_class,
+    'media-with-text--media-' ~ media_position|clean_class
   ]
 %}
 
-<div{{ attributes.addClass(classes) }}
-  {% if background_url is defined and background_url %}style="background-image: url('{{ background_url }}')"{% endif %}>
-  <div class="call-out-content">
-    {{ heading }}
-    {{ content.localgov_body_text }}
-    <a href="{{ button_url }}" class="btn btn-primary"
-      {% if open_in_new_window %} target="_blank" {% endif %}>
-      <span>{{ paragraph.localgov_button.getValue[0].title }}</span>
-      {% if open_in_new_window %}
-        <span class="visually-hidden"> {{ '(opens in a new window)'|t }}</span>
+{{ attach_library('localgov_campaigns_paragraphs/localgov_media_with_text') }}
+
+{% block paragraph %}
+  <section{{ attributes.addClass(classes) }}>
+    {% block content %}
+      {% if media_position == 'left' or media_position == 'top' %}
+        <div class="media-with-text__media">
+          {{ content.localgov_media_item }}
+        </div>
+        <div class="media-with-text__body">
+          {{ heading }}
+          {{ content.localgov_text }}
+          {{ link }}
+        </div>
+      {% else %}
+        <div class="media-with-text__body">
+          {{ heading }}
+          {{ content.localgov_text }}
+          {{ link }}
+        </div>
+        <div class="media-with-text__media">
+          {{ content.localgov_media_item }}
+        </div>
       {% endif %}
-    </a>
-  </div>
-</div>
+    {% endblock %}
+  </section>
+{% endblock paragraph %}

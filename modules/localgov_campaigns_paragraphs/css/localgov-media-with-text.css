@@ -1,0 +1,31 @@
+/**
+ * @file
+ * Basic styling for Media with text paragraph.
+ */
+
+.media-with-text--featured {
+  background-color: #fafafa;
+  border: 1px solid #ccc;
+}
+
+.media-with-text--featured .media-with-text__body {
+  padding: 1rem;
+}
+
+.media-with-text--media-left,
+.media-with-text--media-right {
+  display: flex;
+  justify-content: space-between;
+}
+
+.media-with-text--media-left .media-with-text__body {
+  padding-left: 1rem;
+}
+
+.media-with-text--media-right .media-with-text__body {
+  padding-right: 1rem;
+}
+
+.media-with-text--media-top .media-with-text__media {
+  margin-bottom: 1rem;
+}

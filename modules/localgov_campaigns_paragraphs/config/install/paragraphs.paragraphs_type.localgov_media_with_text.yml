@@ -1,8 +1,8 @@
 langcode: en
 status: true
 dependencies: {  }
-id: localgov_call_out_box
-label: 'Call out box'
+id: localgov_media_with_text
+label: 'Media with text'
 icon_uuid: null
 icon_default: null
 description: ''
