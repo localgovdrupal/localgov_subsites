@@ -10,6 +10,7 @@ dependencies:
     - paragraphs.paragraphs_type.localgov_call_out_box
     - paragraphs.paragraphs_type.localgov_documents
     - paragraphs.paragraphs_type.localgov_fact_box
+    - paragraphs.paragraphs_type.localgov_featured_teasers
     - paragraphs.paragraphs_type.localgov_image
     - paragraphs.paragraphs_type.localgov_key_contacts
     - paragraphs.paragraphs_type.localgov_key_facts
@@ -43,6 +44,7 @@ settings:
       localgov_call_out_box: localgov_call_out_box
       localgov_documents: localgov_documents
       localgov_fact_box: localgov_fact_box
+      localgov_featured_teasers: localgov_featured_teasers
       localgov_image: localgov_image
       localgov_key_contacts: localgov_key_contacts
       localgov_key_facts: localgov_key_facts
@@ -57,49 +59,55 @@ settings:
       localgov_box_links_listing: localgov_box_links_listing
     target_bundles_drag_drop:
       from_library:
-        weight: -40
+        weight: -55
         enabled: false
       localgov_accordion:
         enabled: true
-        weight: -38
+        weight: -53
       localgov_accordion_pane:
-        weight: -39
+        weight: -54
         enabled: false
       localgov_box_link:
         enabled: true
-        weight: -31
+        weight: -52
       localgov_box_links_listing:
         enabled: true
-        weight: 25
+        weight: -33
       localgov_call_out_box:
         enabled: true
-        weight: -30
+        weight: -51
       localgov_contact:
         weight: -17
         enabled: false
       localgov_documents:
         enabled: true
-        weight: -29
+        weight: -50
       localgov_fact_box:
         enabled: true
-        weight: -28
+        weight: -49
+      localgov_featured_teaser:
+        weight: -29
+        enabled: false
+      localgov_featured_teasers:
+        enabled: true
+        weight: -48
       localgov_image:
         enabled: true
-        weight: -27
+        weight: -47
       localgov_key_contact_item:
-        weight: 34
+        weight: -31
         enabled: false
       localgov_key_contacts:
         enabled: true
-        weight: 33
+        weight: -32
       localgov_key_fact:
-        weight: -40
+        weight: -30
         enabled: false
       localgov_key_facts:
         enabled: true
-        weight: -26
+        weight: -46
       localgov_link:
-        weight: -18
+        weight: -36
         enabled: false
       localgov_link_and_summary:
         enabled: true
@@ -129,6 +137,6 @@ settings:
         enabled: true
         weight: -16
       topic_list_builder:
-        weight: -10
+        weight: -35
         enabled: false
 field_type: entity_reference_revisions

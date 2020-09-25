@@ -47,6 +47,12 @@ function localgov_campaigns_paragraphs_theme($existing, $type, $theme, $path) {
       'template' => 'paragraph--localgov-fact-box',
       'base hook' => 'paragraph',
     ],
+    'paragraph__localgov_featured_teaser' => [
+      'base hook' => 'paragraph',
+    ],
+    'paragraph__localgov_featured_teasers' => [
+      'base hook' => 'paragraph',
+    ],
     'paragraph__localgov_key_contacts' => [
       'template' => 'paragraph--localgov-key-contacts',
       'base hook' => 'paragraph',
