@@ -51,6 +51,10 @@ class CampaignsParagraphsAdministrationTest extends ParagraphsTestBase {
     $this->assertSession()->pageTextContains('localgov_heading_level');
     $this->assertSession()->pageTextContains('localgov_body_text');
 
+    // Check 'Block view' fields.
+    $this->drupalGet('/admin/structure/paragraphs_type/localgov_block_view/fields');
+    $this->assertSession()->pageTextContains('localgov_embed_block_view');
+
     // Check 'Box link' fields.
     $this->drupalGet('/admin/structure/paragraphs_type/localgov_box_link/fields');
     $this->assertSession()->pageTextContains('localgov_image');

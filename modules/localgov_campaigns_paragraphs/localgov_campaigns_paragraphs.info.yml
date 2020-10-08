@@ -9,6 +9,7 @@ dependencies:
   - drupal:options
   - paragraphs:paragraphs
   - tablefield:tablefield
+  - viewsreference:viewsreference
   - localgov_core:localgov_core
   - localgov_core:localgov_media
   - localgov_paragraphs:localgov_paragraphs

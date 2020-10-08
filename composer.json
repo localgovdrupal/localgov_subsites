@@ -8,6 +8,7 @@
   "require": {
     "drupal/layout_paragraphs": "dev-1.0.x",
     "drupal/tablefield": "dev-2.x",
+    "drupal/viewsreference": "^2.0",
     "localgovdrupal/localgov_paragraphs": "dev-master"
   },
   "extra": {
@@ -16,6 +17,9 @@
       "drupal/core": "-p2"
     },
     "patches": {
+      "drupal/viewsreference": {
+        "Implement configuration schema for Views reference field storage+settings and widget+formatter https://www.drupal.org/project/viewsreference/issues/2957529": "https://www.drupal.org/files/issues/2020-07-16/2957529-10.viewsreference.patch"
+      }
     }
   }
 }
