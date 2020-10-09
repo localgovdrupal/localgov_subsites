@@ -9,7 +9,7 @@
     "drupal/layout_paragraphs": "dev-1.0.x",
     "drupal/tablefield": "dev-2.x",
     "drupal/viewsreference": "^2.0",
-    "localgovdrupal/localgov_paragraphs": "1.0.0-alpha1"
+    "localgovdrupal/localgov_paragraphs": "^1.0@alpha"
   },
   "extra": {
     "composer-exit-on-patch-failure": true,
