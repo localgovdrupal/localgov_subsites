@@ -3,10 +3,12 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
+    - field.field.node.localgov_campaigns_page.localgov_campaigns_content
+    - field.field.node.localgov_campaigns_page.localgov_campaigns_parent
+    - field.field.node.localgov_campaigns_page.localgov_campaigns_summary
     - field.field.node.localgov_campaigns_page.localgov_campaigns_topic
     - node.type.localgov_campaigns_page
   module:
-    - text
     - user
 id: node.localgov_campaigns_page.teaser
 targetEntityType: node
@@ -21,6 +23,8 @@ content:
     settings: {  }
     third_party_settings: {  }
 hidden:
-  localgov_campaigns_topic: true
   links: true
+  localgov_campaigns_content: true
+  localgov_campaigns_parent: true
+  localgov_campaigns_topic: true
   search_api_excerpt: true
