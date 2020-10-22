@@ -12,6 +12,8 @@ dependencies:
   - drupal:node
   - drupal:path
   - drupal:text
+  - entity_hierarchy:entity_hierarchy
+  - entity_hierarchy:entity_hierarchy_breadcrumb
   - field_group:field_group
   - paragraphs:paragraphs
   - layout_paragraphs:layout_paragraphs
