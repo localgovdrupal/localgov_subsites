@@ -2,7 +2,6 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.localgov_campaigns_page.localgov_campaigns_parent
     - field.field.node.localgov_campaigns_page.localgov_campaigns_content
     - field.field.node.localgov_campaigns_page.localgov_campaigns_topic
     - field.field.node.localgov_campaigns_page.localgov_campaigns_summary
@@ -30,7 +29,6 @@ third_party_settings:
       children:
         - title
         - localgov_campaigns_summary
-        - localgov_campaigns_parent
         - localgov_campaigns_topic
       parent_name: group_tabs
       weight: 20
@@ -68,12 +66,6 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  localgov_campaigns_parent:
-    weight: -3
-    settings: {  }
-    third_party_settings: {  }
-    type: options_select
-    region: content
   localgov_campaigns_content:
     weight: 8
     settings:

@@ -2,7 +2,6 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.localgov_campaigns_page.localgov_campaigns_parent
     - field.field.node.localgov_campaigns_page.localgov_campaigns_content
     - field.field.node.localgov_campaigns_page.localgov_campaigns_topic
     - field.field.node.localgov_campaigns_page.localgov_campaigns_summary
@@ -24,7 +23,6 @@ content:
     type: layout_paragraphs
     region: content
 hidden:
-  localgov_campaigns_parent: true
   localgov_campaigns_topic: true
   links: true
   localgov_campaigns_summary: true
