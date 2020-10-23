@@ -7,11 +7,7 @@ use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
-use Drupal\Core\Routing\CurrentRouteMatch;
 use Drupal\Core\Session\AccountInterface;
-use Drupal\entity_hierarchy\Storage\NestedSetNodeKeyFactory;
-use Drupal\entity_hierarchy\Storage\NestedSetStorageFactory;
-use Drupal\node\NodeInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -38,7 +34,6 @@ abstract class CampaignsAbstractBlockBase extends BlockBase implements Container
       $configuration,
       $plugin_id,
       $plugin_definition,
-      $container->get('current_route_match'),
       $container->get('entity_type.manager')
     );
   }
@@ -52,23 +47,13 @@ abstract class CampaignsAbstractBlockBase extends BlockBase implements Container
    *   The plugin_id for the plugin instance.
    * @param mixed $plugin_definition
    *   The plugin implementation definition.
-   * @param \Drupal\Core\Routing\CurrentRouteMatch $route_match
-   *   The route match service.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   The entity type manager service.
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, CurrentRouteMatch $route_match, EntityTypeManagerInterface $entity_type_manager) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, EntityTypeManagerInterface $entity_type_manager) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
 
-    $this->routeMatch = $route_match;
     $this->entityTypeManager = $entity_type_manager;
-    if ($this->routeMatch->getParameter('node')) {
-      $this->node = $this->routeMatch->getParameter('node');
-      if (!$this->node instanceof NodeInterface) {
-        $node_storage = $this->entityTypeManager->getStorage('node');
-        $this->node = $node_storage->load($this->node);
-      }
-    }
   }
 
   /**
@@ -81,8 +66,9 @@ abstract class CampaignsAbstractBlockBase extends BlockBase implements Container
    */
   protected function getCampaign() {
     $entity = NULL;
+    $this->node = $this->getContextValue('node');
 
-    if ($id = $this->getRootId($this->node)) {
+    if ($this->node && $id = $this->getRootId($this->node)) {
       $entity = $this->entityTypeManager->getStorage('node')->load($id);
     }
 
@@ -113,6 +99,7 @@ abstract class CampaignsAbstractBlockBase extends BlockBase implements Container
    * {@inheritdoc}
    */
   protected function blockAccess(AccountInterface $account) {
+    $this->node = $this->getContextValue('node');
     if ($this->node and
       ($this->node->bundle() == 'localgov_campaigns_overview' or $this->node->bundle() == 'localgov_campaigns_page')
     ) {

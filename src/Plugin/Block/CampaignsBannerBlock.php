@@ -9,7 +9,10 @@ namespace Drupal\localgov_campaigns\Plugin\Block;
  *
  * @Block(
  *   id = "localgov_campaign_banner",
- *   admin_label = "Campaign banner"
+ *   admin_label = "Campaign banner",
+ *   context_definitions = {
+ *     "node" = @ContextDefinition("entity:node", label = @Translation("Current node"))
+ *   }
  * )
  */
 class CampaignsBannerBlock extends CampaignsAbstractBlockBase {

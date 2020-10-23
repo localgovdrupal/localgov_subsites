@@ -9,7 +9,10 @@ namespace Drupal\localgov_campaigns\Plugin\Block;
  *
  * @Block(
  *   id = "localgov_campaign_overview_banner",
- *   admin_label = "Campaign overview banner"
+ *   admin_label = "Campaign overview banner",
+ *   context_definitions = {
+ *     "node" = @ContextDefinition("entity:node", label = @Translation("Current node"))
+ *   }
  * )
  */
 class CampaignsOverviewBlock extends CampaignsAbstractBlockBase {
@@ -18,10 +21,9 @@ class CampaignsOverviewBlock extends CampaignsAbstractBlockBase {
    * {@inheritdoc}
    */
   public function build() {
-    $node = \Drupal::requestStack()->getCurrentRequest()->get('node');
     $build = [];
 
-    if ($campaign = $this->getCampaign($node)) {
+    if ($campaign = $this->getCampaign()) {
       $build[] = [
         '#theme' => 'campaign_overview_banner',
         '#heading' => $campaign->getTitle(),
