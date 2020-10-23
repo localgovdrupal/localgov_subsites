@@ -9,6 +9,8 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Routing\CurrentRouteMatch;
 use Drupal\Core\Session\AccountInterface;
+use Drupal\entity_hierarchy\Storage\NestedSetNodeKeyFactory;
+use Drupal\entity_hierarchy\Storage\NestedSetStorageFactory;
 use Drupal\node\NodeInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -18,6 +20,13 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * Provide common block functions for campaigns.
  */
 abstract class CampaignsAbstractBlockBase extends BlockBase implements ContainerFactoryPluginInterface {
+
+  /**
+   * The nested set storage factory service.
+   *
+   * @var \Drupal\entity_hierarchy\Storage\NestedSetStorageFactory
+   */
+  protected $storageFactory;
 
   /**
    * Node being displayed.
@@ -35,7 +44,9 @@ abstract class CampaignsAbstractBlockBase extends BlockBase implements Container
       $plugin_id,
       $plugin_definition,
       $container->get('current_route_match'),
-      $container->get('entity_type.manager')
+      $container->get('entity_type.manager'),
+      $container->get('entity_hierarchy.nested_set_storage_factory'),
+      $container->get('entity_hierarchy.nested_set_node_factory')
     );
   }
 
@@ -52,12 +63,16 @@ abstract class CampaignsAbstractBlockBase extends BlockBase implements Container
    *   The route match service.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   The entity type manager service.
+   * @param \Drupal\entity_hierarchy\Storage\NestedSetStorageFactory $storage_factory
+   *   The nested set storage factory service.
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, CurrentRouteMatch $route_match, EntityTypeManagerInterface $entity_type_manager) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, CurrentRouteMatch $route_match, EntityTypeManagerInterface $entity_type_manager, NestedSetStorageFactory $storage_factory, NestedSetNodeKeyFactory $node_key_factory) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
 
     $this->routeMatch = $route_match;
     $this->entityTypeManager = $entity_type_manager;
+    $this->storageFactory = $storage_factory;
+    $this->nodeKeyFactory = $node_key_factory;
     if ($this->routeMatch->getParameter('node')) {
       $this->node = $this->routeMatch->getParameter('node');
       if (!$this->node instanceof NodeInterface) {
@@ -76,13 +91,18 @@ abstract class CampaignsAbstractBlockBase extends BlockBase implements Container
    * @throws \Drupal\Core\TypedData\Exception\MissingDataException
    */
   protected function getCampaign() {
-    if ($this->node instanceof NodeInterface) {
-      if ($this->node->bundle() == 'localgov_campaigns_page' and $this->node->localgov_campaigns_parent->entity) {
-        return $this->node->localgov_campaigns_parent->entity;
+    $entity = NULL;
+
+    if ($this->node instanceof NodeInterface &&
+      in_array($this->node->bundle(), ['localgov_campaigns_overview', 'localgov_campaigns_page'])
+    ) {
+      $storage = $this->storageFactory->get('localgov_campaigns_parent', 'node');
+      if ($root_node = $storage->findRoot($this->nodeKeyFactory->fromEntity($this->node))) {
+        $entity = $this->entityTypeManager->getStorage('node')->load($root_node->getId());
       }
-      return $this->node->bundle() == 'localgov_campaigns_overview' ? $this->node : NULL;
     }
-    return NULL;
+
+    return $entity;
   }
 
   /**
