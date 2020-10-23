@@ -21,12 +21,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 abstract class CampaignsAbstractBlockBase extends BlockBase implements ContainerFactoryPluginInterface {
 
-  /**
-   * The nested set storage factory service.
-   *
-   * @var \Drupal\entity_hierarchy\Storage\NestedSetStorageFactory
-   */
-  protected $storageFactory;
+  use CampaignsHierarchyTrait;
 
   /**
    * Node being displayed.
@@ -44,9 +39,7 @@ abstract class CampaignsAbstractBlockBase extends BlockBase implements Container
       $plugin_id,
       $plugin_definition,
       $container->get('current_route_match'),
-      $container->get('entity_type.manager'),
-      $container->get('entity_hierarchy.nested_set_storage_factory'),
-      $container->get('entity_hierarchy.nested_set_node_factory')
+      $container->get('entity_type.manager')
     );
   }
 
@@ -63,16 +56,12 @@ abstract class CampaignsAbstractBlockBase extends BlockBase implements Container
    *   The route match service.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   The entity type manager service.
-   * @param \Drupal\entity_hierarchy\Storage\NestedSetStorageFactory $storage_factory
-   *   The nested set storage factory service.
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, CurrentRouteMatch $route_match, EntityTypeManagerInterface $entity_type_manager, NestedSetStorageFactory $storage_factory, NestedSetNodeKeyFactory $node_key_factory) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, CurrentRouteMatch $route_match, EntityTypeManagerInterface $entity_type_manager) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
 
     $this->routeMatch = $route_match;
     $this->entityTypeManager = $entity_type_manager;
-    $this->storageFactory = $storage_factory;
-    $this->nodeKeyFactory = $node_key_factory;
     if ($this->routeMatch->getParameter('node')) {
       $this->node = $this->routeMatch->getParameter('node');
       if (!$this->node instanceof NodeInterface) {
@@ -93,13 +82,8 @@ abstract class CampaignsAbstractBlockBase extends BlockBase implements Container
   protected function getCampaign() {
     $entity = NULL;
 
-    if ($this->node instanceof NodeInterface &&
-      in_array($this->node->bundle(), ['localgov_campaigns_overview', 'localgov_campaigns_page'])
-    ) {
-      $storage = $this->storageFactory->get('localgov_campaigns_parent', 'node');
-      if ($root_node = $storage->findRoot($this->nodeKeyFactory->fromEntity($this->node))) {
-        $entity = $this->entityTypeManager->getStorage('node')->load($root_node->getId());
-      }
+    if ($id = $this->getRootId($this->node)) {
+      $entity = $this->entityTypeManager->getStorage('node')->load($id);
     }
 
     return $entity;
