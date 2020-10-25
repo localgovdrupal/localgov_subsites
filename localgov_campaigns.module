@@ -12,9 +12,8 @@ function localgov_campaigns_theme($existing, $type, $theme, $path) {
   return [
     'campaign_navigation' => [
       'variables' => [
-        'heading' => '',
-        'links' => [],
-        'parent_url' => '',
+        'menu_name' => '',
+        'items' => [],
       ],
     ],
     'campaign_banner' => [

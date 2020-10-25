@@ -4,6 +4,7 @@ namespace Drupal\localgov_campaigns\Plugin\Block;
 
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\entity_hierarchy\Storage\NestedSetNodeKeyFactory;
+use Drupal\entity_hierarchy\Storage\NestedSetStorage;
 use Drupal\entity_hierarchy\Storage\NestedSetStorageFactory;
 use Drupal\node\NodeInterface;
 
@@ -85,6 +86,20 @@ trait CampaignsHierarchyTrait {
   }
 
   /**
+   * Get the configured nested set storage for campaigns.
+   *
+   * @param string $section
+   *   The section of the site for the hiearchy.
+   *
+   * @return \Drupal\entity_hierarchy\Storage\NestedSetStorage
+   *   Nested set storage for localgov_campaigns_parent.
+   */
+  protected function getNestedSetStorage(string $section): NestedSetStorage {
+    $lookup = ['localgov_campaigns' => 'localgov_campaigns_parent'];
+    return $this->getNestedSetStorageFactory()->get($lookup[$section], 'node');
+  }
+
+  /**
    * Get the entity_id of the ultimate parent drupal entity.
    *
    * @param Drupal\Core\Entity\EntityInterface $entity
@@ -97,11 +112,12 @@ trait CampaignsHierarchyTrait {
     if ($entity instanceof NodeInterface &&
       in_array($entity->bundle(), ['localgov_campaigns_overview', 'localgov_campaigns_page'])
     ) {
-      $storage = $this->getNestedSetStorageFactory()->get('localgov_campaigns_parent', 'node');
-      if ($root_node = $storage->findRoot($this->getNestedSetNodeKeyFactory()->fromEntity($entity))) {
+      if ($root_node = $this->getNestedSetStorage('localgov_campaigns')->findRoot($this->getNestedSetNodeKeyFactory()->fromEntity($entity))) {
         return $root_node->getId();
       }
     }
+
+    return NULL;
   }
 
 }
