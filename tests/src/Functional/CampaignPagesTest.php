@@ -68,7 +68,6 @@ class CampaignPagesTest extends BrowserTestBase {
     $this->assertSession()->statusCodeEquals(200);
     $this->assertSession()->pageTextContains('localgov_campaigns_summary');
     $this->assertSession()->pageTextContains('localgov_campaigns_banner');
-    $this->assertSession()->pageTextContains('localgov_campaigns_pages');
     $this->assertSession()->pageTextContains('localgov_campaigns_hide_menu');
     $this->assertSession()->pageTextContains('localgov_campaigns_content');
     $this->assertSession()->pageTextContains('localgov_campaigns_colour_accent');

@@ -3,12 +3,10 @@
 namespace Drupal\localgov_campaigns\Plugin\Block;
 
 use Drupal\Core\Access\AccessResult;
-use Drupal\Core\Cache\Cache;
-use Drupal\Core\Cache\CacheableDependencyInterface;
-use Drupal\Core\Field\Plugin\Field\FieldType\EntityReferenceItem;
+use Drupal\Core\Cache\CacheableMetadata;
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Session\AccountInterface;
-use Drupal\node\NodeInterface;
-use Drupal\node\Entity\Node;
+use Drupal\Core\Template\Attribute;
 
 /**
  * Class CampaignNavigationBlock.
@@ -18,6 +16,18 @@ use Drupal\node\Entity\Node;
  * @Block(
  *   id = "localgov_campaign_navigation",
  *   admin_label = "Campaign navigation",
+ *   context_definitions = {
+ *     "node" = @ContextDefinition(
+ *       "entity:node",
+ *       label = @Translation("Current node"),
+ *       constraints = {
+ *         "Bundle" = {
+ *           "localgov_campaigns_overview",
+ *           "localgov_campaigns_page"
+ *         },
+ *       }
+ *     )
+ *   }
  * )
  */
 class CampaignsNavigationBlock extends CampaignsAbstractBlockBase {
@@ -28,84 +38,66 @@ class CampaignsNavigationBlock extends CampaignsAbstractBlockBase {
   public function build() {
     $build = [];
 
-    if ($campaign = $this->getCampaign()) {
-      $links = $this->formatLinks($campaign, $this->node);
+    $campaign_entity = $this->getContextValue('node');
+    $cache = (new CacheableMetadata())->addCacheableDependency($campaign_entity);
+    $storage = $this->getNestedSetStorage('localgov_campaigns');
+    $node = $this->getNestedSetNodeKeyFactory()->fromEntity($campaign_entity);
+    $ancestors = $storage->findAncestors($node);
+    $tree = $storage->findDescendants($ancestors[0]->getNodeKey());
+    array_unshift($tree, $ancestors[0]);
+    $mapper = \Drupal::service('entity_hierarchy.entity_tree_node_mapper');
+    $entities = $mapper->loadAndAccessCheckEntitysForTreeNodes('node', $tree, $cache);
+    $items = $this->nestTree($tree, $ancestors, $entities);
 
-      if ($links) {
-        $build[] = [
-          '#theme' => 'campaign_navigation',
-          '#heading' => $campaign->label(),
-          '#parent_url' => $campaign->toUrl()->toString(),
-          '#links' => $links,
-        ];
-      }
+    if ($items) {
+      $build[] = [
+        '#theme' => 'campaign_navigation',
+        '#menu_name' => 'campaign_navigation:' . $entities[$ancestors[0]]->id(),
+        '#items' => $items,
+      ];
     }
 
+    $cache->applyTo($build);
     return $build;
   }
 
-  /**
-   * Format links for the campaign navigation theme.
-   *
-   * @param \Drupal\node\NodeInterface $campaign
-   *   Node object of campaign overview page.
-   * @param \Drupal\node\NodeInterface $currentNode
-   *   Current page node.
-   *
-   * @return array
-   *   Menu links for build.
-   *
-   * @throws \Drupal\Core\Entity\EntityMalformedException
-   */
-  protected function formatLinks(NodeInterface $campaign, NodeInterface $currentNode) {
-    $links = [];
-
-    if ($currentNode instanceof NodeInterface) {
-      $currentNid = $currentNode->id();
-    }
-    if ($currentNid == $campaign->id()) {
-      $links[] = [
-        'title' => $campaign->label(),
-        'url' => $campaign->toUrl(),
-        'class' => 'is-active',
-      ];
-    }
-    else {
-      $links[] = [
-        'title' => $campaign->label(),
-        'url' => $campaign->toUrl(),
-      ];
-    }
-
-    $campaign_pages = $campaign->get('localgov_campaigns_pages')->getValue();
-    $campaign_pages_count = $campaign->get('localgov_campaigns_pages')->count();
-
-    if ($campaign_pages_count > 0) {
-      foreach ($campaign_pages as $node_data) {
-        if (isset($node_data['target_id'])) {
-          $node = Node::load($node_data['target_id']);
-          if (is_null($node)) {
-            continue;
-          }
+  protected function nestTree($tree, $ancestors, $entities, &$index = 0, $depth = 0) {
+    $items = $item = [];
+    do {
+      $node = $tree[$index];
+      if ($node->getDepth() > $depth) {
+        $item['below'] = $this->nestTree($tree, $ancestors, $entities, $index, $depth + 1);
+      }
+      elseif ($node->getDepth() == $depth) {
+        if (!empty($item)) {
+          $items[] = $item;
         }
-        $campaignNid = $node->id();
-        if ($currentNid == $campaignNid) {
-          $links[] = [
-            'title' => $node->label(),
-            'url' => $node->toUrl(),
-            'class' => 'is-active',
-          ];
-        }
-        else {
-          $links[] = [
-            'title' => $node->label(),
-            'url' => $node->toUrl(),
-          ];
+        // At the moment we're seeing old revisions in the tree.
+        // Seems to be issues that are fixed in queue. @todo
+        // https://www.drupal.org/project/issues/entity_hierarchy?text=revisions&status=All
+        if (!empty($entities[$node])) {
+          $item = $this->formatItem(
+            $entities[$node],
+            in_array($node, $ancestors)
+          );
         }
       }
+    } while (isset($tree[$index + 1]) && ($tree[$index + 1]->getDepth() >= $depth) && ++$index);
+    if (!empty($item)) {
+      $items[] = $item;
     }
+    return $items;
+  }
 
-    return $links;
+  protected function formatItem(EntityInterface $entity, $in_active_trail) {
+    $link = [];
+    $link['title'] = $entity->label();
+    $link['url'] = $entity->toUrl();
+    $link['url']->setOption('set_active_class', TRUE);
+    $link['in_active_trail'] = $in_active_trail;
+    $link['attributes'] = new Attribute();
+
+    return $link;
   }
 
   /**
@@ -121,58 +113,6 @@ class CampaignsNavigationBlock extends CampaignsAbstractBlockBase {
     }
 
     return parent::blockAccess($account);
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getCacheTags() {
-    $campaign_nodes = $this->listOverviewAndPages();
-    $campaign_cache_tags = $this->prepareCacheTagsForCampaign($campaign_nodes);
-    return Cache::mergeTags(parent::getCacheTags(), $campaign_cache_tags);
-  }
-
-  /**
-   * All cache tags for *a* Campaign.
-   *
-   * List cache tags for the given Campaign Overview and its child Campaign
-   * pages.
-   *
-   * @param array $campaign_nodes
-   *   List of nodes.
-   *
-   * @return array
-   *   List of strings.
-   */
-  protected function prepareCacheTagsForCampaign(array $campaign_nodes): array {
-    $list_of_tag_collections = array_map(function (CacheableDependencyInterface $cacheable): array {
-      return $cacheable->getCacheTags();
-    }, $campaign_nodes);
-    $merged_tags = array_reduce($list_of_tag_collections, [Cache::class, 'mergeTags'], []);
-    return $merged_tags;
-  }
-
-  /**
-   * List of Campaign Overview and its child Campaign pages.
-   *
-   * @return array
-   *   List of nodes.
-   */
-  protected function listOverviewAndPages(): array {
-    $overview = $this->getCampaign();
-    $page_refs = $overview->localgov_campaigns_pages;
-    $page_nodes = array_map(function (EntityReferenceItem $ref) {
-      return $ref->entity;
-    }, iterator_to_array($page_refs));
-
-    // Weed out the references to deleted nodes.
-    $existing_pages = array_filter($page_nodes);
-
-    $related_campaign_nodes = $existing_pages;
-    $related_campaign_nodes[] = $overview;
-    $related_campaign_nodes_w_sequential_keys = array_values($related_campaign_nodes);
-
-    return $related_campaign_nodes_w_sequential_keys;
   }
 
 }

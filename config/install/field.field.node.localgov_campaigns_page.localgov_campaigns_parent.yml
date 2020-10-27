@@ -5,11 +5,13 @@ dependencies:
     - field.storage.node.localgov_campaigns_parent
     - node.type.localgov_campaigns_overview
     - node.type.localgov_campaigns_page
+  module:
+    - entity_hierarchy
 id: node.localgov_campaigns_page.localgov_campaigns_parent
 field_name: localgov_campaigns_parent
 entity_type: node
 bundle: localgov_campaigns_page
-label: Campaign
+label: Parent
 description: ''
 required: true
 translatable: false
@@ -20,8 +22,12 @@ settings:
   handler_settings:
     target_bundles:
       localgov_campaigns_overview: localgov_campaigns_overview
+      localgov_campaigns_page: localgov_campaigns_page
     sort:
       field: _none
     auto_create: false
-    auto_create_bundle: ''
-field_type: entity_reference
+    auto_create_bundle: localgov_campaigns_overview
+  weight_min: -50
+  weight_max: 50
+  weight_label: Weight
+field_type: entity_reference_hierarchy

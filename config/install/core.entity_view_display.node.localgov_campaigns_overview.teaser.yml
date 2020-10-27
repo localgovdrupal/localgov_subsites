@@ -8,7 +8,6 @@ dependencies:
     - field.field.node.localgov_campaigns_overview.localgov_campaigns_colour_grad
     - field.field.node.localgov_campaigns_overview.localgov_campaigns_content
     - field.field.node.localgov_campaigns_overview.localgov_campaigns_hide_menu
-    - field.field.node.localgov_campaigns_overview.localgov_campaigns_pages
     - field.field.node.localgov_campaigns_overview.localgov_campaigns_summary
     - node.type.localgov_campaigns_overview
   module:
@@ -32,5 +31,4 @@ hidden:
   localgov_campaigns_colour_grad: true
   localgov_campaigns_content: true
   localgov_campaigns_hide_menu: true
-  localgov_campaigns_pages: true
   search_api_excerpt: true

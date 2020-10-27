@@ -2,14 +2,15 @@ langcode: en
 status: true
 dependencies:
   module:
+    - entity_hierarchy
     - node
 id: node.localgov_campaigns_parent
 field_name: localgov_campaigns_parent
 entity_type: node
-type: entity_reference
+type: entity_reference_hierarchy
 settings:
   target_type: node
-module: core
+module: entity_hierarchy
 locked: false
 cardinality: 1
 translatable: true

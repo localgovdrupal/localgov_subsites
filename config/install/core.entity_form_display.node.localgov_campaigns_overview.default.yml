@@ -7,7 +7,6 @@ dependencies:
     - field.field.node.localgov_campaigns_overview.localgov_campaigns_colour_grad
     - field.field.node.localgov_campaigns_overview.localgov_campaigns_content
     - field.field.node.localgov_campaigns_overview.localgov_campaigns_hide_menu
-    - field.field.node.localgov_campaigns_overview.localgov_campaigns_pages
     - field.field.node.localgov_campaigns_overview.localgov_campaigns_summary
     - node.type.localgov_campaigns_overview
   module:
@@ -82,7 +81,6 @@ third_party_settings:
     group_child_pages:
       children:
         - localgov_campaigns_hide_menu
-        - localgov_campaigns_pages
       parent_name: group_tabs
       weight: 13
       format_type: tab
@@ -140,12 +138,6 @@ content:
     settings:
       display_label: true
     third_party_settings: {  }
-  localgov_campaigns_pages:
-    weight: 34
-    settings: {  }
-    third_party_settings: {  }
-    type: localgov_entity_reference_labels
-    region: content
   localgov_campaigns_summary:
     weight: 1
     settings:
