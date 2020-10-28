@@ -18,18 +18,23 @@ namespace Drupal\localgov_campaigns\Plugin\Block;
 class CampaignsBannerBlock extends CampaignsAbstractBlockBase {
 
   /**
+   * The entity view builder interface.
+   *
+   * @var \Drupal\Core\Entity\EntityViewBuilderInterface
+   */
+  private $viewBuilder;
+
+  /**
    * {@inheritdoc}
    */
   public function build() {
     $build = [];
 
-    if ($campaign = $this->getCampaign($this->node)) {
-      $build[] = [
-        '#theme' => 'campaign_banner',
-        '#tag' => $campaign->label(),
-        '#heading' => $this->node->label(),
-        '#image' => $this->getCampaignBanner(),
-      ];
+    if ($this->getCampaign($this->node)) {
+      if ($banner = $this->getCampaignBanner()) {
+        $viewBuilder = $this->entityTypeManager->getViewBuilder('paragraph');
+        $build = $viewBuilder->view($banner);
+      }
     }
 
     return $build;

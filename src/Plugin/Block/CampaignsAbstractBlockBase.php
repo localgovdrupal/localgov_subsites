@@ -80,22 +80,17 @@ abstract class CampaignsAbstractBlockBase extends BlockBase implements Container
   }
 
   /**
-   * Get Campaign Banner.
+   * Fetches the referenced hero paragraph entity.
    *
-   * @return string|null
-   *   Stream wrapper url of Campaign overview localgov_campaigns_banner,
-   *   or NULL if no image field set.
+   * @return object|null
+   *   The hero paragraph entity or NULL.
    */
   protected function getCampaignBanner() {
-    $campaign = $this->getCampaign();
-    if ($campaign->get('localgov_campaigns_banner_image')->entity) {
-      $file_storage = $this->entityTypeManager->getStorage('file');
-      $fid = $campaign->get('localgov_campaigns_banner_image')->entity->field_media_image[0]->getValue()['target_id'];
-      $file = $file_storage->load($fid);
-      if (!is_null($file)) {
-        return $file->createFileUrl();
-      }
+    $this->node = $this->getContextValue('node');
+    if ($this->node->hasField('localgov_campaigns_banner')) {
+      return $this->node->localgov_campaigns_banner->entity;
     }
+
     return NULL;
   }
 
