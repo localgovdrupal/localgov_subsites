@@ -66,10 +66,14 @@ abstract class CampaignsAbstractBlockBase extends BlockBase implements Container
    */
   protected function getCampaign() {
     $entity = NULL;
-    $this->node = $this->getContextValue('node');
-
-    if ($this->node && $id = $this->getRootId($this->node)) {
-      $entity = $this->entityTypeManager->getStorage('node')->load($id);
+    if ($this->node = $this->getContextValue('node')) {
+      if ($this->node->bundle() == 'localgov_campaigns_overview') {
+        $entity = $this->node;
+      }
+      else {
+        $id = $this->getRootId($this->node);
+        $entity = $this->entityTypeManager->getStorage('node')->load($id);
+      }
     }
 
     return $entity;

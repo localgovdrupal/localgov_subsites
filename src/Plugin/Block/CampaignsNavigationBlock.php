@@ -37,22 +37,32 @@ class CampaignsNavigationBlock extends CampaignsAbstractBlockBase {
    */
   public function build() {
     $build = [];
+    $items = [];
 
     $campaign_entity = $this->getContextValue('node');
     $cache = (new CacheableMetadata())->addCacheableDependency($campaign_entity);
     $storage = $this->getNestedSetStorage('localgov_campaigns');
     $node = $this->getNestedSetNodeKeyFactory()->fromEntity($campaign_entity);
-    $ancestors = $storage->findAncestors($node);
-    $tree = $storage->findDescendants($ancestors[0]->getNodeKey());
-    array_unshift($tree, $ancestors[0]);
-    $mapper = \Drupal::service('entity_hierarchy.entity_tree_node_mapper');
-    $entities = $mapper->loadAndAccessCheckEntitysForTreeNodes('node', $tree, $cache);
-    $items = $this->nestTree($tree, $ancestors, $entities);
+    if ($ancestors = $storage->findAncestors($node)) {
+      $tree = $storage->findDescendants($ancestors[0]->getNodeKey());
+      array_unshift($tree, $ancestors[0]);
+      $mapper = \Drupal::service('entity_hierarchy.entity_tree_node_mapper');
+      $entities = $mapper->loadAndAccessCheckEntitysForTreeNodes('node', $tree, $cache);
+      $items = $this->nestTree($tree, $ancestors, $entities);
+      $campaign_id = $entities[$ancestors[0]]->id();
+    }
+    elseif ($campaign_entity->bundle('localgov_campaigns_overview')) {
+      // Campaign overview page with no children.
+      // Still show an block with no children.
+      // Cache metadata already has this entity.
+      $items = [$this->formatItem($campaign_entity, TRUE)];
+      $campaign_id = $campaign_entity->id();
+    }
 
     if ($items) {
       $build[] = [
         '#theme' => 'campaign_navigation',
-        '#menu_name' => 'campaign_navigation:' . $entities[$ancestors[0]]->id(),
+        '#menu_name' => 'campaign_navigation:' . $campaign_id,
         '#items' => $items,
       ];
     }
