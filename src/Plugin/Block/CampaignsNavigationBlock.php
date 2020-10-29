@@ -81,11 +81,9 @@ class CampaignsNavigationBlock extends CampaignsAbstractBlockBase {
       elseif ($node->getDepth() == $depth) {
         if (!empty($item)) {
           $items[] = $item;
+          $item = [];
         }
-        // At the moment we're seeing old revisions in the tree.
-        // Seems to be issues that are fixed in queue. @todo
-        // https://www.drupal.org/project/issues/entity_hierarchy?text=revisions&status=All
-        if (!empty($entities[$node])) {
+        if ($entities->contains($node) && $entities[$node]->isDefaultRevision()) {
           $item = $this->formatItem(
             $entities[$node],
             in_array($node, $ancestors)
