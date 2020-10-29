@@ -22,9 +22,9 @@ dependencies:
     - paragraphs.paragraphs_type.localgov_media_with_text
     - paragraphs.paragraphs_type.localgov_newsroom_teaser
     - paragraphs.paragraphs_type.localgov_quote
+    - paragraphs.paragraphs_type.localgov_subscribe_panel
     - paragraphs.paragraphs_type.localgov_table
     - paragraphs.paragraphs_type.localgov_tabs
-    - paragraphs.paragraphs_type.localgov_subscribe_panel
     - paragraphs.paragraphs_type.localgov_text
     - paragraphs.paragraphs_type.localgov_video
     - paragraphs.paragraphs_type.page_section
@@ -97,15 +97,15 @@ settings:
       localgov_documents:
         enabled: true
         weight: -26
+      localgov_featured_campaign:
+        enabled: true
+        weight: 23
       localgov_featured_teaser:
         weight: -29
         enabled: false
       localgov_featured_teasers:
         enabled: true
         weight: -25
-      localgov_featured_campaign:
-        enabled: true
-        weight: 23
       localgov_ia_block:
         enabled: true
         weight: 21
@@ -139,15 +139,15 @@ settings:
       localgov_quote:
         enabled: true
         weight: 7
-      localgov_table:
-        enabled: true
-        weight: 8
       localgov_subscribe_panel:
         enabled: true
         weight: 29
       localgov_tab_panel:
         weight: -23
         enabled: false
+      localgov_table:
+        enabled: true
+        weight: 8
       localgov_tabs:
         enabled: true
         weight: 9

@@ -2,16 +2,16 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.localgov_campaigns_banner_image
+    - field.storage.paragraph.localgov_campaigns_banner_logo
     - media.type.image
-    - node.type.localgov_campaigns_overview
-id: node.localgov_campaigns_overview.localgov_campaigns_banner_image
-field_name: localgov_campaigns_banner_image
-entity_type: node
-bundle: localgov_campaigns_overview
-label: 'Banner image'
+    - paragraphs.paragraphs_type.localgov_banner_primary
+id: paragraph.localgov_banner_primary.localgov_campaigns_banner_logo
+field_name: localgov_campaigns_banner_logo
+entity_type: paragraph
+bundle: localgov_banner_primary
+label: Logo
 description: ''
-required: true
+required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''

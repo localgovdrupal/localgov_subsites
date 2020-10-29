@@ -3,6 +3,7 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
+    - field.field.node.localgov_campaigns_page.localgov_campaigns_banner
     - field.field.node.localgov_campaigns_page.localgov_campaigns_content
     - field.field.node.localgov_campaigns_page.localgov_campaigns_parent
     - field.field.node.localgov_campaigns_page.localgov_campaigns_summary
@@ -24,6 +25,7 @@ content:
     third_party_settings: {  }
 hidden:
   links: true
+  localgov_campaigns_banner: true
   localgov_campaigns_content: true
   localgov_campaigns_parent: true
   localgov_campaigns_topic: true

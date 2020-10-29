@@ -13,8 +13,7 @@ description: 'Hide the sidebar menu from overview and associated pages.'
 required: false
 translatable: false
 default_value:
-  -
-    value: 0
+  - value: 0
 default_value_callback: ''
 settings:
   on_label: 'On'

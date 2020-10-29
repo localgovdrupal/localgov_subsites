@@ -4,21 +4,14 @@ dependencies:
   module:
     - node
     - options
-id: node.localgov_campaigns_colour_grad
-field_name: localgov_campaigns_colour_grad
+id: node.localgov_campaigns_theme
+field_name: localgov_campaigns_theme
 entity_type: node
 type: list_string
 settings:
   allowed_values:
-    -
-      value: magenta
-      label: Magenta
-    -
-      value: orange
-      label: Orange
-    -
-      value: green
-      label: Green
+    - value: theme_a
+      label: Default
   allowed_values_function: ''
 module: options
 locked: false
