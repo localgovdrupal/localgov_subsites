@@ -70,8 +70,7 @@ abstract class CampaignsAbstractBlockBase extends BlockBase implements Container
       if ($this->node->bundle() == 'localgov_campaigns_overview') {
         $entity = $this->node;
       }
-      else {
-        $id = $this->getRootId($this->node);
+      elseif ($id = $this->getRootId($this->node)) {
         $entity = $this->entityTypeManager->getStorage('node')->load($id);
       }
     }
