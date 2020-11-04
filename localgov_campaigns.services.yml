@@ -4,3 +4,6 @@ services:
     class: Drupal\localgov_campaigns\EventSubscriber\PageHeaderSubscriber
     tags:
       - { name: 'event_subscriber' }
+  localgov_campaigns.campaign:
+    class: Drupal\localgov_campaigns\Campaign
+    arguments: ['@entity_type.manager']
