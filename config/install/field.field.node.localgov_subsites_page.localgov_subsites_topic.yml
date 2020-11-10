@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.localgov_subsites_topic
+    - node.type.localgov_subsites_page
+    - taxonomy.vocabulary.localgov_topic
+id: node.localgov_subsites_page.localgov_subsites_topic
+field_name: localgov_subsites_topic
+entity_type: node
+bundle: localgov_subsites_page
+label: 'Topic term'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      localgov_topic: localgov_topic
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

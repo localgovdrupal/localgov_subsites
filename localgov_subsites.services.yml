@@ -1,0 +1,9 @@
+services:
+  # Alter page header.
+  localgov_subsites.page_header:
+    class: Drupal\localgov_subsites\EventSubscriber\PageHeaderSubscriber
+    tags:
+      - { name: 'event_subscriber' }
+  localgov_subsites.subsite:
+    class: Drupal\localgov_subsites\Subsite
+    arguments: ['@entity_type.manager']

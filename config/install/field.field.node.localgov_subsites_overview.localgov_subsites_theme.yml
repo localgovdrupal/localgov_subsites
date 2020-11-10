@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.localgov_subsites_theme
+    - node.type.localgov_subsites_overview
+  module:
+    - options
+id: node.localgov_subsites_overview.localgov_subsites_theme
+field_name: localgov_subsites_theme
+entity_type: node
+bundle: localgov_subsites_overview
+label: 'Visual theme'
+description: ''
+required: true
+translatable: false
+default_value:
+  - value: theme_a
+default_value_callback: ''
+settings: {  }
+field_type: list_string

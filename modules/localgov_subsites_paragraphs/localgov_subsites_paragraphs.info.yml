@@ -1,0 +1,16 @@
+name: LocalGov Subsites Paragraphs
+description: Page builder paragraph types for use with LocalGov Subsites.
+core_version_requirement: ^8.9 || ^9
+type: module
+package: LocalGov Drupal
+
+dependencies:
+  - drupal:media
+  - drupal:options
+  - paragraphs:paragraphs
+  - tablefield:tablefield
+  - viewsreference:viewsreference
+  - localgov_core:localgov_core
+  - localgov_core:localgov_media
+  - localgov_paragraphs:localgov_paragraphs
+  - localgov_paragraphs:localgov_homepage_paragraphs

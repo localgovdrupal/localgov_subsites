@@ -1,0 +1,35 @@
+localgov_subsites_paragraphs:
+  css:
+    base:
+      css/localgov-subsites-paragraphs.css: {}
+
+localgov_accordion:
+  css:
+    base:
+      css/localgov-accordion.css: {}
+  js:
+    js/localgov-accordion.js: {}
+
+localgov_box_links_listing:
+  css:
+    base:
+      css/localgov-box-links-listing.css: {}
+
+localgov_media_with_text:
+  css:
+    base:
+      css/localgov-media-with-text.css: {}
+
+localgov_table_paragraph:
+  css:
+    base:
+      css/localgov-table-paragraph.css: {}
+
+localgov_tabs:
+  css:
+    base:
+      css/localgov-tabs.css: {}
+  js:
+    js/localgov-tabs.js: {}
+  dependencies:
+    - localgov_subsites_paragraphs/localgov_accordion

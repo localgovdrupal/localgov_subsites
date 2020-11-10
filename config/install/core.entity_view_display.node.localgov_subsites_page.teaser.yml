@@ -1,0 +1,32 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.localgov_subsites_page.localgov_subsites_banner
+    - field.field.node.localgov_subsites_page.localgov_subsites_content
+    - field.field.node.localgov_subsites_page.localgov_subsites_parent
+    - field.field.node.localgov_subsites_page.localgov_subsites_summary
+    - field.field.node.localgov_subsites_page.localgov_subsites_topic
+    - node.type.localgov_subsites_page
+  module:
+    - user
+id: node.localgov_subsites_page.teaser
+targetEntityType: node
+bundle: localgov_subsites_page
+mode: teaser
+content:
+  localgov_subsites_summary:
+    type: basic_string
+    weight: 0
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  links: true
+  localgov_subsites_banner: true
+  localgov_subsites_content: true
+  localgov_subsites_parent: true
+  localgov_subsites_topic: true
+  search_api_excerpt: true

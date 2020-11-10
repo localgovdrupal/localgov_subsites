@@ -2,8 +2,8 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.paragraph.localgov_banner_primary.localgov_campaigns_banner_logo
-    - field.field.paragraph.localgov_banner_primary.localgov_campaigns_banner_text
+    - field.field.paragraph.localgov_banner_primary.localgov_subsites_banner_logo
+    - field.field.paragraph.localgov_banner_primary.localgov_subsites_banner_text
     - field.field.paragraph.localgov_banner_primary.localgov_image
     - field.field.paragraph.localgov_banner_primary.localgov_title
     - field.field.paragraph.localgov_banner_primary.localgov_url
@@ -15,14 +15,14 @@ targetEntityType: paragraph
 bundle: localgov_banner_primary
 mode: default
 content:
-  localgov_campaigns_banner_logo:
+  localgov_subsites_banner_logo:
     type: media_library_widget
     weight: 3
     settings:
       media_types: {  }
     third_party_settings: {  }
     region: content
-  localgov_campaigns_banner_text:
+  localgov_subsites_banner_text:
     weight: 2
     settings:
       rows: 5

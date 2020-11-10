@@ -1,8 +1,8 @@
 {
-  "name": "localgovdrupal/localgov_campaigns",
-  "description": "Provides campaign sections using page builder paragraph types for LocalGovDrupal.",
+  "name": "localgovdrupal/localgov_subsites",
+  "description": "Provides subsite sections using page builder paragraph types for LocalGovDrupal.",
   "type": "drupal-module",
-  "homepage": "https://github.com/localgovdrupal/localgov_campaigns",
+  "homepage": "https://github.com/localgovdrupal/localgov_subsites",
   "license": "GPL-2.0-or-later",
   "minimum-stability": "dev",
   "require": {

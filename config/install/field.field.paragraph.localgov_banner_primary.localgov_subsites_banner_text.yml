@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.localgov_subsites_banner_text
+    - paragraphs.paragraphs_type.localgov_banner_primary
+id: paragraph.localgov_banner_primary.localgov_subsites_banner_text
+field_name: localgov_subsites_banner_text
+entity_type: paragraph
+bundle: localgov_banner_primary
+label: Text
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

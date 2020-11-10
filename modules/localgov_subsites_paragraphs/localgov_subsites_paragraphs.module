@@ -1,0 +1,234 @@
+<?php
+
+/**
+ * @file
+ * LocalGovDrupal Subsites Paragraphs module file.
+ */
+
+use Drupal\Core\Link;
+use Drupal\Core\Url;
+use Drupal\file\Entity\File;
+use Drupal\image\Entity\ImageStyle;
+
+/**
+ * Implements hook_theme().
+ */
+function localgov_subsites_paragraphs_theme($existing, $type, $theme, $path) {
+  return [
+    'field__paragraph__localgov_paragraphs__localgov_box_links_listing' => [
+      'template' => 'field--paragraph--localgov-paragraphs--localgov-box-links-listing',
+      'base hook' => 'field',
+    ],
+    'paragraph__localgov_accordion' => [
+      'template' => 'paragraph--localgov-accordion',
+      'base hook' => 'paragraph',
+    ],
+    'paragraph__localgov_accordion_pane' => [
+      'template' => 'paragraph--localgov-accordion-pane',
+      'base hook' => 'paragraph',
+    ],
+    'paragraph__localgov_box_link' => [
+      'template' => 'paragraph--localgov-box-link',
+      'base hook' => 'paragraph',
+    ],
+    'paragraph__localgov_box_links_listing' => [
+      'template' => 'paragraph--localgov-box-links-listing',
+      'base hook' => 'paragraph',
+    ],
+    'paragraph__localgov_call_out_box' => [
+      'template' => 'paragraph--localgov-call-out-box',
+      'base hook' => 'paragraph',
+    ],
+    'paragraph__localgov_documents' => [
+      'template' => 'paragraph--localgov-documents',
+      'base hook' => 'paragraph',
+    ],
+    'paragraph__localgov_fact_box' => [
+      'template' => 'paragraph--localgov-fact-box',
+      'base hook' => 'paragraph',
+    ],
+    'paragraph__localgov_featured_teaser' => [
+      'base hook' => 'paragraph',
+    ],
+    'paragraph__localgov_featured_teasers' => [
+      'base hook' => 'paragraph',
+    ],
+    'paragraph__localgov_key_contacts' => [
+      'template' => 'paragraph--localgov-key-contacts',
+      'base hook' => 'paragraph',
+    ],
+    'paragraph__localgov_key_contact_item' => [
+      'template' => 'paragraph--localgov-key-contact-item',
+      'base hook' => 'paragraph',
+    ],
+    'paragraph__localgov_key_facts' => [
+      'template' => 'paragraph--localgov-key-facts',
+      'base hook' => 'paragraph',
+    ],
+    'paragraph__localgov_key_fact' => [
+      'template' => 'paragraph--localgov-key-fact',
+      'base hook' => 'paragraph',
+    ],
+    'paragraph__localgov_link_and_summary' => [
+      'template' => 'paragraph--localgov-link-and-summary',
+      'base hook' => 'paragraph',
+    ],
+    'paragraph__localgov_media_with_text' => [
+      'template' => 'paragraph--localgov-media-with-text',
+      'base hook' => 'paragraph',
+    ],
+    'paragraph__localgov_quote' => [
+      'template' => 'paragraph--localgov-quote',
+      'base hook' => 'paragraph',
+    ],
+    'paragraph__localgov_table' => [
+      'template' => 'paragraph--localgov-table',
+      'base hook' => 'paragraph',
+    ],
+    'paragraph__localgov_tabs' => [
+      'template' => 'paragraph--localgov-tabs',
+      'base hook' => 'paragraph',
+    ],
+    'paragraph__localgov_tab_panel' => [
+      'template' => 'paragraph--localgov-tab-panel',
+      'base hook' => 'paragraph',
+    ],
+    'paragraph__localgov_video' => [
+      'template' => 'paragraph--localgov-video',
+      'base hook' => 'paragraph',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function localgov_subsites_paragraphs_preprocess_paragraph(&$variables) {
+  $variables['#attached']['library'][] = 'localgov_subsites_paragraphs/localgov_subsites_paragraphs';
+
+  /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
+  $paragraph = $variables['paragraph'];
+
+  // Create heading element for paragraphs with a heading level field and
+  // non-empty title field.
+  if ($paragraph->hasField('localgov_heading_level') && $paragraph->hasField('localgov_title') && !$paragraph->get('localgov_title')->isEmpty()) {
+    $heading_text = $paragraph->get('localgov_title')->value;
+    $heading_level = $paragraph->get('localgov_heading_level')->value;
+    $variables['heading'] = _localgov_subsites_paragraphs_create_heading($heading_text, $heading_level);
+  }
+
+  if ($paragraph->bundle() === 'localgov_box_link') {
+    if (!$paragraph->get('localgov_link')->isEmpty()) {
+      $link = $paragraph->get('localgov_link')->first()->getValue();
+      $variables['localgov_link'] = [
+        'title' => $link['title'],
+        'url' => Url::fromUri($link['uri']),
+        'open_in_new_window' => $paragraph->get('localgov_opens_in_a_new_window')->value,
+      ];
+    }
+  }
+
+  if ($paragraph->bundle() === 'localgov_call_out_box') {
+    if (!$paragraph->get('localgov_button')->isEmpty()) {
+      $button = $paragraph->get('localgov_button')->first()->getValue();
+      $variables['button_url'] = Url::fromUri($button['uri']);
+    }
+    if (!$paragraph->get('localgov_background_image')->isEmpty()) {
+      $fid = $paragraph->get('localgov_background_image')->entity->field_media_image[0]->getValue()['target_id'];
+      $file_url = File::load($fid)->getFileUri();
+      $variables['background_url'] = ImageStyle::load('large_21_9')->buildUrl($file_url);
+    }
+    $heading_text = $paragraph->get('localgov_header_text')->value;
+    $heading_level = $paragraph->get('localgov_heading_level')->value ?: 'h2';
+    $variables['heading'] = _localgov_subsites_paragraphs_create_heading($heading_text, $heading_level);
+    $variables['colour_theme'] = $paragraph->get('localgov_colour_theme')->value;
+    $variables['open_in_new_window'] = $paragraph->get('localgov_opens_in_a_new_window')->value;
+  }
+
+  if ($paragraph->bundle() === 'localgov_key_contact_item') {
+    $variables['theme'] = $paragraph->get('localgov_colour_theme')->value;
+  }
+
+  if ($paragraph->bundle() === 'localgov_media_with_text') {
+    // Check media item's position.
+    $variables['media_position'] = $paragraph->get('localgov_media_position')->first()->value;
+
+    // Check component's style.
+    $variables['style'] = $paragraph->get('localgov_media_with_text_style')->first()->value;
+
+    // Create a link.
+    if (!$paragraph->get('localgov_link')->isEmpty()) {
+      $link = $paragraph->get('localgov_link')->first()->getValue();
+      $link_options = [
+        'attributes' => [
+          'class' => 'media-with-text__link',
+        ],
+      ];
+
+      // Check if the link should open in a new window.
+      if ($paragraph->get('localgov_opens_in_a_new_window')->value) {
+        $link_options['attributes']['target'] = '_blank';
+      }
+
+      $link_url = Url::fromUri($link['uri'], $link_options);
+      $link = Link::fromTextAndUrl($link['title'], $link_url);
+      $variables['link'] = $link->toRenderable();
+    }
+  }
+
+  if ($paragraph->bundle() === 'localgov_table') {
+    $variables['table_theme'] = $paragraph->get('localgov_table_theme')->value;
+  }
+
+  if ($paragraph->bundle() === 'localgov_documents') {
+    /** @var \Drupal\Core\Field\EntityReferenceFieldItemList $media_entities */
+    $media_entities = $paragraph->get('localgov_documents');
+    $documents = $media_entities->referencedEntities();
+    foreach ($documents as $key => $document) {
+      $file_entity = $document->field_media_document->entity;
+      if ($file_entity) {
+        $variables['documents'][$key] = [
+          'name' => $variables['content']['localgov_documents'][$key],
+          'size' => format_size($file_entity->getSize()),
+        ];
+      }
+    }
+  }
+
+  if ($paragraph->bundle() === 'video_page_builder') {
+    if (!$paragraph->get('field_video_url')->isEmpty()) {
+      $video = $paragraph->get('field_video_url')->first()->getValue();
+      $variables['field_video_url'] = $video['uri'];
+    }
+  }
+}
+
+/**
+ * Create a heading element.
+ *
+ * @param string $heading_text
+ *   Heading text.
+ * @param string $heading_level
+ *   Heading level.
+ *
+ * @return null|array
+ *   Heading render element.
+ */
+function _localgov_subsites_paragraphs_create_heading(string $heading_text, string $heading_level) {
+  $allowed_heading_levels = ['h2', 'h3', 'h4', 'h5', 'h6'];
+
+  if (!in_array($heading_level, $allowed_heading_levels)) {
+    return;
+  }
+
+  $heading = [
+    '#type' => 'inline_template',
+    '#template' => '<{{ level }}>{{ text }}</{{ level }}>',
+    '#context' => [
+      'level' => $heading_level,
+      'text' => $heading_text,
+    ],
+  ];
+
+  return $heading;
+}
