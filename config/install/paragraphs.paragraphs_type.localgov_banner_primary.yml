@@ -1,0 +1,10 @@
+uuid: 5559681f-f228-4dbf-a6a4-1fbeb157aed2
+langcode: en
+status: true
+dependencies: {  }
+id: localgov_banner_primary
+label: 'Banner primary'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

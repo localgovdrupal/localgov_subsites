@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: localgov_subsites_overview
+label: 'Subsite overview'
+type: 'canonical_entities:node'
+pattern: '[node:title]'
+selection_criteria:
+  b7733dd9-c007-410f-94cb-896af2a94006:
+    id: node_type
+    bundles:
+      localgov_subsites_overview: localgov_subsites_overview
+    negate: false
+    context_mapping:
+      node: node
+    uuid: b7733dd9-c007-410f-94cb-896af2a94006
+selection_logic: and
+weight: -5
+relationships: {  }

@@ -1,0 +1,16 @@
+# A custom one column layout.
+#
+# It fits side by side as many items as possible.
+#
+# @see https://www.drupal.org/docs/drupal-apis/layout-api/how-to-register-layouts
+#
+localgov_subsites_one_column_flexible:
+ label: Flexible
+ category: 'Columns: 1'
+ template: templates/layout--onecol--flexible
+ library: localgov_subsites/one-column-flexible
+ icon_map:
+   - [content]
+ regions:
+   content:
+    label: Content

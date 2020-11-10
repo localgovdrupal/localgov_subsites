@@ -1,3 +1,3 @@
-# LocalGov Campaigns
+# LocalGov Subsites
 
-Provides campaign sections using page builder paragraph types for LocalGovDrupal.
+Provides subsite sections using page builder paragraph types for LocalGov Drupal.

@@ -1,4 +1,4 @@
-name: Test LocalGov Drupal Campaigns
+name: Test LocalGov Drupal Subsites
 
 on:
   push:

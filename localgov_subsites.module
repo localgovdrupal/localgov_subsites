@@ -1,0 +1,67 @@
+<?php
+
+/**
+ * @file
+ * LocalGov Subsites module file.
+ */
+
+use Drupal\localgov_subsites\Subsite;
+use Drupal\node\NodeInterface;
+
+/**
+ * Implements hook_theme().
+ */
+function localgov_subsites_theme($existing, $type, $theme, $path) {
+  return [
+    'subsite_navigation' => [
+      'variables' => [
+        'menu_name' => '',
+        'items' => [],
+      ],
+    ],
+    'subsite_banner' => [
+      'variables' => [
+        'tag' => '',
+        'heading' => '',
+        'image' => '',
+      ],
+    ],
+    'subsite_overview_banner' => [
+      'variables' => [
+        'heading' => '',
+        'image' => '',
+      ],
+    ],
+    'node__localgov_subsites_page__full' => [
+      'template' => 'node--localgov-subsites-page--full',
+      'base hook' => 'node',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_preprocess_page().
+ *
+ * Adds a class to the page wrapper with the name of the theme
+ * if the current node is within a subsite.
+ */
+function localgov_subsites_preprocess_page(&$variables) {
+  $node = \Drupal::routeMatch()->getParameter('node');
+
+  if (!$node instanceof NodeInterface) {
+    return;
+  }
+
+  if (in_array($node->bundle(), [
+    'localgov_subsites_overview',
+    'localgov_subsites_page'
+  ])) {
+    $subsite = \Drupal::service('class_resolver')
+      ->getInstanceFromDefinition(Subsite::class)
+      ->getSubsite($node);
+
+    if ($subsite instanceof NodeInterface && $theme = $subsite->localgov_subsites_theme->value) {
+      $variables['attributes']['class'][] = str_replace('_', '--', $theme);
+    }
+  }
+}

@@ -14,7 +14,7 @@ behavior_plugins:
   layout_paragraphs:
     enabled: true
     available_layouts:
-      localgov_campaigns_one_column_flexible: Flexible
+      localgov_subsites_one_column_flexible: Flexible
       layout_onecol: 'One column'
       layout_twocol: 'Two column'
       layout_threecol_33_34_33: 'Three column 33/34/33'
