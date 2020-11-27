@@ -56,11 +56,13 @@ class Subsite implements ContainerInjectionInterface {
     if ($node instanceof NodeInterface) {
       if ($node->bundle() === 'localgov_subsites_overview') {
         $entity = $node;
-      } elseif ($id = $this->getRootId($node)) {
+      }
+      elseif ($id = $this->getRootId($node)) {
         $entity = $this->entityTypeManager->getStorage('node')->load($id);
       }
     }
 
     return $entity;
   }
+
 }

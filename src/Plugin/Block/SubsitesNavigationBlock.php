@@ -71,6 +71,12 @@ class SubsitesNavigationBlock extends SubsitesAbstractBlockBase {
     return $build;
   }
 
+  /**
+   * Get nested set tree of links for the menu.
+   *
+   * @return array
+   *   Returns and array of nested items.
+   */
   protected function nestTree($tree, $ancestors, $entities, &$index = 0, $depth = 0) {
     $items = $item = [];
     do {
@@ -97,6 +103,9 @@ class SubsitesNavigationBlock extends SubsitesAbstractBlockBase {
     return $items;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   protected function formatItem(EntityInterface $entity, $in_active_trail) {
     $link = [];
     $link['title'] = $entity->label();
