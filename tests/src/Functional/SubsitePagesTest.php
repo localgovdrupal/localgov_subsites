@@ -53,8 +53,9 @@ class SubsitePagesTest extends BrowserTestBase {
       'bypass node access',
       'administer nodes',
       'administer node fields',
+      'reorder entity_hierarchy children',
     ]);
-    $this->nodeStorage = $this->container->get('entity_type.manager')->getStorage('node');
+    //$this->nodeStorage = $this->container->get('entity_type.manager')->getStorage('node');
   }
 
   /**
@@ -66,29 +67,28 @@ class SubsitePagesTest extends BrowserTestBase {
     // Check overview fields.
     $this->drupalGet('/admin/structure/types/manage/localgov_subsites_overview/fields');
     $this->assertSession()->statusCodeEquals(200);
-    $this->assertSession()->pageTextContains('localgov_subsites_summary');
     $this->assertSession()->pageTextContains('localgov_subsites_banner');
-    $this->assertSession()->pageTextContains('localgov_subsites_hide_menu');
     $this->assertSession()->pageTextContains('localgov_subsites_content');
-    $this->assertSession()->pageTextContains('localgov_subsites_colour_accent');
-    $this->assertSession()->pageTextContains('localgov_subsites_colour_grad');
+    $this->assertSession()->pageTextContains('localgov_subsites_hide_menu');
+    $this->assertSession()->pageTextContains('localgov_subsites_summary');
+    $this->assertSession()->pageTextContains('localgov_subsites_theme');
 
     // Check page fields.
     $this->drupalGet('/admin/structure/types/manage/localgov_subsites_page/fields');
     $this->assertSession()->statusCodeEquals(200);
-    $this->assertSession()->pageTextContains('localgov_subsites_summary');
-    $this->assertSession()->pageTextContains('localgov_subsites_parent');
     $this->assertSession()->pageTextContains('localgov_subsites_content');
     $this->assertSession()->pageTextContains('localgov_subsites_topic');
+    $this->assertSession()->pageTextContains('localgov_subsites_parent');
+    $this->assertSession()->pageTextContains('localgov_subsites_summary');
 
     // Check edit tabs.
     $this->drupalGet('/node/add/localgov_subsites_overview');
     $this->assertSession()->pageTextContains('Description');
-    $this->assertSession()->pageTextContains('Banner image and colours');
+    $this->assertSession()->pageTextContains('Banner and colour theme');
     $this->assertSession()->pageTextContains('Page builder');
-    $this->assertSession()->pageTextContains('Child pages');
     $this->drupalGet('/node/add/localgov_subsites_page');
     $this->assertSession()->pageTextContains('Description');
+    $this->assertSession()->pageTextContains('Banner');
     $this->assertSession()->pageTextContains('Page builder');
   }
 
