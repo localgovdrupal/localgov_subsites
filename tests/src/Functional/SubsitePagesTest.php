@@ -17,12 +17,16 @@ class SubsitePagesTest extends BrowserTestBase {
   use NodeCreationTrait;
   use AssertBreadcrumbTrait;
 
+
   /**
-   * Test breadcrumbs in the Standard profile.
-   *
-   * @var string
+   * {@inheritdoc}
    */
-  protected $profile = 'standard';
+  protected $defaultTheme = 'localgov_theme';
+
+  /**
+   * {@inheritdoc}
+   */
+  protected $profile = 'localgov';
 
   /**
    * A user with permission to bypass content access checks.
@@ -39,6 +43,7 @@ class SubsitePagesTest extends BrowserTestBase {
   public static $modules = [
     'localgov_subsites',
     'localgov_subsites_paragraphs',
+    'entity_hierarchy',
     'field_ui',
     'pathauto',
   ];
@@ -54,8 +59,11 @@ class SubsitePagesTest extends BrowserTestBase {
       'administer nodes',
       'administer node fields',
       'reorder entity_hierarchy children',
+      'create localgov_subsites_page content',
+      'create localgov_subsites_overview content',
+
     ]);
-    //$this->nodeStorage = $this->container->get('entity_type.manager')->getStorage('node');
+    $this->nodeStorage = $this->container->get('entity_type.manager')->getStorage('node');
   }
 
   /**
@@ -83,7 +91,7 @@ class SubsitePagesTest extends BrowserTestBase {
 
     // Check edit tabs.
     $this->drupalGet('/node/add/localgov_subsites_overview');
-    $this->assertSession()->pageTextContains('Description');
+    //$this->assertSession()->pageTextContains('Description');
     $this->assertSession()->pageTextContains('Banner and colour theme');
     $this->assertSession()->pageTextContains('Page builder');
     $this->drupalGet('/node/add/localgov_subsites_page');
