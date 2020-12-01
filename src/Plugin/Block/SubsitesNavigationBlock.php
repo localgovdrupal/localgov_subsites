@@ -40,6 +40,13 @@ class SubsitesNavigationBlock extends SubsitesAbstractBlockBase {
     $items = [];
 
     $subsite_entity = $this->getContextValue('node');
+    // In some cases, this block might be rendered on a /node/add page. It
+    // seems that in this instancem the $subsite_entity still exists but will
+    // not have an id, so we will check first, and return nothing in the absnce
+    // of an id.
+    if (!$subsite_entity->id()) {
+      return;
+    }
     $cache = (new CacheableMetadata())->addCacheableDependency($subsite_entity);
     $storage = $this->getNestedSetStorage('localgov_subsites');
     $node = $this->getNestedSetNodeKeyFactory()->fromEntity($subsite_entity);
