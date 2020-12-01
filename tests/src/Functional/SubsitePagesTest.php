@@ -41,10 +41,11 @@ class SubsitePagesTest extends BrowserTestBase {
    * @var array
    */
   public static $modules = [
-    'localgov_subsites',
-    'localgov_subsites_paragraphs',
+    'dbal',
     'entity_hierarchy',
     'field_ui',
+    'localgov_subsites',
+    'localgov_subsites_paragraphs',
     'pathauto',
   ];
 
@@ -120,7 +121,7 @@ class SubsitePagesTest extends BrowserTestBase {
     $this->assertText('Page 1');
     $trail = ['' => 'Home'];
     $trail += ['overview-1' => 'Overview 1'];
-    //$this->assertBreadcrumb(NULL, $trail);
+    $this->assertBreadcrumb(NULL, $trail);
   }
 
 }
