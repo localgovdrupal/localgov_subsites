@@ -23,8 +23,10 @@
       },
       "drupal/layout_paragraphs": {
         "Fix missing schema for link in view mode: https://www.drupal.org/project/layout_paragraphs/issues/3161998": "https://www.drupal.org/files/issues/2020-07-28/missing_link_config_schema-3161998-2.patch"
+      },
+      "drupal/dbal": {
+        "Sgtop DBAL from causing notices when working with databases that don't use username and password, i.e. SQLite.": "https://www.drupal.org/files/issues/2020-12-02/dbal-sqlite-compatibility-3185995-3.patch"
       }
-
     }
   }
 }
