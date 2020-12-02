@@ -5,12 +5,19 @@
   "homepage": "https://github.com/localgovdrupal/localgov_subsites",
   "license": "GPL-2.0-or-later",
   "minimum-stability": "dev",
+  "repositories": [
+    {
+        "type": "vcs",
+        "url": "https://git.drupalcode.org/issue/dbal-3185995.git"
+    }
+  ],
   "require": {
     "drupal/entity_hierarchy": "^2.24",
     "drupal/layout_paragraphs": "dev-1.0.x",
     "drupal/tablefield": "dev-2.x",
     "drupal/viewsreference": "^2.0",
-    "localgovdrupal/localgov_paragraphs": "^1.0@alpha"
+    "localgovdrupal/localgov_paragraphs": "^1.0@alpha",
+    "drupal/dbal": "dev-3185995-connection-factory-expects as 1.2"
   },
   "extra": {
     "composer-exit-on-patch-failure": true,
