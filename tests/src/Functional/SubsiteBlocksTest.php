@@ -62,9 +62,9 @@ class SubsiteBlocksTest extends BrowserTestBase {
 
     $this->adminUser = $this->drupalCreateUser(
       [
-      'administer blocks',
-      'create localgov_subsites_overview content',
-      'edit any localgov_subsites_overview content'
+        'administer blocks',
+        'create localgov_subsites_overview content',
+        'edit any localgov_subsites_overview content',
       ]
     );
   }
@@ -108,7 +108,7 @@ class SubsiteBlocksTest extends BrowserTestBase {
       'type' => 'localgov_subsites_overview',
       'status' => NodeInterface::PUBLISHED,
     ]);
-    //$subsite_overview->save();
+    // $subsite_overview->save();
     $subsite_overview->localgov_subsites_banner->appendItem($banner_paragraph);
     $subsite_overview->save();
 
@@ -179,7 +179,7 @@ class SubsiteBlocksTest extends BrowserTestBase {
       'localgov_subsites_parent' => ['target_id' => $subsite_overview->id()],
     ]);
     $subsite_page2_title = $this->randomMachineName(8);
-    $subsite_page2 = $this->createNode([
+    $this->createNode([
       'title' => $subsite_page2_title,
       'type' => 'localgov_subsites_page',
       'status' => NodeInterface::PUBLISHED,
@@ -207,7 +207,6 @@ class SubsiteBlocksTest extends BrowserTestBase {
     $this->assertSession()->pageTextNotContains($subsite_page1_title);
     $this->assertSession()->pageTextNotContains($subsite_page2_title);
     $this->assertSession()->pageTextContains($article_title);
-
 
     // Test the ability to hide the navigation menu.
     $subsite_overview->set('localgov_subsites_hide_menu', ['value' => 1]);
