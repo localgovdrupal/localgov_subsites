@@ -6,6 +6,7 @@ use Drupal\node\NodeInterface;
 use Drupal\Tests\BrowserTestBase;
 use Drupal\Tests\node\Traits\NodeCreationTrait;
 use Drupal\Tests\system\Functional\Menu\AssertBreadcrumbTrait;
+use Drupal\Core\Database\Database;
 
 /**
  * Tests LocalGov Subsite pages work together.
@@ -71,6 +72,14 @@ class SubsitePagesTest extends BrowserTestBase {
    * Verifies basic functionality with all modules.
    */
   public function testSubsiteFields() {
+
+    // If we're testing with sqlite, entity_hierarchy will break.
+    // See https://github.com/localgovdrupal/localgov_subsites/pull/8#issuecomment-740668968
+    $connection = Database::getConnection()->getConnectionOptions();
+    if ($connection['driver'] === 'sqlite') {
+      return;
+    }
+
     $this->drupalLogin($this->adminUser);
 
     // Check overview fields.
@@ -105,6 +114,14 @@ class SubsitePagesTest extends BrowserTestBase {
    * Pathauto and breadcrumbs.
    */
   public function testSubsitePaths() {
+
+    // If we're testing with sqlite, entity_hierarchy will break.
+    // See https://github.com/localgovdrupal/localgov_subsites/pull/8#issuecomment-740668968
+    $connection = Database::getConnection()->getConnectionOptions();
+    if ($connection['driver'] === 'sqlite') {
+      return;
+    }
+
     $overview = $this->createNode([
       'title' => 'Overview 1',
       'type' => 'localgov_subsites_overview',
