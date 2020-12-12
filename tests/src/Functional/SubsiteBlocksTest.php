@@ -11,7 +11,6 @@ use Drupal\Tests\TestFileCreationTrait;
 use Drupal\Tests\node\Traits\NodeCreationTrait;
 use Drupal\Core\Database\Database;
 
-
 /**
  * Tests user blocks.
  *
