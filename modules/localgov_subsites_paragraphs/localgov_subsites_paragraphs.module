@@ -27,6 +27,14 @@ function localgov_subsites_paragraphs_theme($existing, $type, $theme, $path) {
       'template' => 'paragraph--localgov-accordion-pane',
       'base hook' => 'paragraph',
     ],
+    'paragraph__localgov_banner_primary' => [
+      'template' => 'paragraph--localgov-banner-primary',
+      'base hook' => 'paragraph',
+    ],
+    'paragraph__localgov_banner_secondary' => [
+      'template' => 'paragraph--localgov-banner-secondary',
+      'base hook' => 'paragraph',
+    ],
     'paragraph__localgov_box_link' => [
       'template' => 'paragraph--localgov-box-link',
       'base hook' => 'paragraph',

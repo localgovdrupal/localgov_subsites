@@ -40,6 +40,13 @@ class SubsitesNavigationBlock extends SubsitesAbstractBlockBase {
     $items = [];
 
     $subsite_entity = $this->getContextValue('node');
+    // In some cases, this block might be rendered on a /node/add page. It
+    // seems that in this instancem the $subsite_entity still exists but will
+    // not have an id, so we will check first, and return nothing in the absnce
+    // of an id.
+    if (!$subsite_entity->id()) {
+      return;
+    }
     $cache = (new CacheableMetadata())->addCacheableDependency($subsite_entity);
     $storage = $this->getNestedSetStorage('localgov_subsites');
     $node = $this->getNestedSetNodeKeyFactory()->fromEntity($subsite_entity);
@@ -71,6 +78,12 @@ class SubsitesNavigationBlock extends SubsitesAbstractBlockBase {
     return $build;
   }
 
+  /**
+   * Get nested set tree of links for the menu.
+   *
+   * @return array
+   *   Returns and array of nested items.
+   */
   protected function nestTree($tree, $ancestors, $entities, &$index = 0, $depth = 0) {
     $items = $item = [];
     do {
@@ -97,6 +110,9 @@ class SubsitesNavigationBlock extends SubsitesAbstractBlockBase {
     return $items;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   protected function formatItem(EntityInterface $entity, $in_active_trail) {
     $link = [];
     $link['title'] = $entity->label();

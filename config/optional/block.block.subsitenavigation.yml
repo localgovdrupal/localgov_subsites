@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - localgov_subsites
+  theme:
+    - localgov_theme
+id: subsitenavigation
+theme: localgov_theme
+region: sidebar_second
+weight: -7
+provider: null
+plugin: localgov_subsite_navigation
+settings:
+  id: localgov_subsite_navigation
+  label: 'Subsite navigation'
+  provider: localgov_subsites
+  label_display: visible
+  context_mapping:
+    node: '@node.node_route_context:node'
+visibility: {  }
