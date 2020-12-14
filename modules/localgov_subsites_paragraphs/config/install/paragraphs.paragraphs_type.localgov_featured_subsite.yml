@@ -1,9 +1,6 @@
-uuid: e479ad59-fd24-447e-9300-9e7f1e9d8c67
 langcode: en
 status: true
 dependencies: {  }
-_core:
-  default_config_hash: OhGFgbEq2S7SqeYtg2B2ZrOP6h-peTkJBx_xjKQqtz0
 id: localgov_featured_subsite
 label: 'Featured subsite'
 icon_uuid: null

@@ -11,7 +11,16 @@ namespace Drupal\localgov_subsites\Plugin\Block;
  *   id = "localgov_subsite_banner",
  *   admin_label = "Subsite banner",
  *   context_definitions = {
- *     "node" = @ContextDefinition("entity:node", label = @Translation("Current node"))
+ *     "node" = @ContextDefinition(
+ *       "entity:node",
+ *       label = @Translation("Current node"),
+ *       constraints = {
+ *         "Bundle" = {
+ *           "localgov_subsites_overview",
+ *           "localgov_subsites_page"
+ *         },
+ *       }
+ *     )
  *   }
  * )
  */
