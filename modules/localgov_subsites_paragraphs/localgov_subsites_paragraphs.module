@@ -146,7 +146,7 @@ function localgov_subsites_paragraphs_preprocess_paragraph(&$variables) {
       $file_url = File::load($fid)->getFileUri();
       $variables['background_url'] = ImageStyle::load('large_21_9')->buildUrl($file_url);
     }
-    $heading_text = $paragraph->get('localgov_header_text')->value;
+    $heading_text = $paragraph->get('localgov_header_text')->value ?: '';
     $heading_level = $paragraph->get('localgov_heading_level')->value ?: 'h2';
     $variables['heading'] = _localgov_subsites_paragraphs_create_heading($heading_text, $heading_level);
     $variables['colour_theme'] = $paragraph->get('localgov_colour_theme')->value;
