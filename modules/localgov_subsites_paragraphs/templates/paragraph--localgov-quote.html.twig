@@ -38,7 +38,27 @@
  * @ingroup themeable
  */
 #}
-<blockquote class="pull-out-quote">
+
+{%
+  set classes = [
+    "pull-out-quote",
+  ]
+%}
+
+<blockquote{{ attributes.addClass(classes) }}>
   <p>{{ content.localgov_text_plain }}</p>
-  <footer>- {{ content.localgov_author }}</footer>
+  {% if paragraph.localgov_author.value %}
+    <footer>
+      - {{ paragraph.localgov_author.value }}
+    </footer>
+  {% endif %}
 </blockquote>
+
+{% block content_variable %}
+  {#
+    This allows the cache_context to bubble up for us, without having to
+    individually list every field in
+    {{ content|without('field_name', 'field_other_field', 'field_etc') }}
+  #}
+  {% set catch_cache = content|render %}
+{% endblock %}
