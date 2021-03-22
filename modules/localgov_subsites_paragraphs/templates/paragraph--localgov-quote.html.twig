@@ -46,7 +46,10 @@
 %}
 
 <blockquote{{ attributes.addClass(classes) }}>
-  <p>{{ content.localgov_text_plain }}</p>
+  <div class="pull-out-quote__content">
+    {{ content.localgov_text_plain }}
+  </div>
+  
   {% if paragraph.localgov_author.value %}
     <footer>
       - {{ paragraph.localgov_author.value }}
