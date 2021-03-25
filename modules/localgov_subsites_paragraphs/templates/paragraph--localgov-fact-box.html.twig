@@ -38,11 +38,42 @@
  * @ingroup themeable
  */
 #}
+
 {%
-  set class = 'fact-box-' ~ paragraph.field_background.getValue[0].value
+  set classes = [
+    'fact-box',
+    paragraph.field_background.getValue[0].value ? 
+      'fact-box--' ~ paragraph.field_background.getValue[0].value : '',
+  ]
 %}
-<div class="fact-box {{ class }} level-height-item">
-  <p class="fact-opening">{{ content.localgov_above_text }}</p>
-  <p class="fact">{{ content.localgov_fact }}</p>
-  <p class="fact-closing">{{ content.localgov_below_text }}</p>
+
+<div{{attributes.addClass(classes)}}>
+
+	{% if paragraph.localgov_above_text.value %}
+		<p class="fact-opening">
+      {{ paragraph.localgov_above_text.value }}
+    </p>
+	{% endif %}
+
+	{% if paragraph.localgov_fact.value %}
+		<p class="fact">
+      {{ paragraph.localgov_fact.value }}
+    </p>
+	{% endif %}
+
+	{% if paragraph.localgov_below_text.value %}
+		<p class="fact-closing">
+      {{ paragraph.localgov_below_text.value }}
+    </p>
+	{% endif %}
+
 </div>
+
+{% block content_variable %}
+  {#
+    This allows the cache_context to bubble up for us, without having to
+    individually list every field in
+    {{ content|without('field_name', 'field_other_field', 'field_etc') }}
+  #}
+  {% set catch_cache = content|render %}
+{% endblock %}
