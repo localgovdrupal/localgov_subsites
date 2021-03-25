@@ -50,19 +50,19 @@
 <div{{attributes.addClass(classes)}}>
 
 	{% if paragraph.localgov_above_text.value %}
-		<p class="fact-opening">
+		<p class="fact-box__opening">
       {{ paragraph.localgov_above_text.value }}
     </p>
 	{% endif %}
 
 	{% if paragraph.localgov_fact.value %}
-		<p class="fact">
+		<p class="fact-box__fact">
       {{ paragraph.localgov_fact.value }}
     </p>
 	{% endif %}
 
 	{% if paragraph.localgov_below_text.value %}
-		<p class="fact-closing">
+		<p class="fact-box__closing">
       {{ paragraph.localgov_below_text.value }}
     </p>
 	{% endif %}
