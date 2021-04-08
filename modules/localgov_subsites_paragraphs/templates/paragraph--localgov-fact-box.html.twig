@@ -39,11 +39,19 @@
  */
 #}
 
+{% if paragraph.localgov_background.value %}
+  {% set factbox_bg = paragraph.localgov_background.value %}
+{% endif %}
+
 {%
   set classes = [
     'fact-box',
-    paragraph.field_background.getValue[0].value ? 
-      'fact-box--' ~ paragraph.field_background.getValue[0].value : '',
+    factbox_bg ? 'fact-box--has-bg',
+    factbox_bg ? 'fact-box--' ~ factbox_bg,
+    'paragraph',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    not paragraph.isPublished() ? 'paragraph--unpublished'
   ]
 %}
 
