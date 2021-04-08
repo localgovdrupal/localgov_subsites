@@ -41,19 +41,33 @@
 #}
 {%
   set classes = [
+    'featured-teaser',
     'paragraph',
     'paragraph--type--' ~ paragraph.bundle|clean_class,
     view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
     not paragraph.isPublished() ? 'paragraph--unpublished',
-    'featured-teaser'
   ]
 %}
 
-{% block paragraph %}
-  <div{{ attributes.addClass(classes) }}>
-    {% block content %}
+<div{{ attributes.addClass(classes) }}>
+  {% if heading %}
+    <div class="featured-teaser__heading">
       {{ heading }}
+    </div>
+  {% endif %}
+
+  {% if content %}
+    <div class="featured-teaser__content">
       {{ content }}
-    {% endblock %}
-  </div>
-{% endblock paragraph %}
+    </div>
+  {% endif %}
+</div>
+
+{% block content_variable %}
+  {#
+    This allows the cache_context to bubble up for us, without having to
+    individually list every field in
+    {{ content|without('field_name', 'field_other_field', 'field_etc') }}
+  #}
+  {% set catch_cache = content|render %}
+{% endblock %}
