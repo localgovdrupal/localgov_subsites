@@ -50,17 +50,17 @@
 %}
 
 <div{{ attributes.addClass(classes) }}>
-    {% if heading %}
-      <div class="featured-teasers__heading">
-        {{ heading }}
-      </div>
-    {% endif %}
+  {% if heading %}
+    <div class="featured-teasers__heading">
+      {{ heading }}
+    </div>
+  {% endif %}
 
-    {% if paragraph.localgov_paragraphs %}
-      <div class="featured-teasers__teasers">
-        {{ content.localgov_paragraphs }}
-      </div>
-    {% endif %}
+  {% if paragraph.localgov_paragraphs %}
+    <div class="featured-teasers__teasers">
+      {{ content.localgov_paragraphs }}
+    </div>
+  {% endif %}
 </div>
 
 {% block content_variable %}
