@@ -42,6 +42,10 @@
 {%
   set classes = [
     "pull-out-quote",
+    'paragraph',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    not paragraph.isPublished() ? 'paragraph--unpublished'
   ]
 %}
 
@@ -51,7 +55,7 @@
   </div>
   
   {% if paragraph.localgov_author.value %}
-    <footer>
+    <footer class="pull-out-quote__author">
       - {{ paragraph.localgov_author.value }}
     </footer>
   {% endif %}
