@@ -38,11 +38,50 @@
  * @ingroup themeable
  */
 #}
+
+{% if paragraph.localgov_background.value %}
+  {% set factbox_bg = paragraph.localgov_background.value %}
+{% endif %}
+
 {%
-  set class = 'fact-box-' ~ paragraph.field_background.getValue[0].value
+  set classes = [
+    'fact-box',
+    factbox_bg ? 'fact-box--has-bg',
+    factbox_bg ? 'fact-box--' ~ factbox_bg,
+    'paragraph',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    not paragraph.isPublished() ? 'paragraph--unpublished'
+  ]
 %}
-<div class="fact-box {{ class }} level-height-item">
-  <p class="fact-opening">{{ content.localgov_above_text }}</p>
-  <p class="fact">{{ content.localgov_fact }}</p>
-  <p class="fact-closing">{{ content.localgov_below_text }}</p>
+
+<div{{attributes.addClass(classes)}}>
+
+	{% if paragraph.localgov_above_text.value %}
+		<p class="fact-box__opening">
+      {{ paragraph.localgov_above_text.value }}
+    </p>
+	{% endif %}
+
+	{% if paragraph.localgov_fact.value %}
+		<p class="fact-box__fact">
+      {{ paragraph.localgov_fact.value }}
+    </p>
+	{% endif %}
+
+	{% if paragraph.localgov_below_text.value %}
+		<p class="fact-box__closing">
+      {{ paragraph.localgov_below_text.value }}
+    </p>
+	{% endif %}
+
 </div>
+
+{% block content_variable %}
+  {#
+    This allows the cache_context to bubble up for us, without having to
+    individually list every field in
+    {{ content|without('field_name', 'field_other_field', 'field_etc') }}
+  #}
+  {% set catch_cache = content|render %}
+{% endblock %}
