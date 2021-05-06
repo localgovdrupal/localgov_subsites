@@ -17,6 +17,8 @@ function localgov_subsites_theme($existing, $type, $theme, $path) {
       'variables' => [
         'menu_name' => '',
         'items' => [],
+        'current_entity' => NULL,
+        'overview_entity' => NULL,
       ],
     ],
     'subsite_banner' => [

@@ -57,6 +57,7 @@ class SubsitesNavigationBlock extends SubsitesAbstractBlockBase {
       $entities = $mapper->loadAndAccessCheckEntitysForTreeNodes('node', $tree, $cache);
       $items = $this->nestTree($tree, $ancestors, $entities);
       $subsite_id = $entities[$ancestors[0]]->id();
+      $overview_entity = $entities[$ancestors[0]];
     }
     elseif ($subsite_entity->bundle('localgov_subsites_overview')) {
       // Subsite overview page with no children.
@@ -64,6 +65,7 @@ class SubsitesNavigationBlock extends SubsitesAbstractBlockBase {
       // Cache metadata already has this entity.
       $items = [$this->formatItem($subsite_entity, TRUE)];
       $subsite_id = $subsite_entity->id();
+      $overview_entity = $subsite_entity;
     }
 
     if ($items) {
@@ -71,6 +73,8 @@ class SubsitesNavigationBlock extends SubsitesAbstractBlockBase {
         '#theme' => 'subsite_navigation',
         '#menu_name' => 'subsite_navigation:' . $subsite_id,
         '#items' => $items,
+        '#current_entity' => $subsite_entity,
+        '#overview_entity' => $overview_entity,
       ];
     }
 
