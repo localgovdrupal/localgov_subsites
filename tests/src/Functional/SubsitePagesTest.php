@@ -41,7 +41,7 @@ class SubsitePagesTest extends BrowserTestBase {
    *
    * @var array
    */
-  public static $modules = [
+  protected static $modules = [
     'dbal',
     'entity_hierarchy',
     'field_ui',
@@ -53,7 +53,7 @@ class SubsitePagesTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     $this->adminUser = $this->drupalCreateUser([
@@ -134,7 +134,7 @@ class SubsitePagesTest extends BrowserTestBase {
       'localgov_subsites_parent' => ['target_id' => $overview->id()],
     ]);
 
-    // TODO: commenting out this test for now as we've spent a lot of time
+    // @todo commenting out this test for now as we've spent a lot of time
     // trying to get to the bottom of why it's failing but are unable to find a
     // solution despite this feature working as expected when debugging the
     // PHPUnit output.
