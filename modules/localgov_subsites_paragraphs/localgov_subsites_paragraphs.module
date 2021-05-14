@@ -101,10 +101,6 @@ function localgov_subsites_paragraphs_theme($existing, $type, $theme, $path) {
       'template' => 'paragraph--localgov-tab-panel',
       'base hook' => 'paragraph',
     ],
-    'paragraph__localgov_video' => [
-      'template' => 'paragraph--localgov-video',
-      'base hook' => 'paragraph',
-    ],
   ];
 }
 
