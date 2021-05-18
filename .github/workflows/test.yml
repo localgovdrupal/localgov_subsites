@@ -67,7 +67,7 @@ jobs:
           composer global config github-oauth.github.com ${{ github.token }}
 
       - name: Obtain the test target from the repo that triggered this workflow
-        run: composer --working-dir=html require --with-all-dependencies localgovdrupal/${{ github.event.repository.name }}:"dev-${GIT_BRANCH} as ${GIT_BASE%'.x'}"
+        run: composer --working-dir=html require --with-all-dependencies localgovdrupal/${{ github.event.repository.name }}:"dev-${GIT_BRANCH} as ${GIT_BASE}"
 
   phpcs:
     name: Coding standards checks
