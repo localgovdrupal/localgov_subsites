@@ -77,7 +77,7 @@ jobs:
       - name: Obtain the test target from the repo that triggered this workflow
         run: composer --working-dir=html require --with-all-dependencies localgovdrupal/${{ github.event.repository.name }}:"${COMPOSER_REF} as ${GIT_BASE}-dev"
 
-phpcs:
+  phpcs:
     name: Coding standards checks
     needs: build
     runs-on: ubuntu-latest
