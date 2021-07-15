@@ -5,6 +5,7 @@
  * LocalGov Subsites module file.
  */
 
+use Drupal\localgov_roles\RolesHelper;
 use Drupal\localgov_subsites\Subsite;
 use Drupal\node\NodeInterface;
 
@@ -39,6 +40,86 @@ function localgov_subsites_theme($existing, $type, $theme, $path) {
       'base hook' => 'node',
     ],
   ];
+}
+
+/**
+ * Implements hook_localgov_role_default().
+ */
+function localgov_subsites_localgov_roles_default() {
+
+  // Content editing permissions.
+  $perms = [
+    RolesHelper::EDITOR_ROLE => [
+      'create localgov_subsites_overview content',
+      'create localgov_subsites_page content',
+      'delete any localgov_subsites_overview content',
+      'delete any localgov_subsites_page content',
+      'delete localgov_subsites_overview revisions',
+      'delete localgov_subsites_page revisions',
+      'delete own localgov_subsites_overview content',
+      'delete own localgov_subsites_page content',
+      'edit any localgov_subsites_overview content',
+      'edit any localgov_subsites_page content',
+      'edit own localgov_subsites_overview content',
+      'edit own localgov_subsites_page content',
+      'revert localgov_subsites_overview revisions',
+      'revert localgov_subsites_page revisions',
+      'view localgov_subsites_overview revisions',
+      'view localgov_subsites_page revisions',
+    ],
+    RolesHelper::AUTHOR_ROLE => [
+      'create localgov_subsites_overview content',
+      'create localgov_subsites_page content',
+      'delete own localgov_subsites_overview content',
+      'delete own localgov_subsites_page content',
+      'edit own localgov_subsites_overview content',
+      'edit own localgov_subsites_page content',
+      'revert localgov_subsites_overview revisions',
+      'revert localgov_subsites_page revisions',
+      'view localgov_subsites_overview revisions',
+      'view localgov_subsites_page revisions',
+    ],
+    RolesHelper::CONTRIBUTOR_ROLE => [
+      'create localgov_subsites_overview content',
+      'create localgov_subsites_page content',
+      'delete own localgov_subsites_overview content',
+      'delete own localgov_subsites_page content',
+      'edit own localgov_subsites_overview content',
+      'edit own localgov_subsites_page content',
+      'view localgov_subsites_overview revisions',
+      'view localgov_subsites_page revisions',
+    ],
+  ];
+
+  // Content scheduling permissions required by localgov_workflows.
+  if (\Drupal::moduleHandler()->moduleExists('localgov_workflows')) {
+    $perms[RolesHelper::EDITOR_ROLE] = array_merge($perms[RolesHelper::EDITOR_ROLE], [
+      'add scheduled transitions node localgov_subsites_overview',
+      'add scheduled transitions node localgov_subsites_page',
+      'reschedule scheduled transitions node localgov_subsites_overview',
+      'reschedule scheduled transitions node localgov_subsites_page',
+      'view scheduled transitions node localgov_subsites_overview',
+      'view scheduled transitions node localgov_subsites_page',
+    ]);
+    $perms[RolesHelper::AUTHOR_ROLE] = array_merge($perms[RolesHelper::AUTHOR_ROLE], [
+      'add scheduled transitions node localgov_subsites_overview',
+      'add scheduled transitions node localgov_subsites_page',
+      'reschedule scheduled transitions node localgov_subsites_overview',
+      'reschedule scheduled transitions node localgov_subsites_page',
+      'view scheduled transitions node localgov_subsites_overview',
+      'view scheduled transitions node localgov_subsites_page',
+    ]);
+    $perms[RolesHelper::CONTRIBUTOR_ROLE] = array_merge($perms[RolesHelper::CONTRIBUTOR_ROLE], [
+      'add scheduled transitions node localgov_subsites_overview',
+      'add scheduled transitions node localgov_subsites_page',
+      'reschedule scheduled transitions node localgov_subsites_overview',
+      'reschedule scheduled transitions node localgov_subsites_page',
+      'view scheduled transitions node localgov_subsites_overview',
+      'view scheduled transitions node localgov_subsites_page',
+    ]);
+  }
+
+  return $perms;
 }
 
 /**
