@@ -4,9 +4,9 @@ dependencies:
   module:
     - localgov_subsites
   theme:
-    - localgov_theme
+    - localgov_base
 id: localgov_subsite_navigation
-theme: localgov_theme
+theme: localgov_base
 region: sidebar_second
 weight: -4
 provider: null
