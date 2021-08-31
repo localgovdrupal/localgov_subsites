@@ -26,7 +26,7 @@ class SubsiteBlocksTest extends BrowserTestBase {
    *
    * @var array
    */
-  public static $modules = [
+  protected static $modules = [
     'localgov_subsites',
   ];
 
@@ -50,7 +50,7 @@ class SubsiteBlocksTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     $type = $this->container->get('entity_type.manager')->getStorage('node_type')
