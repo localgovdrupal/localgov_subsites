@@ -4,9 +4,9 @@ dependencies:
   module:
     - localgov_subsites
   theme:
-    - localgov_theme
+    - localgov_base
 id: localgov_subsite_banner
-theme: localgov_theme
+theme: localgov_base
 region: content_top
 weight: 0
 provider: null
