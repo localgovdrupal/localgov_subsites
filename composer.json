@@ -10,6 +10,7 @@
     "drupal/layout_paragraphs": "dev-1.0.x",
     "drupal/tablefield": "dev-2.x",
     "drupal/viewsreference": "^2.0",
+    "localgovdrupal/localgov_core": "^2.1",
     "localgovdrupal/localgov_paragraphs": "^2.0"
   },
   "extra": {
