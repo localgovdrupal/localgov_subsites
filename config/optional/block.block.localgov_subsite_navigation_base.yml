@@ -4,18 +4,16 @@ dependencies:
   module:
     - localgov_subsites
   theme:
-    - localgov_scarfolk
-id: subsitenavigation
-theme: localgov_scarfolk
+    - localgov_base
+id: localgov_subsite_navigation_base
+theme: localgov_base
 region: sidebar_second
-weight: -7
+weight: -4
 provider: null
 plugin: localgov_subsite_navigation
 settings:
   id: localgov_subsite_navigation
   label: 'Subsite navigation'
   provider: localgov_subsites
-  label_display: visible
-  context_mapping:
-    node: '@node.node_route_context:node'
+  label_display: '0'
 visibility: {  }

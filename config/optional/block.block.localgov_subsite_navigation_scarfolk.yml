@@ -5,7 +5,7 @@ dependencies:
     - localgov_subsites
   theme:
     - localgov_scarfolk
-id: localgov_subsite_navigation
+id: localgov_subsite_navigation_scarfolk
 theme: localgov_scarfolk
 region: sidebar_second
 weight: -4
