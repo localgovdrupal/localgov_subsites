@@ -4,9 +4,9 @@ dependencies:
   module:
     - localgov_subsites
   theme:
-    - localgov_base
+    - localgov_scarfolk
 id: subsitenavigation
-theme: localgov_base
+theme: localgov_scarfolk
 region: sidebar_second
 weight: -7
 provider: null
