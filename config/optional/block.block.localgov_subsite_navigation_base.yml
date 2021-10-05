@@ -16,4 +16,6 @@ settings:
   label: 'Subsite navigation'
   provider: localgov_subsites
   label_display: '0'
+  context_mapping:
+    node: '@node.node_route_context:node'
 visibility: {  }
