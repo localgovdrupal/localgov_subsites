@@ -4,11 +4,11 @@ dependencies:
   module:
     - localgov_subsites
   theme:
-    - localgov_base
-id: subsitebanner
-theme: localgov_base
+    - localgov_scarfolk
+id: localgov_subsite_banner_scarfolk
+theme: localgov_scarfolk
 region: banner
-weight: -7
+weight: 0
 provider: null
 plugin: localgov_subsite_banner
 settings:
