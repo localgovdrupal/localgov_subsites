@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - localgov_subsites
+  theme:
+    - localgov_base
+id: localgov_subsite_banner_base
+theme: localgov_base
+region: banner
+weight: 0
+provider: null
+plugin: localgov_subsite_banner
+settings:
+  id: localgov_subsite_banner
+  label: 'Subsite banner'
+  provider: localgov_subsites
+  label_display: '0'
+  context_mapping:
+    node: '@node.node_route_context:node'
+visibility: {  }
