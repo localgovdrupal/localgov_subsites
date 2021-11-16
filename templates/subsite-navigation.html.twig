@@ -46,7 +46,11 @@
         ]
       %}
       <li{{ item.attributes.addClass(classes) }}>
-        {{ link(item.title, item.url) }}
+        {% if item.in_active_trail %}
+          {{ item.title }}
+        {% else %}
+          {{ link(item.title, item.url) }}
+        {% endif %}
         {% if item.below %}
           {{ subsite_navigation.menu_links(item.below, attributes, menu_level + 1) }}
         {% endif %}
