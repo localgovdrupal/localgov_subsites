@@ -15,7 +15,7 @@ dependencies:
   - entity_hierarchy:entity_hierarchy
   - entity_hierarchy:entity_hierarchy_breadcrumb
   - field_group:field_group
-  - paragraphs:paragraphs
+  - paragraphs:paragraphs (>=8.x-1.13)
   - layout_paragraphs:layout_paragraphs
   - localgov_subsites:localgov_subsites_paragraphs
   - localgov_core:localgov_core
