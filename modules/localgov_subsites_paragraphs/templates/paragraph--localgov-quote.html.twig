@@ -38,7 +38,25 @@
  * @ingroup themeable
  */
 #}
-<blockquote class="pull-out-quote">
-  <p>{{ content.localgov_text_plain }}</p>
-  <footer>- {{ content.localgov_author }}</footer>
-</blockquote>
+
+{%
+  set classes = [
+    "pull-out-quote",
+    'paragraph',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    not paragraph.isPublished() ? 'paragraph--unpublished'
+  ]
+%}
+
+<figure{{ attributes.addClass(classes) }}>
+  <blockquote class="pull-out-quote__content">
+    {{ content|without('localgov_author') }}
+  </blockquote>
+  
+  {% if paragraph.localgov_author.value %}
+    <figcaption class="pull-out-quote__author">
+      - {{ paragraph.localgov_author.value }}
+    </figcaption>
+  {% endif %}
+</figure>
