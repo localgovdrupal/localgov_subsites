@@ -3,6 +3,7 @@
 namespace Drupal\Tests\localgov_subsites\Functional;
 
 use Drupal\file\Entity\File;
+use Drupal\file\FileInterface;
 use Drupal\media\Entity\Media;
 use Drupal\node\NodeInterface;
 use Drupal\paragraphs\Entity\Paragraph;
@@ -91,7 +92,7 @@ class SubsiteBlocksTest extends BrowserTestBase {
     $image = current($this->getTestFiles('image'));
     $file = File::create([
       'uri' => $image->uri,
-      'status' => FILE_STATUS_PERMANENT,
+      'status' => FileInterface::STATUS_PERMANENT,
     ]);
     $file->save();
 
