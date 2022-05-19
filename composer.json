@@ -8,7 +8,7 @@
   "require": {
     "drupal/entity_hierarchy": "^2.24",
     "drupal/layout_paragraphs": "^2.0@beta",
-    "drupal/tablefield": "dev-2.x",
+    "drupal/tablefield": "^2.2",
     "drupal/viewsreference": "^2.0",
     "localgovdrupal/localgov_core": "^2.1",
     "localgovdrupal/localgov_paragraphs": "^2.0"

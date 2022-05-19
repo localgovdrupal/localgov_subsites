@@ -29,12 +29,6 @@ function localgov_subsites_theme($existing, $type, $theme, $path) {
         'image' => '',
       ],
     ],
-    'subsite_overview_banner' => [
-      'variables' => [
-        'heading' => '',
-        'image' => '',
-      ],
-    ],
     'node__localgov_subsites_page__full' => [
       'template' => 'node--localgov-subsites-page--full',
       'base hook' => 'node',

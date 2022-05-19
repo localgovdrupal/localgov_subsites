@@ -2,7 +2,7 @@
 
 namespace Drupal\Tests\localgov_subsites_paragraphs\Functional;
 
-use Drupal\Tests\paragraphs\Functional\Classic\ParagraphsTestBase;
+use Drupal\Tests\paragraphs\Functional\WidgetLegacy\ParagraphsTestBase;
 
 /**
  * Tests the configuration of localgov_paragraphs.

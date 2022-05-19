@@ -5,7 +5,7 @@ dependencies:
     - localgov_subsites
   theme:
     - localgov_base
-id: localgov_subsite_navigation
+id: localgov_subsite_navigation_base
 theme: localgov_base
 region: sidebar_second
 weight: -4
@@ -16,4 +16,6 @@ settings:
   label: 'Subsite navigation'
   provider: localgov_subsites
   label_display: '0'
+  context_mapping:
+    node: '@node.node_route_context:node'
 visibility: {  }
