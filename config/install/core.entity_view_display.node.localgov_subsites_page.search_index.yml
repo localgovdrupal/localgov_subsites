@@ -23,7 +23,7 @@ content:
     label: hidden
     settings:
       view_mode: default
-      link: false
+      link: ''
     third_party_settings: {  }
     type: layout_paragraphs
     region: content
