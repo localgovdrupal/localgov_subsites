@@ -3,6 +3,11 @@
  * Basic styling for Accordion paragraph.
  */
 
+.accordion-pane__title button {
+  width: 100%;
+  text-align: left;
+}
+
 .accordion--initialised .accordion-pane__content {
   display: none;
 }
