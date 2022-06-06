@@ -9,6 +9,8 @@ localgov_accordion:
       css/localgov-accordion.css: {}
   js:
     js/localgov-accordion.js: {}
+  dependencies:
+    - core/drupal
 
 localgov_box_links_listing:
   css:
