@@ -4,3 +4,11 @@
  * @file
  * LocalGov Subsites install file.
  */
+
+/**
+ * Clear caches after moving subsites paragraphs to localgov_paragraphs.
+ */
+function localgov_subsites_update_9001() {
+
+  drupal_flush_all_caches();
+}
