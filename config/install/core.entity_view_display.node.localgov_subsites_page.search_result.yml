@@ -16,17 +16,16 @@ targetEntityType: node
 bundle: localgov_subsites_page
 mode: search_result
 content:
-  localgov_subsites_summary:
-    type: basic_string
-    weight: 0
-    region: content
-    label: hidden
+  search_api_excerpt:
     settings: {  }
     third_party_settings: {  }
+    weight: 0
+    region: content
 hidden:
+  content_moderation_control: true
   links: true
   localgov_subsites_banner: true
   localgov_subsites_content: true
   localgov_subsites_parent: true
+  localgov_subsites_summary: true
   localgov_subsites_topic: true
-  search_api_excerpt: true
