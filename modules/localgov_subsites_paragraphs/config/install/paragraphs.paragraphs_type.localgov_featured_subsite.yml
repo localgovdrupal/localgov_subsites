@@ -1,9 +1,0 @@
-langcode: en
-status: true
-dependencies: {  }
-id: localgov_featured_subsite
-label: 'Featured subsite'
-icon_uuid: null
-icon_default: null
-description: ''
-behavior_plugins: {  }

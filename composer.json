@@ -11,7 +11,7 @@
     "drupal/tablefield": "^2.2",
     "drupal/viewsreference": "^2.0",
     "localgovdrupal/localgov_core": "^2.1",
-    "localgovdrupal/localgov_paragraphs": "^2.0"
+    "localgovdrupal/localgov_paragraphs": "^2.1"
   },
   "extra": {
     "composer-exit-on-patch-failure": true,
