@@ -20,7 +20,7 @@
     },
     "patches": {
       "drupal/viewsreference": {
-        "Implement configuration schema for Views reference field storage+settings and widget+formatter https://www.drupal.org/project/viewsreference/issues/2957529": "https://www.drupal.org/files/issues/2020-07-16/2957529-10.viewsreference.patch"
+        "Implement configuration schema for Views reference field storage+settings and widget+formatter https://www.drupal.org/project/viewsreference/issues/2957529": "https://www.drupal.org/files/issues/2022-08-22/viewsreference-schema_2.x-2957529-14.patch"
       }
     }
   }
