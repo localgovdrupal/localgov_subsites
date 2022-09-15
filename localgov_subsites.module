@@ -137,7 +137,7 @@ function localgov_subsites_preprocess_page(&$variables) {
       ->getInstanceFromDefinition(Subsite::class)
       ->getSubsite($node);
 
-    if ($subsite instanceof NodeInterface && $theme = $subsite->localgov_subsites_theme->value) {
+    if ($subsite instanceof NodeInterface && isset($subsite->localgov_subsites_theme->value) && $theme = $subsite->localgov_subsites_theme->value) {
       $variables['attributes']['class'][] = str_replace('_', '--', $theme);
     }
   }
