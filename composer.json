@@ -6,7 +6,7 @@
   "license": "GPL-2.0-or-later",
   "minimum-stability": "dev",
   "require": {
-    "drupal/entity_hierarchy": "^2.24",
+    "drupal/entity_hierarchy": "^3.3",
     "drupal/tablefield": "^2.2",
     "drupal/viewsreference": "^2.0",
     "localgovdrupal/localgov_core": "^2.1",
