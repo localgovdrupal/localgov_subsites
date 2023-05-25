@@ -22,12 +22,12 @@ class SubsitePagesTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected $defaultTheme = 'localgov_base';
+  protected $defaultTheme = 'stark';
 
   /**
    * {@inheritdoc}
    */
-  protected $profile = 'localgov';
+  protected $profile = 'testing';
 
   /**
    * A user with permission to bypass content access checks.

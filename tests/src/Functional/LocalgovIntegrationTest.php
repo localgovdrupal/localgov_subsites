@@ -20,16 +20,14 @@ class LocalgovIntegrationTest extends BrowserTestBase {
   use CronRunTrait;
 
   /**
-   * Test breadcrumbs in the Standard profile.
-   *
-   * @var string
+   * {@inheritdoc}
    */
-  protected $profile = 'standard';
+  protected $profile = 'testing';
 
   /**
    * {@inheritdoc}
    */
-  protected $defaultTheme = 'stable';
+  protected $defaultTheme = 'stark';
 
   /**
    * A user with permission to bypass content access checks.

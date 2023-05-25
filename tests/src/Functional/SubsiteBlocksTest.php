@@ -39,7 +39,7 @@ class SubsiteBlocksTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected $profile = 'localgov';
+  protected $profile = 'testing';
 
   /**
    * A user with the 'administer blocks' permission.
