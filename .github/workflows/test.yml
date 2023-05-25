@@ -90,6 +90,7 @@ jobs:
       - name: REMOVE BEFORE MERGING - Require aliased dependencies
         run: |
           composer --working-dir=./html require localgovdrupal/localgov_core:"dev-feature/drupal-10 as 2.2.0"
+          composer --working-dir=./html require localgovdrupal/localgov_paragraphs:"dev-feature/drupal-10 as 2.3.0"
 
       - name: Obtain the test target using Composer
         if: env.HEAD_USER == 'localgovdrupal'
