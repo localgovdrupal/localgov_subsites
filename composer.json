@@ -9,8 +9,8 @@
         "drupal/entity_hierarchy": "^3.3",
         "drupal/tablefield": "^2.2",
         "drupal/viewsreference": "^2.0",
-        "localgovdrupal/localgov_core": "dev-feature/drupal-10 as 2.2.0",
-        "localgovdrupal/localgov_paragraphs": "dev-feature/drupal-10 as 2.3.0"
+        "localgovdrupal/localgov_core": "^2.12",
+        "localgovdrupal/localgov_paragraphs": "^2.3"
     },
     "extra": {
         "composer-exit-on-patch-failure": true,
