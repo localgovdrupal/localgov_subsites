@@ -87,11 +87,6 @@ jobs:
           composer --working-dir=./html require --no-install drupal/core-recommended:${{ matrix.drupal-version }} drupal/core-composer-scaffold:${{ matrix.drupal-version }} drupal/core-project-message:${{ matrix.drupal-version }} drupal/core-dev:${{ matrix.drupal-version }}
           composer --working-dir=./html install
 
-      - name: REMOVE BEFORE MERGING - Require aliased dependencies
-        run: |
-          composer --working-dir=./html require localgovdrupal/localgov_core:"dev-feature/drupal-10 as 2.2.0"
-          composer --working-dir=./html require localgovdrupal/localgov_paragraphs:"dev-feature/drupal-10 as 2.3.0"
-
       - name: Obtain the test target using Composer
         if: env.HEAD_USER == 'localgovdrupal'
         run: |
