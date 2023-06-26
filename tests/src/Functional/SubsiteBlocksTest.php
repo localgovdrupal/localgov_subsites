@@ -2,15 +2,15 @@
 
 namespace Drupal\Tests\localgov_subsites\Functional;
 
+use Drupal\Core\Database\Database;
 use Drupal\file\Entity\File;
 use Drupal\file\FileInterface;
 use Drupal\media\Entity\Media;
 use Drupal\node\NodeInterface;
 use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\Tests\BrowserTestBase;
-use Drupal\Tests\TestFileCreationTrait;
 use Drupal\Tests\node\Traits\NodeCreationTrait;
-use Drupal\Core\Database\Database;
+use Drupal\Tests\TestFileCreationTrait;
 
 /**
  * Tests user blocks.
@@ -39,7 +39,7 @@ class SubsiteBlocksTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected $profile = 'localgov';
+  protected $profile = 'testing';
 
   /**
    * A user with the 'administer blocks' permission.

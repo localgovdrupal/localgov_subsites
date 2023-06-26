@@ -1,22 +1,22 @@
 {
-  "name": "localgovdrupal/localgov_subsites",
-  "description": "Provides subsite sections using page builder paragraph types for LocalGovDrupal.",
-  "type": "drupal-module",
-  "homepage": "https://github.com/localgovdrupal/localgov_subsites",
-  "license": "GPL-2.0-or-later",
-  "minimum-stability": "dev",
-  "require": {
-    "drupal/entity_hierarchy": "^3.3",
-    "drupal/tablefield": "^2.2",
-    "drupal/viewsreference": "^2.0",
-    "localgovdrupal/localgov_core": "^2.1",
-    "localgovdrupal/localgov_paragraphs": "^2.2"
-  },
-  "extra": {
-    "composer-exit-on-patch-failure": true,
-    "patchLevel": {
-      "drupal/core": "-p2"
+    "name": "localgovdrupal/localgov_subsites",
+    "description": "Provides subsite sections using page builder paragraph types for LocalGovDrupal.",
+    "type": "drupal-module",
+    "homepage": "https://github.com/localgovdrupal/localgov_subsites",
+    "license": "GPL-2.0-or-later",
+    "minimum-stability": "dev",
+    "require": {
+        "drupal/entity_hierarchy": "^3.3",
+        "drupal/tablefield": "^2.2",
+        "drupal/viewsreference": "^2.0",
+        "localgovdrupal/localgov_core": "^2.12",
+        "localgovdrupal/localgov_paragraphs": "^2.3"
     },
-    "patches": {}
-  }
+    "extra": {
+        "composer-exit-on-patch-failure": true,
+        "patchLevel": {
+            "drupal/core": "-p2"
+        },
+        "patches": {}
+    }
 }

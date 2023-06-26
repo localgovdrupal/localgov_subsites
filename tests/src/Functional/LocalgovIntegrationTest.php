@@ -2,11 +2,11 @@
 
 namespace Drupal\Tests\localgov_subsites\Functional;
 
-use Drupal\Tests\Traits\Core\CronRunTrait;
 use Drupal\node\NodeInterface;
 use Drupal\Tests\BrowserTestBase;
 use Drupal\Tests\node\Traits\NodeCreationTrait;
 use Drupal\Tests\system\Functional\Menu\AssertBreadcrumbTrait;
+use Drupal\Tests\Traits\Core\CronRunTrait;
 
 /**
  * Tests pages working together with LocalGov: pathauto, services, search.
@@ -20,16 +20,14 @@ class LocalgovIntegrationTest extends BrowserTestBase {
   use CronRunTrait;
 
   /**
-   * Test breadcrumbs in the Standard profile.
-   *
-   * @var string
+   * {@inheritdoc}
    */
-  protected $profile = 'standard';
+  protected $profile = 'testing';
 
   /**
    * {@inheritdoc}
    */
-  protected $defaultTheme = 'stable';
+  protected $defaultTheme = 'stark';
 
   /**
    * A user with permission to bypass content access checks.
