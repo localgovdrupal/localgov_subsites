@@ -2,9 +2,9 @@
 
 namespace Drupal\localgov_subsites\EventSubscriber;
 
+use Drupal\localgov_core\Event\PageHeaderDisplayEvent;
 use Drupal\node\Entity\Node;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Drupal\localgov_core\Event\PageHeaderDisplayEvent;
 
 /**
  * Hide page header.

@@ -2,11 +2,11 @@
 
 namespace Drupal\localgov_subsites;
 
+use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\localgov_subsites\Plugin\Block\SubsitesHierarchyTrait;
 use Drupal\node\NodeInterface;
-use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Class Subsite.
