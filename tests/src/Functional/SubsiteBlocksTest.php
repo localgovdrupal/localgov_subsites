@@ -238,6 +238,7 @@ class SubsiteBlocksTest extends BrowserTestBase {
     $subsite_overview->set('localgov_subsites_hide_menu', ['value' => 0]);
     $subsite_overview->set('status', NodeInterface::NOT_PUBLISHED);
     $subsite_overview->save();
+    drupal_flush_all_caches();
     $this->drupalGet($subsite_page1->toUrl()->toString());
     $this->assertSession()->responseContains('block-localgov-subsite-navigation');
     $this->assertSession()->responseContains($subsite_page1_title);
