@@ -7,6 +7,7 @@ use Drupal\Core\Cache\CacheableMetadata;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Template\Attribute;
+use Drupal\Node\NodeInterface;
 
 /**
  * Class SubsiteNavigationBlock.
@@ -56,8 +57,25 @@ class SubsitesNavigationBlock extends SubsitesAbstractBlockBase {
       $mapper = \Drupal::service('entity_hierarchy.entity_tree_node_mapper');
       $entities = $mapper->loadAndAccessCheckEntitysForTreeNodes('node', $tree, $cache);
       $items = $this->nestTree($tree, $ancestors, $entities);
-      $subsite_id = $entities[$ancestors[0]]->id();
-      $overview_entity = $entities[$ancestors[0]];
+
+      // Sometimes the subsite is missing if the overview is unpublished and
+      // the user is anonymous, in which case set it to NULL.
+      if (!empty($entities[$ancestors[0]]) && $entities[$ancestors[0]] instanceof NodeInterface) {
+        $subsite_id = $entities[$ancestors[0]]->id();
+        $overview_entity = $entities[$ancestors[0]];
+        $cache->addCacheableDependency($overview_entity);
+      }
+      else {
+        $subsite_id = NULL;
+        $overview_entity = NULL;
+
+        // But we still need the parent subsite for cache purposes.
+        $entities = $mapper->loadEntitiesForTreeNodesWithoutAccessChecks('node', $tree, $cache);
+        if (!empty($entities[$ancestors[0]]) && $entities[$ancestors[0]] instanceof NodeInterface) {
+          $overview_entity_for_cache = $entities[$ancestors[0]];
+          $cache->addCacheableDependency($overview_entity_for_cache);
+        }
+      }
     }
     elseif ($subsite_entity->bundle('localgov_subsites_overview')) {
       // Subsite overview page with no children.
