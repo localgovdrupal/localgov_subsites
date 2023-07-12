@@ -63,10 +63,18 @@ class SubsitesNavigationBlock extends SubsitesAbstractBlockBase {
       if (!empty($entities[$ancestors[0]]) && $entities[$ancestors[0]] instanceof NodeInterface) {
         $subsite_id = $entities[$ancestors[0]]->id();
         $overview_entity = $entities[$ancestors[0]];
+        $cache->addCacheableDependency($overview_entity);
       }
       else {
         $subsite_id = NULL;
         $overview_entity = NULL;
+
+        // But we still need the parent subsite for cache purposes.
+        $entities = $mapper->loadEntitiesForTreeNodesWithoutAccessChecks('node', $tree, $cache);
+        if (!empty($entities[$ancestors[0]]) && $entities[$ancestors[0]] instanceof NodeInterface) {
+          $overview_entity_for_cache = $entities[$ancestors[0]];
+          $cache->addCacheableDependency($overview_entity_for_cache);
+        }
       }
     }
     elseif ($subsite_entity->bundle('localgov_subsites_overview')) {
