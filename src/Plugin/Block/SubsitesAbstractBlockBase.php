@@ -20,6 +20,13 @@ abstract class SubsitesAbstractBlockBase extends BlockBase implements ContainerF
   use SubsitesHierarchyTrait;
 
   /**
+   * Entity manager.
+   *
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   */
+  protected $entityTypeManager;
+
+  /**
    * Node being displayed.
    *
    * @var \Drupal\node\NodeInterface

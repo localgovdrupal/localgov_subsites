@@ -17,6 +17,13 @@ class Subsite implements ContainerInjectionInterface {
   use SubsitesHierarchyTrait;
 
   /**
+   * Entity manager.
+   *
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   */
+  protected $entityTypeManager;
+
+  /**
    * Node being displayed.
    *
    * @var \Drupal\node\NodeInterface
