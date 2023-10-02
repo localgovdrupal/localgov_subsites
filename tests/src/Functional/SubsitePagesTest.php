@@ -37,13 +37,6 @@ class SubsitePagesTest extends BrowserTestBase {
   protected $adminUser;
 
   /**
-   * Node to hold the article.
-   *
-   * @var \Drupal\node\NodeInterface
-   */
-  protected $nodeStorage;
-
-  /**
    * Modules to enable.
    *
    * @var array
@@ -72,7 +65,6 @@ class SubsitePagesTest extends BrowserTestBase {
       'create localgov_subsites_overview content',
 
     ]);
-    $this->nodeStorage = $this->container->get('entity_type.manager')->getStorage('node');
   }
 
   /**
