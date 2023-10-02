@@ -20,6 +20,13 @@ abstract class SubsitesAbstractBlockBase extends BlockBase implements ContainerF
   use SubsitesHierarchyTrait;
 
   /**
+   * Entity manager.
+   *
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   */
+  protected $entityTypeManager;
+
+  /**
    * Node being displayed.
    *
    * @var \Drupal\node\NodeInterface
@@ -98,8 +105,8 @@ abstract class SubsitesAbstractBlockBase extends BlockBase implements ContainerF
    */
   protected function blockAccess(AccountInterface $account) {
     $this->node = $this->getContextValue('node');
-    if ($this->node and
-      ($this->node->bundle() == 'localgov_subsites_overview' or $this->node->bundle() == 'localgov_subsites_page')
+    if ($this->node &&
+      ($this->node->bundle() == 'localgov_subsites_overview' || $this->node->bundle() == 'localgov_subsites_page')
     ) {
       return AccessResult::allowed();
     }
