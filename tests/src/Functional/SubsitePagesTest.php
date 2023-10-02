@@ -65,7 +65,6 @@ class SubsitePagesTest extends BrowserTestBase {
       'create localgov_subsites_overview content',
 
     ]);
-    $this->nodeStorage = $this->container->get('entity_type.manager')->getStorage('node');
   }
 
   /**

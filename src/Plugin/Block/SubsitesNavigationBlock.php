@@ -7,7 +7,7 @@ use Drupal\Core\Cache\CacheableMetadata;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Template\Attribute;
-use Drupal\Node\NodeInterface;
+use Drupal\node\NodeInterface;
 
 /**
  * Class SubsiteNavigationBlock.
@@ -51,6 +51,8 @@ class SubsitesNavigationBlock extends SubsitesAbstractBlockBase {
     $cache = (new CacheableMetadata())->addCacheableDependency($subsite_entity);
     $storage = $this->getNestedSetStorage('localgov_subsites');
     $node = $this->getNestedSetNodeKeyFactory()->fromEntity($subsite_entity);
+    $subsite_id = NULL;
+    $overview_entity = NULL;
     if ($ancestors = $storage->findAncestors($node)) {
       $tree = $storage->findDescendants($ancestors[0]->getNodeKey());
       array_unshift($tree, $ancestors[0]);

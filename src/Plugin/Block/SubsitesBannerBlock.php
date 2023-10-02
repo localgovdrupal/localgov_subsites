@@ -39,7 +39,7 @@ class SubsitesBannerBlock extends SubsitesAbstractBlockBase {
   public function build() {
     $build = [];
 
-    if ($this->getSubsite($this->node)) {
+    if ($this->getSubsite()) {
       if ($banner = $this->getSubsiteBanner()) {
         $viewBuilder = $this->entityTypeManager->getViewBuilder('paragraph');
         $build = $viewBuilder->view($banner);
