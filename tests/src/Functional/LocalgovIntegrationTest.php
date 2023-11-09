@@ -86,7 +86,7 @@ class LocalgovIntegrationTest extends BrowserTestBase {
       'localgov_subsites_summary' => $overview_summary,
     ]);
     $this->cronRun();
-    $this->drupalGet('search', ['query' => ['s' => 'bias+dogma+revelation']]);
+    $this->drupalGet('search', ['query' => ['s' => 'bias dogma revelation']]);
     $this->assertSession()->pageTextContains($title);
     $this->assertSession()->responseContains('<strong>bias</strong>');
     $this->assertSession()->responseContains('<strong>dogma</strong>');
@@ -101,7 +101,7 @@ class LocalgovIntegrationTest extends BrowserTestBase {
       'localgov_subsites_summary' => $page_summary,
     ]);
     $this->cronRun();
-    $this->drupalGet('search', ['query' => ['s' => 'time+main+only']]);
+    $this->drupalGet('search', ['query' => ['s' => 'time main only']]);
     $this->assertSession()->pageTextContains('Subsite subsite page');
     $this->assertSession()->responseContains('<strong>time</strong>');
     $this->assertSession()->responseContains('<strong>main</strong>');
