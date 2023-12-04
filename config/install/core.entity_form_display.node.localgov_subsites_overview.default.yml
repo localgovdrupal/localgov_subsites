@@ -29,6 +29,7 @@ third_party_settings:
         id: ''
         classes: ''
         direction: vertical
+        width_breakpoint: 1138
       label: tabs
       region: content
     group_description:
