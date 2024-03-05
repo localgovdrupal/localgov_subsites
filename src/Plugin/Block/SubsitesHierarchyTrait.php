@@ -102,7 +102,7 @@ trait SubsitesHierarchyTrait {
   /**
    * Get the entity_id of the ultimate parent drupal entity.
    *
-   * @param Drupal\Core\Entity\EntityInterface $entity
+   * @param \Drupal\Core\Entity\EntityInterface $entity
    *   Entity to find root ancestor of.
    *
    * @return null|int
