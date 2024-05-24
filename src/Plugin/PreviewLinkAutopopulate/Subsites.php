@@ -6,7 +6,7 @@ use Drupal\node\NodeInterface;
 use Drupal\preview_link\PreviewLinkAutopopulatePluginBase;
 
 /**
- * Auto-populate Guide preview links.
+ * Auto-populate subsite preview links.
  *
  * @PreviewLinkAutopopulate(
  *   id = "localgov_subsites",
