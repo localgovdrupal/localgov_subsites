@@ -6,6 +6,16 @@
  */
 
 /**
+ * Implements hook_install()
+ */
+function localgov_subsites_install() {
+
+  if (\Drupal::moduleHandler()->moduleExists('localgov_services_navigation')) {
+    localgov_subsites_optional_fields_settings();
+  }
+}
+
+/**
  * Clear caches after moving subsites paragraphs to localgov_paragraphs.
  */
 function localgov_subsites_update_9001() {
