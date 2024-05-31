@@ -6,7 +6,7 @@
  */
 
 /**
- * Implements hook_install()
+ * Implements hook_install().
  */
 function localgov_subsites_install() {
 
