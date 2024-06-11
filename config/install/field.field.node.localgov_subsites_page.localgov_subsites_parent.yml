@@ -11,7 +11,7 @@ id: node.localgov_subsites_page.localgov_subsites_parent
 field_name: localgov_subsites_parent
 entity_type: node
 bundle: localgov_subsites_page
-label: Parent
+label: 'Subsite parent page'
 description: ''
 required: true
 translatable: false
@@ -25,6 +25,7 @@ settings:
       localgov_subsites_page: localgov_subsites_page
     sort:
       field: _none
+      direction: ASC
     auto_create: false
     auto_create_bundle: localgov_subsites_overview
   weight_min: -50

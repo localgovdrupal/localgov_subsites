@@ -10,7 +10,7 @@ id: node.localgov_subsites_overview.localgov_services_parent
 field_name: localgov_services_parent
 entity_type: node
 bundle: localgov_subsites_overview
-label: 'Parent page'
+label: 'Service parent page'
 description: ''
 required: false
 translatable: true
