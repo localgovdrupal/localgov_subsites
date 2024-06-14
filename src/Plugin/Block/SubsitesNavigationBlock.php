@@ -123,7 +123,7 @@ class SubsitesNavigationBlock extends SubsitesAbstractBlockBase {
         if ($entities->contains($node) && $entities[$node]->isDefaultRevision()) {
           $item = $this->formatItem(
             $entities[$node],
-            in_array($node, $ancestors)
+            in_array($node, $ancestors, TRUE)
           );
         }
       }
