@@ -109,7 +109,7 @@ content:
     type: layout_paragraphs
     region: content
   localgov_subsites_parent:
-    weight: -3
+    weight: -6
     settings:
       match_operator: CONTAINS
       match_limit: 10
