@@ -132,7 +132,7 @@ function localgov_subsites_preprocess_page(&$variables) {
   if (in_array($node->bundle(), [
     'localgov_subsites_overview',
     'localgov_subsites_page',
-  ])) {
+  ], TRUE)) {
     $subsite = \Drupal::service('class_resolver')
       ->getInstanceFromDefinition(Subsite::class)
       ->getSubsite($node);

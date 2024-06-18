@@ -113,7 +113,7 @@ trait SubsitesHierarchyTrait {
       in_array($entity->bundle(), [
         'localgov_subsites_overview',
         'localgov_subsites_page',
-      ])
+      ], TRUE)
     ) {
       if ($root_node = $this->getNestedSetStorage('localgov_subsites')->findRoot($this->getNestedSetNodeKeyFactory()->fromEntity($entity))) {
         return $root_node->getId();
