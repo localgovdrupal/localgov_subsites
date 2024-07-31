@@ -2,6 +2,7 @@
 
 namespace Drupal\localgov_subsites\Plugin\PreviewLinkAutopopulate;
 
+use Drupal\localgov_subsites\Plugin\Block\SubsitesHierarchyTrait;
 use Drupal\node\NodeInterface;
 use Drupal\preview_link\PreviewLinkAutopopulatePluginBase;
 
@@ -22,35 +23,13 @@ use Drupal\preview_link\PreviewLinkAutopopulatePluginBase;
  */
 class Subsites extends PreviewLinkAutopopulatePluginBase {
 
+  use SubsitesHierarchyTrait;
+
   /**
    * {@inheritdoc}
    */
   public function getPreviewEntities(): array {
-    $nodes = [];
-
-    // Find subsite overview.
-    $node = $this->getEntity();
-    if ($node->bundle() == 'localgov_subsites_overview') {
-      $overview = $node;
-    }
-    elseif ($node->bundle() == 'localgov_subsites_page') {
-      $overview = $node->get('localgov_subsites_parent')->entity;
-    }
-    $nodes[] = $overview;
-
-    // Find subsite pages.
-    $pages = $this->entityTypeManager->getStorage('node')
-      ->loadByProperties([
-        'type' => 'localgov_subsites_page',
-        'localgov_subsites_parent' => $overview->id(),
-      ]);
-    foreach ($pages as $page) {
-      if ($page instanceof NodeInterface && $page->access('view')) {
-        $nodes[] = $page;
-      }
-    }
-
-    return $nodes;
+    return $this->getFlattenedSubsiteHierarchy($this->entity);
   }
 
 }
