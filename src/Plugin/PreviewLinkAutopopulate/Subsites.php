@@ -3,7 +3,6 @@
 namespace Drupal\localgov_subsites\Plugin\PreviewLinkAutopopulate;
 
 use Drupal\localgov_subsites\Plugin\Block\SubsitesHierarchyTrait;
-use Drupal\node\NodeInterface;
 use Drupal\preview_link\PreviewLinkAutopopulatePluginBase;
 
 /**

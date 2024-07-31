@@ -126,6 +126,9 @@ trait SubsitesHierarchyTrait {
   /**
    * Get flattened list of nodes in subsite hierarchy.
    *
+   * This does not do any access checks so unpublished nodes may be returned. If
+   * this becomes a requirement then it should be extended to include this.
+   *
    * @param \Drupal\node\NodeInterface $node
    *   Any entity in the hierarchy.
    *
@@ -141,7 +144,7 @@ trait SubsitesHierarchyTrait {
       $tree = $storage->findDescendants($ancestors[0]->getNodeKey());
       array_unshift($tree, $ancestors[0]);
       $mapper = \Drupal::service('entity_hierarchy.entity_tree_node_mapper');
-      $ancestor_entities = $mapper->loadAndAccessCheckEntitysForTreeNodes('node', $tree);
+      $ancestor_entities = $mapper->loadEntitiesForTreeNodesWithoutAccessChecks('node', $tree);
       foreach ($ancestor_entities as $ancestor_entity) {
         if (!$ancestor_entities->contains($ancestor_entity)) {
           // Doesn't exist or is access hidden.
