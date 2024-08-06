@@ -11,6 +11,7 @@ use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\Tests\BrowserTestBase;
 use Drupal\Tests\node\Traits\NodeCreationTrait;
 use Drupal\Tests\TestFileCreationTrait;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Tests user blocks.
@@ -66,7 +67,9 @@ class SubsiteBlocksTest extends BrowserTestBase {
       [
         'administer blocks',
         'create localgov_subsites_overview content',
+        'create localgov_subsites_page content',
         'edit any localgov_subsites_overview content',
+        'edit any localgov_subsites_page content',
       ]
     );
   }
@@ -244,6 +247,30 @@ class SubsiteBlocksTest extends BrowserTestBase {
     $this->assertSession()->responseContains($subsite_page1_title);
     $this->assertSession()->responseContains($subsite_page2_title);
     $this->assertSession()->pageTextNotContains($subsite_overview_title);
+  }
+
+  /**
+   * Test subsite blocks on node creation forms.
+   *
+   * This is for cases when using Mercury editor or page builders that use the
+   * front end theme.
+   *
+   * @see https://github.com/localgovdrupal/localgov_subsites/issues/154
+   */
+  public function testSubsiteBlocksOnCreateNodePage() {
+
+    // Login and place blocks.
+    $this->drupalLogin($this->adminUser);
+    $this->drupalPlaceBlock('localgov_subsite_banner', ['region' => 'content']);
+    $this->drupalPlaceBlock('localgov_subsite_navigation');
+
+    // Check create new subsite overview page does not crash.
+    $this->drupalGet('/node/add/localgov_subsites_overview');
+    $this->assertSession()->statusCodeEquals(Response::HTTP_OK);
+
+    // Check create new subsite page does not crash.
+    $this->drupalGet('/node/add/localgov_subsites_page');
+    $this->assertSession()->statusCodeEquals(Response::HTTP_OK);
   }
 
 }
