@@ -5,6 +5,7 @@
  * LocalGov Subsites module file.
  */
 
+use Drupal\Core\Entity\Display\EntityFormDisplayInterface;
 use Drupal\localgov_roles\RolesHelper;
 use Drupal\localgov_subsites\Subsite;
 use Drupal\node\NodeInterface;
@@ -132,13 +133,52 @@ function localgov_subsites_preprocess_page(&$variables) {
   if (in_array($node->bundle(), [
     'localgov_subsites_overview',
     'localgov_subsites_page',
-  ])) {
+  ], TRUE)) {
     $subsite = \Drupal::service('class_resolver')
       ->getInstanceFromDefinition(Subsite::class)
       ->getSubsite($node);
 
     if ($subsite instanceof NodeInterface && isset($subsite->localgov_subsites_theme->value) && $theme = $subsite->localgov_subsites_theme->value) {
       $variables['attributes']['class'][] = str_replace('_', '--', $theme);
+    }
+  }
+}
+
+/**
+ * Set form settings for optional services fields on installation.
+ */
+function localgov_subsites_optional_fields_settings() {
+
+  $form_displays = \Drupal::entityTypeManager()
+    ->getStorage('entity_form_display')
+    ->loadByProperties([
+      'targetEntityType' => 'node',
+      'bundle' => 'localgov_subsites_overview',
+    ]);
+  if ($form_displays) {
+    foreach ($form_displays as $form_display) {
+      assert($form_display instanceof EntityFormDisplayInterface);
+      if (!$form_display->getComponent('localgov_services_parent')) {
+        $form_display->setComponent('localgov_services_parent', [
+          'type' => 'entity_reference_autocomplete',
+          'region' => 'content',
+          'settings' => [
+            'match_operator' => 'CONTAINS',
+            'size' => '60',
+            'placeholder' => '',
+            'match_limit' => 10,
+          ],
+          'weight' => -1,
+        ])->save();
+        if (
+          ($field_groups = $form_display->getThirdPartySettings('field_group')) &&
+          ($group = $field_groups['group_description'] ?? FALSE)
+        ) {
+          $group['children'][] = 'localgov_services_parent';
+          $form_display->setThirdPartySetting('field_group', 'group_description', $group)
+            ->save();
+        }
+      }
     }
   }
 }
