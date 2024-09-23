@@ -3,10 +3,10 @@
 namespace Drupal\Tests\localgov_subsites\Functional;
 
 use Drupal\Core\Database\Database;
-use Drupal\node\NodeInterface;
 use Drupal\Tests\BrowserTestBase;
 use Drupal\Tests\node\Traits\NodeCreationTrait;
 use Drupal\Tests\system\Functional\Menu\AssertBreadcrumbTrait;
+use Drupal\node\NodeInterface;
 
 /**
  * Tests LocalGov Subsite pages work together.
