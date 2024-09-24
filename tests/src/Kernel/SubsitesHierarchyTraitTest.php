@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Drupal\Tests\localgov_subsites\Kernel;
 
-use Drupal\field\Entity\FieldConfig;
-use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\KernelTests\KernelTestBase;
-use Drupal\localgov_subsites\Plugin\Block\SubsitesHierarchyTrait;
-use Drupal\node\NodeInterface;
 use Drupal\Tests\node\Traits\ContentTypeCreationTrait;
 use Drupal\Tests\node\Traits\NodeCreationTrait;
+use Drupal\field\Entity\FieldConfig;
+use Drupal\field\Entity\FieldStorageConfig;
+use Drupal\localgov_subsites\Plugin\Block\SubsitesHierarchyTrait;
+use Drupal\node\NodeInterface;
 
 /**
  * Test SubsitesHierarchyTrait methods.
