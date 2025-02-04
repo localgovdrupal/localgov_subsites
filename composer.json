@@ -7,7 +7,7 @@
     "minimum-stability": "dev",
     "require": {
         "drupal/entity_hierarchy": "^3.3",
-        "drupal/tablefield": "^2.2",
+        "drupal/tablefield": "^2.4 || ^3.0@beta",
         "drupal/viewsreference": "^2.0",
         "localgovdrupal/localgov_core": "^2.12",
         "localgovdrupal/localgov_paragraphs": "^2.3"
