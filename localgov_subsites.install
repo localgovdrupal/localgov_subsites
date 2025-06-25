@@ -16,6 +16,21 @@ function localgov_subsites_install($is_syncing) {
   if (\Drupal::moduleHandler()->moduleExists('localgov_services_navigation')) {
     localgov_subsites_optional_fields_settings();
   }
+
+  // Install default config for simple_sitemap, as this does not appear to work
+  // in the config/optional folder.
+  // Discussed on https://www.drupal.org/project/simple_sitemap/issues/3156080
+  if (\Drupal::moduleHandler()->moduleExists('simple_sitemap')) {
+    $generator = \Drupal::service('simple_sitemap.entity_manager');
+    $generator->setBundleSettings('node', 'localgov_subsites_overview', [
+      'index' => TRUE,
+      'priority' => 1.0,
+    ]);
+    $generator->setBundleSettings('node', 'localgov_subsites_page', [
+      'index' => TRUE,
+      'priority' => 0.5,
+    ]);
+  }
 }
 
 /**
