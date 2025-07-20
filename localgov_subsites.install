@@ -24,7 +24,8 @@ function localgov_subsites_install($is_syncing) {
     $generator = \Drupal::service('simple_sitemap.entity_manager');
     $generator->setBundleSettings('node', 'localgov_subsites_overview', [
       'index' => TRUE,
-      'priority' => '1.0', // Cast as string to ensure the value is properly set
+      // Cast as string to ensure the value is properly set.
+      'priority' => '1.0',
     ]);
     $generator->setBundleSettings('node', 'localgov_subsites_page', [
       'index' => TRUE,
