@@ -45,7 +45,7 @@ third_party_settings:
         formatter: closed
         description: ''
         required_fields: false
-      label: Description
+      label: Content
       region: content
     group_banner:
       children:
